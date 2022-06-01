@@ -1,3 +1,4 @@
+import Modal from 'components/Modal'
 import NavBar from 'components/NavBar'
 
 import styles from './makeTodo.module.scss'
@@ -8,7 +9,8 @@ const MakeTodo = () => {
   return (
     <div className={styles.container}>
       <NavBar />
-      <main>
+      <Modal />
+      <main className={styles.boards}>
         {processList.map((process) => {
           return (
             <div key='process-process' className={styles.processBox}>
