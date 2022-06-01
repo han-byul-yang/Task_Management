@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import cx from 'classnames'
+import DatePicker from 'react-datepicker'
+
+import { CustomButton } from './utils/CustomButton'
 
 import { PlusIcon, XIcon } from 'assets/svgs'
+import 'react-datepicker/dist/react-datepicker.css'
 import styles from './modal.module.scss'
 
 const Modal = () => {
@@ -9,6 +13,8 @@ const Modal = () => {
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [categoryShow, setCategoryShow] = useState(false)
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(null)
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.currentTarget.value)
@@ -30,6 +36,12 @@ const Modal = () => {
 
   const handleCategoryDelete = (index: number) => {
     setCategoryList(categoryList.filter((selectItem) => categoryList.indexOf(selectItem) !== index))
+  }
+
+  const handleDateChange = (dates: any) => {
+    const [start, end] = dates
+    setStartDate(start)
+    setEndDate(end)
   }
 
   return (
@@ -60,6 +72,19 @@ const Modal = () => {
           )
         })}
       </form>
+      <div className={styles.detail}>
+        <div>Task Detail</div>
+        <div className={styles.date}>
+          <DatePicker
+            selected={startDate}
+            onChange={handleDateChange}
+            startDate={startDate}
+            endDate={endDate}
+            selectsRange
+            customInput={<CustomButton />}
+          />
+        </div>
+      </div>
     </div>
   )
 }
@@ -67,3 +92,5 @@ const Modal = () => {
 export default Modal
 
 // 카테고리 중복으로 했을 때 처리
+// dates any types
+// date Picker onSelect 생각해보기
