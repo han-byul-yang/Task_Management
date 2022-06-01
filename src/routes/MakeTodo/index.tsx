@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import Modal from 'components/Modal'
 import NavBar from 'components/NavBar'
 
@@ -5,6 +7,11 @@ import styles from './makeTodo.module.scss'
 
 const MakeTodo = () => {
   const processList = ['TODO', 'DOING', 'DONE']
+  const [processName, setProcessName] = useState('')
+
+  const handleAddProcessClick = (process: string) => {
+    setProcessName(process)
+  }
 
   return (
     <div className={styles.container}>
@@ -12,16 +19,18 @@ const MakeTodo = () => {
       <main className={styles.boards}>
         {processList.map((process) => {
           return (
-            <div key='process-process' className={styles.processBox}>
+            <div key={`process-${process}`} className={styles.processBox}>
               <div className={styles.processTop}>
                 <div>{process}</div>
-                <div>+</div>
+                <button type='button' onClick={() => handleAddProcessClick(process)}>
+                  +
+                </button>
               </div>
             </div>
           )
         })}
       </main>
-      <Modal />
+      <Modal processName={processName} />
     </div>
   )
 }

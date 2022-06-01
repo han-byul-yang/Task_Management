@@ -1,14 +1,20 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import cx from 'classnames'
 import DatePicker from 'react-datepicker'
+import { useRecoilState } from 'recoil'
 
 import { CustomButton } from './utils/CustomButton'
+import { todosAtom } from 'store/atoms'
 
 import { FileIcon, ImageIcon, PlusIcon, XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './modal.module.scss'
 
-const Modal = () => {
+interface IModalProps {
+  processName: string
+}
+
+const Modal = ({ processName }: IModalProps) => {
   const [task, setTask] = useState('')
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
@@ -17,6 +23,7 @@ const Modal = () => {
   const [endDate, setEndDate] = useState(null)
   const [image, setImage] = useState<string | ArrayBuffer | null>()
   const [description, setDescription] = useState('')
+  const [todoList, setTodoList] = useRecoilState(todosAtom)
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.currentTarget.value)
@@ -61,6 +68,25 @@ const Modal = () => {
 
   const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDescription(e.currentTarget.value)
+  }
+
+  const handleCreateTaskClick = () => {
+    setTodoList((oldTodos) => {
+      return {
+        ...oldTodos,
+        [processName]: [
+          ...oldTodos[processName],
+          {
+            id: new Date(),
+            task,
+            category: categoryList,
+            date: [startDate, endDate],
+            image,
+            description,
+          },
+        ],
+      }
+    })
   }
 
   return (
@@ -116,6 +142,9 @@ const Modal = () => {
             onChange={handleDescriptionChange}
           />
         </div>
+        <button type='button' onClick={handleCreateTaskClick}>
+          Create Task
+        </button>
       </div>
     </div>
   )

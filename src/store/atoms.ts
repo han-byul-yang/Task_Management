@@ -5,11 +5,11 @@ export interface Todoform {
 }
 
 export interface Todo {
-  id: number
+  id: Date
   task: string
   category: string[]
   date?: (Date | null)[]
-  image?: string
+  image?: string | ArrayBuffer | null
   description?: string
 }
 
