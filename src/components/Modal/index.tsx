@@ -1,12 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
+import cx from 'classnames'
 
-import { XIcon } from 'assets/svgs'
+import { PlusIcon, XIcon } from 'assets/svgs'
 import styles from './modal.module.scss'
 
 const Modal = () => {
   const [task, setTask] = useState('')
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
+  const [categoryShow, setCategoryShow] = useState(false)
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.currentTarget.value)
@@ -14,6 +16,10 @@ const Modal = () => {
 
   const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCategory(e.currentTarget.value)
+  }
+
+  const handleCategoryShow = () => {
+    setCategoryShow(true)
   }
 
   const handleCategorySubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -38,7 +44,14 @@ const Modal = () => {
       </div>
       <form className={styles.category} onSubmit={handleCategorySubmit}>
         <div>Task Type</div>
-        <input type='text' placeholder='카테고리 입력해주세요' value={category} onChange={handleCategoryChange} />
+        <PlusIcon className={styles.categoryBtn} onClick={handleCategoryShow} />
+        <input
+          className={cx(styles.categoryInput, { [styles.show]: categoryShow })}
+          type='text'
+          placeholder='카테고리 입력해주세요'
+          value={category}
+          onChange={handleCategoryChange}
+        />
         {categoryList.map((item, index) => {
           return (
             <button type='button' key={`category-${item}`} onClick={() => handleCategoryDelete(index)}>
