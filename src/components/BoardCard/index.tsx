@@ -1,16 +1,33 @@
+import { useRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 
-import { Todo } from 'store/atoms'
+import { Todo, todosAtom } from 'store/atoms'
 
 import { CalendarIcon, EditIcon } from 'assets/svgs'
 import styles from './boardCard.module.scss'
 
 interface IBoardCardProps {
   todo: Todo
+  processName: string
 }
 
-const BoardCard = ({ todo }: IBoardCardProps) => {
+const BoardCard = ({ todo, processName }: IBoardCardProps) => {
+  const [todoList, setTodoList] = useRecoilState(todosAtom)
+
   const { image, task, category, description, date } = todo
+
+  const handleDeleteClick = () => {
+    setTodoList((prevState) => {
+      const filterdTodo = todoList[processName].filter((todos) => todos.id !== todo.id)
+
+      return {
+        ...prevState,
+        [processName]: [...filterdTodo],
+      }
+    })
+  }
+
+  const handleEditClick = () => {}
 
   return (
     <div key={`todo-${todo}`} className={styles.boardCard}>
@@ -19,10 +36,10 @@ const BoardCard = ({ todo }: IBoardCardProps) => {
       <div className={styles.setting}>
         <EditIcon />
         <div className={styles.settingBox}>
-          <button className={styles.edit} type='button'>
+          <button className={styles.edit} type='button' onClick={handleEditClick}>
             EDIT
           </button>
-          <button className={styles.delete} type='button'>
+          <button className={styles.delete} type='button' onClick={handleDeleteClick}>
             DELETE
           </button>
         </div>

@@ -39,7 +39,7 @@ const MakeTodo = () => {
                 </button>
               </div>
               {todoList[process].map((todo: Todo) => {
-                return <BoardCard key={`todo-${todo}`} todo={todo} />
+                return <BoardCard key={`todo-${todo}`} todo={todo} processName={processName} />
               })}
             </div>
           )
