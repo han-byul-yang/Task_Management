@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 
 import { CustomButton } from './utils/CustomButton'
 
-import { PlusIcon, XIcon } from 'assets/svgs'
+import { FileIcon, ImageIcon, PlusIcon, XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './modal.module.scss'
 
@@ -15,6 +15,7 @@ const Modal = () => {
   const [categoryShow, setCategoryShow] = useState(false)
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
+  const [image, setImage] = useState<string | ArrayBuffer | null>()
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.currentTarget.value)
@@ -42,6 +43,19 @@ const Modal = () => {
     const [start, end] = dates
     setStartDate(start)
     setEndDate(end)
+  }
+
+  const handleImageChange = (e: any) => {
+    const file = e.target.files[0]
+    const reader = new FileReader()
+
+    reader.readAsDataURL(file)
+
+    return new Promise(() => {
+      reader.onload = () => {
+        setImage(reader.result)
+      }
+    })
   }
 
   return (
@@ -84,6 +98,14 @@ const Modal = () => {
             customInput={<CustomButton />}
           />
         </div>
+        <div className={styles.image}>
+          <ImageIcon />
+          <input type='file' accept='img/*' onChange={handleImageChange} />
+        </div>
+        <div className={styles.description}>
+          <FileIcon />
+          <input type='text' placeholder='상세한 내용을 입력하세요' value={} onChange={} />
+        </div>
       </div>
     </div>
   )
@@ -94,3 +116,4 @@ export default Modal
 // 카테고리 중복으로 했을 때 처리
 // dates any types
 // date Picker onSelect 생각해보기
+// change type
