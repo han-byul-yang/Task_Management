@@ -1,13 +1,29 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { XIcon } from 'assets/svgs'
 import styles from './modal.module.scss'
 
 const Modal = () => {
   const [task, setTask] = useState('')
+  const [category, setCategory] = useState('')
+  const [categoryList, setCategoryList] = useState<string[]>([])
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.currentTarget.value)
+  }
+
+  const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setCategory(e.currentTarget.value)
+  }
+
+  const handleCategorySubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setCategoryList((prevState) => [...prevState, category])
+    setCategory('')
+  }
+
+  const handleCategoryDelete = (index: number) => {
+    setCategoryList(categoryList.filter((selectItem) => categoryList.indexOf(selectItem) !== index))
   }
 
   return (
@@ -20,8 +36,21 @@ const Modal = () => {
         <div>title</div>
         <input type='text' placeholder='할 일을 입력해주세요' value={task} onChange={handleTaskChange} />
       </div>
+      <form className={styles.category} onSubmit={handleCategorySubmit}>
+        <div>Task Type</div>
+        <input type='text' placeholder='카테고리 입력해주세요' value={category} onChange={handleCategoryChange} />
+        {categoryList.map((item, index) => {
+          return (
+            <button type='button' key={`category-${item}`} onClick={() => handleCategoryDelete(index)}>
+              {item}
+            </button>
+          )
+        })}
+      </form>
     </div>
   )
 }
 
 export default Modal
+
+// 카테고리 중복으로 했을 때 처리

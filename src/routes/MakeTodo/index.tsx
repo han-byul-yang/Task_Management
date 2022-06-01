@@ -9,7 +9,6 @@ const MakeTodo = () => {
   return (
     <div className={styles.container}>
       <NavBar />
-      <Modal />
       <main className={styles.boards}>
         {processList.map((process) => {
           return (
@@ -22,6 +21,7 @@ const MakeTodo = () => {
           )
         })}
       </main>
+      <Modal />
     </div>
   )
 }
