@@ -16,6 +16,7 @@ const Modal = () => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
   const [image, setImage] = useState<string | ArrayBuffer | null>()
+  const [description, setDescription] = useState('')
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.currentTarget.value)
@@ -56,6 +57,10 @@ const Modal = () => {
         setImage(reader.result)
       }
     })
+  }
+
+  const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setDescription(e.currentTarget.value)
   }
 
   return (
@@ -104,7 +109,12 @@ const Modal = () => {
         </div>
         <div className={styles.description}>
           <FileIcon />
-          <input type='text' placeholder='상세한 내용을 입력하세요' value={} onChange={} />
+          <input
+            type='text'
+            placeholder='상세한 내용을 입력하세요'
+            value={description}
+            onChange={handleDescriptionChange}
+          />
         </div>
       </div>
     </div>
