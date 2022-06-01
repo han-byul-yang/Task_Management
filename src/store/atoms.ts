@@ -8,7 +8,7 @@ export interface Todo {
   id: Date
   task: string
   category: string[]
-  date?: (Date | null)[]
+  date: (Date | null)[]
   image?: string | ArrayBuffer | null
   description?: string
 }
