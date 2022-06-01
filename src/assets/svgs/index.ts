@@ -1,1 +1,8 @@
-export {}
+export { ReactComponent as CalendarIcon } from './calendar.svg'
+export { ReactComponent as ClockIcon } from './clock.svg'
+export { ReactComponent as EditIcon } from './edit.svg'
+export { ReactComponent as FileIcon } from './filetext.svg'
+export { ReactComponent as ImageIcon } from './image.svg'
+export { ReactComponent as ListIcon } from './list.svg'
+export { ReactComponent as PlusIcon } from './plus.svg'
+export { ReactComponent as XIcon } from './x.svg'
