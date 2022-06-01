@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react'
 import cx from 'classnames'
 import DatePicker from 'react-datepicker'
 import { useRecoilState } from 'recoil'
@@ -12,9 +12,10 @@ import styles from './modal.module.scss'
 
 interface IModalProps {
   processName: string
+  handleOpenModal: MouseEventHandler<SVGSVGElement>
 }
 
-const Modal = ({ processName }: IModalProps) => {
+const Modal = ({ processName, handleOpenModal }: IModalProps) => {
   const [task, setTask] = useState('')
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
@@ -89,11 +90,13 @@ const Modal = ({ processName }: IModalProps) => {
     })
   }
 
+  console.log(todoList)
+
   return (
     <div className={styles.modalBox}>
       <div className={styles.modalHead}>
         <div>Create a new task</div>
-        <XIcon />
+        <XIcon onClick={handleOpenModal} />
       </div>
       <div className={styles.title}>
         <div>title</div>
@@ -156,3 +159,4 @@ export default Modal
 // dates any types
 // date Picker onSelect 생각해보기
 // change type
+// todo create시 모달창 닫히기

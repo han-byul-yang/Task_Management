@@ -4,13 +4,21 @@ import Modal from 'components/Modal'
 import NavBar from 'components/NavBar'
 
 import styles from './makeTodo.module.scss'
+import ModalPortal from 'components/Modal/ModalPortal'
 
 const MakeTodo = () => {
-  const processList = ['TODO', 'DOING', 'DONE']
   const [processName, setProcessName] = useState('')
+  const [openModal, setOpenModal] = useState(false)
 
-  const handleAddProcessClick = (process: string) => {
+  const processList = ['TODO', 'DOING', 'DONE']
+
+  const handleAddTodoClick = (process: string) => {
     setProcessName(process)
+    setOpenModal(true)
+  }
+
+  const handleOpenModal = () => {
+    setOpenModal(false)
   }
 
   return (
@@ -22,7 +30,7 @@ const MakeTodo = () => {
             <div key={`process-${process}`} className={styles.processBox}>
               <div className={styles.processTop}>
                 <div>{process}</div>
-                <button type='button' onClick={() => handleAddProcessClick(process)}>
+                <button type='button' onClick={() => handleAddTodoClick(process)}>
                   +
                 </button>
               </div>
@@ -30,7 +38,11 @@ const MakeTodo = () => {
           )
         })}
       </main>
-      <Modal processName={processName} />
+      {openModal && (
+        <ModalPortal>
+          <Modal processName={processName} handleOpenModal={handleOpenModal} />
+        </ModalPortal>
+      )}
     </div>
   )
 }
