@@ -1,6 +1,74 @@
-.categoryBtn {
-  width: 30px;
-  height: 30px;
+@use '../../styles/constants/colors';
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 320px;
+  height: 500px;
+  font-weight: 500;
+  background: colors.$WHITE;
+  border: 1px solid colors.$BLACK;
+  border-radius: 10px;
+}
+
+.modalBox {
+  position: relative;
+  width: 290px;
+  height: 100%;
+}
+
+.modalHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  font-size: 20px;
+
+  .xBtn {
+    cursor: pointer;
+  }
+}
+
+.title {
+  width: 260px;
+  font-size: 17px;
+
+  input {
+    width: 100%;
+    margin-top: 8px;
+    line-height: 28px;
+    border-bottom: 1px solid colors.$BLACK;
+  }
+}
+
+.category {
+  margin-top: 25px;
+
+  .categoryForm {
+    display: flex;
+    justify-content: baseline;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .categoryBtn {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  .categoryItem {
+    width: auto;
+    height: 30px;
+    padding: 3px 10px;
+    margin: 8px 5px 0 0;
+    font-size: 15px;
+    color: colors.$WHITE;
+    background: colors.$KEY;
+    border-radius: 10px;
+  }
 }
 
 .categoryInput {
@@ -10,3 +78,68 @@
 .show {
   display: inline-block;
 }
+
+.detail {
+  margin-top: 25px;
+}
+
+.date {
+  margin-top: 15px;
+  cursor: pointer;
+
+  .dateBtn {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-left: 5px;
+      font-size: 16px;
+    }
+  }
+}
+
+.image {
+  margin-top: 10px;
+
+  .imageLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .imageBtn {
+      margin-right: 5px;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+
+  input {
+    margin-left: 5px;
+  }
+}
+
+.createBtn {
+  position: absolute;
+  bottom: 20px;
+  width: 280px;
+  height: 50px;
+  font-size: 17px;
+  color: colors.$WHITE;
+  background: colors.$LIGHTGRAY;
+  border-radius: 20px;
+  transition: 0.2s linear;
+
+  &:hover {
+    background: colors.$KEY;
+  }
+}
+
+// 알파벳 마다 다르게 태그 색상 설정
