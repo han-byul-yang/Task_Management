@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
 import { Todo, todosAtom } from 'store/atoms'
 import Modal from 'components/Modal'
@@ -13,7 +13,7 @@ import styles from './makeTodo.module.scss'
 const MakeTodo = () => {
   const [processName, setProcessName] = useState('')
   const [openModal, setOpenModal] = useState(false)
-  const [todoList, setTodoList] = useRecoilState(todosAtom)
+  const todoList = useRecoilValue(todosAtom)
 
   const processList = ['TODO', 'DOING', 'DONE']
 

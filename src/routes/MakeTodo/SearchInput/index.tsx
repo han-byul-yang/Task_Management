@@ -34,6 +34,7 @@ const SearchInput = () => {
   const handleKeyInputSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSearchKey(keyInput)
+    setKeyInput('')
   }
 
   const handleKeyResultClick = (dropdownWord: string) => {
