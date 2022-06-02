@@ -5,9 +5,10 @@ import { Todo, todosAtom } from 'store/atoms'
 import Modal from 'components/Modal'
 import NavBar from 'components/NavBar'
 import ModalPortal from 'components/Modal/ModalPortal'
+import BoardCard from 'components/BoardCard'
+import SearchInput from './SearchInput'
 
 import styles from './makeTodo.module.scss'
-import BoardCard from 'components/BoardCard'
 
 const MakeTodo = () => {
   const [processName, setProcessName] = useState('')
@@ -21,13 +22,14 @@ const MakeTodo = () => {
     setOpenModal(true)
   }
 
-  const handleOpenModal = () => {
+  const handleCloseModal = () => {
     setOpenModal(false)
   }
 
   return (
     <div className={styles.container}>
       <NavBar />
+      <SearchInput />
       <main className={styles.boards}>
         {processList.map((process) => {
           return (
@@ -47,7 +49,7 @@ const MakeTodo = () => {
       </main>
       {openModal && (
         <ModalPortal>
-          <Modal processName={processName} handleOpenModal={handleOpenModal} />
+          <Modal processName={processName} handleCloseModal={handleCloseModal} />
         </ModalPortal>
       )}
     </div>
