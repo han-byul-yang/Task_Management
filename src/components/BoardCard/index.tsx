@@ -13,33 +13,28 @@ import styles from './boardCard.module.scss'
 
 interface IBoardCardProps {
   todo: Todo
-  processName: string
 }
 
-const BoardCard = ({ todo, processName }: IBoardCardProps) => {
+const BoardCard = ({ todo }: IBoardCardProps) => {
   const [todoList, setTodoList] = useRecoilState(todosAtom)
   const searchKey = useRecoilValue(searchKeyAtom)
   const [openModal, setOpenModal] = useState(false)
 
-  const { image, description, date } = todo
+  const { id, process, image, description, date } = todo
 
   const handleDeleteClick = () => {
-    const filterdTodo = todoList[processName].filter((todos) => todos.id !== todo.id)
+    const filterdTodo = todoList[process].filter((todos) => todos.id !== id)
 
     setTodoList((prevState) => {
       return {
         ...prevState,
-        [processName]: [...filterdTodo],
+        [process]: [...filterdTodo],
       }
     })
   }
 
   const handleEditClick = () => {
     setOpenModal(true)
-  }
-
-  const handleCloseModal = () => {
-    setOpenModal(false)
   }
 
   const { highlightTask, highlightCategory } = highlightWords(searchKey, todo)
@@ -77,7 +72,7 @@ const BoardCard = ({ todo, processName }: IBoardCardProps) => {
       </div>
       {openModal && (
         <ModalPortal>
-          <Modal processName={processName} todo={todo} handleCloseModal={handleCloseModal} />
+          <Modal processName={process} todo={todo} setOpenModal={setOpenModal} />
         </ModalPortal>
       )}
     </div>

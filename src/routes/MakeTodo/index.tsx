@@ -22,10 +22,6 @@ const MakeTodo = () => {
     setOpenModal(true)
   }
 
-  const handleCloseModal = () => {
-    setOpenModal(false)
-  }
-
   return (
     <div className={styles.container}>
       <NavBar />
@@ -41,17 +37,19 @@ const MakeTodo = () => {
                 </button>
               </div>
               {todoList[process].map((todo: Todo) => {
-                return <BoardCard key={`todo-${todo}`} todo={todo} processName={processName} />
+                return <BoardCard key={`todo-${todo}`} todo={todo} />
               })}
             </div>
           )
         })}
+        {openModal && (
+          <div className={styles.modalBackground}>
+            <ModalPortal>
+              <Modal processName={processName} setOpenModal={setOpenModal} />
+            </ModalPortal>
+          </div>
+        )}
       </main>
-      {openModal && (
-        <ModalPortal>
-          <Modal processName={processName} handleCloseModal={handleCloseModal} />
-        </ModalPortal>
-      )}
     </div>
   )
 }

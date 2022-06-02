@@ -1,10 +1,11 @@
-import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react'
+import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react'
+import { useMount } from 'react-use'
 import cx from 'classnames'
 import DatePicker from 'react-datepicker'
 import { useRecoilState } from 'recoil'
 
 import { CustomButton } from './utils/CustomButton'
-import { todosAtom } from 'store/atoms'
+import { Todo, todosAtom } from 'store/atoms'
 
 import { FileIcon, ImageIcon, PlusIcon, XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -12,10 +13,11 @@ import styles from './modal.module.scss'
 
 interface IModalProps {
   processName: string
-  handleOpenModal: MouseEventHandler<SVGSVGElement>
+  todo?: Todo
+  setOpenModal: Dispatch<SetStateAction<boolean>>
 }
 
-const Modal = ({ processName, handleOpenModal }: IModalProps) => {
+const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
   const [task, setTask] = useState('')
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
@@ -25,6 +27,21 @@ const Modal = ({ processName, handleOpenModal }: IModalProps) => {
   const [image, setImage] = useState<string | ArrayBuffer | null>()
   const [description, setDescription] = useState('')
   const [todoList, setTodoList] = useRecoilState(todosAtom)
+
+  useMount(() => {
+    if (!todo) return
+    if (todo) {
+      setTask(todo.task)
+      setCategoryList(todo.category)
+      setStartDate(todo.date[0])
+      setImage(todo.image)
+      setDescription(todo.description)
+    }
+  })
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTask(e.currentTarget.value)
@@ -72,13 +89,23 @@ const Modal = ({ processName, handleOpenModal }: IModalProps) => {
   }
 
   const handleCreateTaskClick = () => {
-    setTodoList((oldTodos) => {
+    /* todo
+      ? setTodoList((oldTodos) => {
+          const todoIdx = oldTodos[processName].filter((oldTodo) => oldTodo.id === todo.id)
+          const deleteTodo = oldTodos[processName].splice()
+          return {
+            ...oldTodos,
+            [processName]: [],
+          }
+        })
+      : */ setTodoList((oldTodos) => {
       return {
         ...oldTodos,
         [processName]: [
           ...oldTodos[processName],
           {
             id: new Date(),
+            process: processName,
             task,
             category: categoryList,
             date: [startDate, endDate],
@@ -88,66 +115,77 @@ const Modal = ({ processName, handleOpenModal }: IModalProps) => {
         ],
       }
     })
+    handleCloseModal()
   }
 
-  console.log(todoList)
-
   return (
-    <div className={styles.modalBox}>
-      <div className={styles.modalHead}>
-        <div>Create a new task</div>
-        <XIcon onClick={handleOpenModal} />
-      </div>
-      <div className={styles.title}>
-        <div>title</div>
-        <input type='text' placeholder='할 일을 입력해주세요' value={task} onChange={handleTaskChange} />
-      </div>
-      <form className={styles.category} onSubmit={handleCategorySubmit}>
-        <div>Task Type</div>
-        <PlusIcon className={styles.categoryBtn} onClick={handleCategoryShow} />
-        <input
-          className={cx(styles.categoryInput, { [styles.show]: categoryShow })}
-          type='text'
-          placeholder='카테고리 입력해주세요'
-          value={category}
-          onChange={handleCategoryChange}
-        />
-        {categoryList.map((item, index) => {
-          return (
-            <button type='button' key={`category-${item}`} onClick={() => handleCategoryDelete(index)}>
-              {item}
-            </button>
-          )
-        })}
-      </form>
-      <div className={styles.detail}>
-        <div>Task Detail</div>
-        <div className={styles.date}>
-          <DatePicker
-            selected={startDate}
-            onChange={handleDateChange}
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            customInput={<CustomButton />}
-          />
+    <div className={styles.modalContainer}>
+      <div className={styles.modalBox}>
+        <div className={styles.modalHead}>
+          <div>Create a new task</div>
+          <XIcon className={styles.xBtn} onClick={handleCloseModal} />
         </div>
-        <div className={styles.image}>
-          <ImageIcon />
-          <input type='file' accept='img/*' onChange={handleImageChange} />
+        <div className={styles.title}>
+          <div>Title</div>
+          <input type='text' placeholder='할 일을 입력해주세요' value={task} onChange={handleTaskChange} />
         </div>
-        <div className={styles.description}>
-          <FileIcon />
-          <input
-            type='text'
-            placeholder='상세한 내용을 입력하세요'
-            value={description}
-            onChange={handleDescriptionChange}
-          />
+        <div className={styles.category}>
+          <div>Task Type</div>
+          <form className={styles.categoryForm} onSubmit={handleCategorySubmit}>
+            <PlusIcon className={styles.categoryBtn} onClick={handleCategoryShow} />
+            <input
+              className={cx(styles.categoryInput, { [styles.show]: categoryShow })}
+              type='text'
+              placeholder='카테고리 입력해주세요'
+              value={category}
+              onChange={handleCategoryChange}
+            />
+          </form>
+          {categoryList.map((item, index) => {
+            return (
+              <button
+                className={styles.categoryItem}
+                type='button'
+                key={`category-${item}`}
+                onClick={() => handleCategoryDelete(index)}
+              >
+                {item}
+              </button>
+            )
+          })}
         </div>
-        <button type='button' onClick={handleCreateTaskClick}>
-          Create Task
-        </button>
+        <div className={styles.detail}>
+          <div>Task Detail</div>
+          <div className={styles.date}>
+            <DatePicker
+              selected={startDate}
+              onChange={handleDateChange}
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              customInput={<CustomButton />}
+            />
+          </div>
+          <div className={styles.image}>
+            <label className={styles.imageLabel} htmlFor='chooseFile'>
+              <ImageIcon className={styles.imageBtn} />
+              Choose Your Image 👈
+            </label>
+            <input type='file' id='chooseFile' accept='img/*' onChange={handleImageChange} />
+          </div>
+          <div className={styles.description}>
+            <FileIcon />
+            <input
+              type='text'
+              placeholder='상세한 내용을 입력하세요'
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </div>
+          <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
+            Create Task
+          </button>
+        </div>
       </div>
     </div>
   )
@@ -155,8 +193,11 @@ const Modal = ({ processName, handleOpenModal }: IModalProps) => {
 
 export default Modal
 
+// 선택된 파일 없음 말고 파일 이름 띄워주기
 // 카테고리 중복으로 했을 때 처리
 // dates any types
 // date Picker onSelect 생각해보기
 // change type
 // todo create시 모달창 닫히기
+// todo 있을 대 endDate setting 하기
+// 컴포넌트로 분리해주기

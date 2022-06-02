@@ -6,6 +6,7 @@ export interface Todoform {
 
 export interface Todo {
   id: Date
+  process: string
   task: string
   category: string[]
   date: [Date, null]
