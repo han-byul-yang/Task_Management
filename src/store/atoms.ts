@@ -35,15 +35,7 @@ export const searchKeyAtom = atom<string>({
   default: '',
 })
 
-/* export const todoEditAtom = atom<Todo>({
-  key: 'todo',
-  default: {
-    id: new Date(),
-    task: '',
-    category: [],
-    date: [new Date(), null],
-    image: null,
-    description: '',
-  },
+export const processAtom = atom<string[]>({
+  key: 'processKey',
+  default: ['TODO', 'DOING', 'DONE'],
 })
-*/
