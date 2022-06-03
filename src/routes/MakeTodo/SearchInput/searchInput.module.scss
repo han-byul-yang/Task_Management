@@ -28,16 +28,17 @@
   width: 340px;
   height: 44px;
   padding-left: 35px;
+  color: colors.$FONT;
   background: colors.$LIGHTPINK;
   border-radius: 15px;
 }
 
 .dropdownList {
-  position: relative;
+  position: absolute;
   z-index: 50;
   width: 100%;
   height: auto;
-  padding: 15px 35px 10px;
+  padding: 10px 20px;
   margin-top: 5px;
   background: colors.$LIGHTPINK;
   border-radius: 10px;
@@ -47,7 +48,19 @@
 
     button {
       width: 100%;
+      padding: 5px;
+      font-size: 15px;
+      color: colors.$FONT;
       text-align: left;
+      border-radius: 5px;
+      transition: 0.1s linear;
+
+      &:hover {
+        color: colors.$KEY;
+        background: colors.$WHITE;
+      }
     }
   }
 }
+
+// 키보드로 내리는 것도 하기
