@@ -1,6 +1,9 @@
+import { SearchIcon } from 'assets/svgs'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 import { searchKeyAtom, todosAtom } from 'store/atoms'
+
+import styles from './searchInput.module.scss'
 
 const SearchInput = () => {
   const [keyInput, setKeyInput] = useState('')
@@ -42,8 +45,15 @@ const SearchInput = () => {
   }
 
   return (
-    <form onSubmit={handleKeyInputSubmit}>
-      <input type='text' placeholder='키워드를 입력해주세요' value={keyInput} onChange={handleKeyInputChange} />
+    <form className={styles.searchForm} onSubmit={handleKeyInputSubmit}>
+      <SearchIcon className={styles.searchIcon} />
+      <input
+        className={styles.input}
+        type='text'
+        placeholder='search'
+        value={keyInput}
+        onChange={handleKeyInputChange}
+      />
       <ul>
         {dropdownWordsList.map((dropdownWord) => {
           if (dropdownWord.includes(keyInput)) {

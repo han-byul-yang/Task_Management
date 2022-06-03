@@ -1,0 +1,21 @@
+@use '../../../styles/constants/colors';
+
+.searchForm {
+  position: relative;
+
+  .searchIcon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.input {
+  width: 250px;
+  height: 40px;
+  padding-left: 35px;
+  background: colors.$LIGHTPINK;
+  border-radius: 15px;
+}
