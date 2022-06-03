@@ -24,7 +24,7 @@
   width: calc(calc(100vw - 300px) / 4);
   min-width: 240px;
   overflow-y: auto;
-  border: 1px solid black;
+  border-right: 1px solid colors.$GRAY_100;
 
   &::-webkit-scrollbar {
     display: block;
