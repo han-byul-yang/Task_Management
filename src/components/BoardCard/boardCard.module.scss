@@ -1,0 +1,74 @@
+@use '../../styles/constants/colors';
+
+.boardCard {
+  width: calc(100% - 30px);
+  height: auto;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 5px 0;
+
+  .setting {
+    .settingIcon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .settingBox {
+      position: relative;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      background: colors.$WHITE;
+      border: 1px solid black;
+    }
+  }
+}
+
+.category {
+  display: flex;
+
+  li {
+    width: auto;
+    padding: 8px 10px;
+    margin-right: 8px;
+    font-size: 14px;
+    color: colors.$WHITE;
+    background: colors.$KEY;
+    border-radius: 5px;
+  }
+}
+
+.description {
+  width: 100%;
+  margin: 10px 0;
+  font-size: 13px;
+  line-height: 25px;
+  color: colors.$GRAY_300;
+}
+
+.dates {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .dateIcon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+}

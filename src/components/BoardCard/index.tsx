@@ -41,29 +41,29 @@ const BoardCard = ({ todo }: IBoardCardProps) => {
 
   return (
     <div key={`todo-${todo}`} className={styles.boardCard}>
-      <img src={`${image}`} alt='todo-img' className={styles.image} />
-      <div className={styles.title}>{parse(highlightTask)}</div>
-      <div className={styles.setting}>
-        <EditIcon />
-        <div className={styles.settingBox}>
-          <button className={styles.edit} type='button' onClick={handleEditClick}>
-            EDIT
-          </button>
-          <button className={styles.delete} type='button' onClick={handleDeleteClick}>
-            DELETE
-          </button>
+      {image ? <img src={`${image}`} alt='todo-img' className={styles.image} /> : null}
+      <div className={styles.titleBox}>
+        <div className={styles.title}>{parse(highlightTask)}</div>
+        <div className={styles.setting}>
+          <EditIcon className={styles.settingIcon} />
+          <div className={styles.settingBox}>
+            <button className={styles.edit} type='button' onClick={handleEditClick}>
+              EDIT
+            </button>
+            <button className={styles.delete} type='button' onClick={handleDeleteClick}>
+              DELETE
+            </button>
+          </div>
         </div>
       </div>
-      {highlightCategory.map((item) => {
-        return (
-          <div key={`category-${item}`} className={styles.category}>
-            {parse(item)}
-          </div>
-        )
-      })}
+      <ul className={styles.category}>
+        {highlightCategory.map((item) => {
+          return <li key={`category-${item}`}>{parse(item)}</li>
+        })}
+      </ul>
       <div className={styles.description}>{description}</div>
       <div className={styles.dates}>
-        <CalendarIcon />
+        <CalendarIcon className={styles.dateIcon} />
         <div>
           {!date[1]
             ? dayjs(date[0]).format('YYYY-MM-DD')

@@ -1,4 +1,10 @@
 import { atom } from 'recoil'
+import { recoilPersist } from 'recoil-persist'
+
+const { persistAtom } = recoilPersist({
+  key: 'storeDatas',
+  storage: sessionStorage,
+})
 
 export interface Todoform {
   [key: string]: Todo[]
@@ -21,6 +27,7 @@ export const todosAtom = atom<Todoform>({
     DOING: [],
     DONE: [],
   },
+  effects_UNSTABLE: [persistAtom],
 })
 
 export const searchKeyAtom = atom<string>({

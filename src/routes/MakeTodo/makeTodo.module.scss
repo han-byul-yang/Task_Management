@@ -1,11 +1,47 @@
-.container {
-  display: flex;
-}
+@use '../../styles/constants/colors';
 
 .boards {
   display: flex;
+  width: auto;
+  height: 850px;
+  margin: 0 20px;
+  border: 1px solid black;
+}
+
+.processBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(calc(100vw - 300px) / 4);
+  min-width: 300px;
+  overflow-y: auto;
+  border: 1px solid black;
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+    height: 9px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$GRAY_100;
+    border-radius: 8px;
+  }
 }
 
 .processTop {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 30px);
+  height: 50px;
+  font-size: 20px;
+  font-weight: 500;
+
+  button {
+    padding: 10px 14px;
+    color: colors.$WHITE;
+    background: colors.$LIGHTORANGE;
+    border-radius: 10px;
+  }
 }
