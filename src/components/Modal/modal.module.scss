@@ -30,6 +30,7 @@
   justify-content: space-between;
   height: 50px;
   font-size: 20px;
+  color: colors.$FONT;
 
   .xBtn {
     cursor: pointer;
@@ -45,10 +46,12 @@
 .title {
   width: 260px;
   font-size: 17px;
+  color: colors.$FONT;
 
   .titleHead {
     display: flex;
     align-items: center;
+    color: colors.$FONT;
   }
 
   input {
@@ -64,6 +67,7 @@
 
   .categoryHead {
     display: flex;
+    color: colors.$FONT;
   }
 
   .categoryForm {
@@ -71,6 +75,7 @@
     justify-content: baseline;
     width: 100%;
     margin-top: 10px;
+    color: colors.$FONT;
   }
 
   .categoryBtn {
@@ -102,10 +107,12 @@
 
 .detail {
   margin-top: 25px;
+  color: colors.$FONT;
 }
 
 .date {
   margin-top: 15px;
+  color: colors.$FONT;
   cursor: pointer;
 
   .dateBtn {
@@ -121,10 +128,12 @@
 
 .image {
   margin-top: 10px;
+  color: colors.$FONT;
 
   .imageLabel {
     display: flex;
     align-items: center;
+    color: colors.$FONT;
     cursor: pointer;
 
     .imageBtn {
@@ -141,6 +150,7 @@
   display: flex;
   align-items: center;
   margin-top: 15px;
+  color: colors.$FONT;
 
   input {
     width: 100%;
@@ -154,6 +164,7 @@
   width: 280px;
   height: 50px;
   font-size: 17px;
+  color: colors.$FONT;
   color: colors.$WHITE;
   background: colors.$GRAY_100;
   border-radius: 20px;
