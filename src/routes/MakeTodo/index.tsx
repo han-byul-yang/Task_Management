@@ -23,7 +23,7 @@ const MakeTodo = () => {
   }
 
   return (
-    <div>
+    <div className={styles.page}>
       <SearchInput />
       <main className={styles.boards}>
         {processList.map((process) => {

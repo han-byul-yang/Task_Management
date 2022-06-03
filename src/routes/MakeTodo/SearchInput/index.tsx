@@ -45,32 +45,34 @@ const SearchInput = () => {
   }
 
   return (
-    <form className={styles.searchForm} onSubmit={handleKeyInputSubmit}>
-      <SearchIcon className={styles.searchIcon} />
-      <input
-        className={styles.input}
-        type='text'
-        placeholder='search'
-        value={keyInput}
-        onChange={handleKeyInputChange}
-      />
-      {keyInput !== '' && (
-        <ul>
-          {dropdownWordsList.map((dropdownWord) => {
-            if (dropdownWord.includes(keyInput)) {
-              return (
-                <li key={`dropdown-${dropdownWord}`}>
-                  <button type='button' onClick={() => handleKeyResultClick(dropdownWord)}>
-                    {dropdownWord}
-                  </button>
-                </li>
-              )
-            }
-            return null
-          })}
-        </ul>
-      )}
-    </form>
+    <div className={styles.inputBox}>
+      <form className={styles.searchForm} onSubmit={handleKeyInputSubmit}>
+        <SearchIcon className={styles.searchIcon} />
+        <input
+          className={styles.searchInput}
+          type='text'
+          placeholder='search'
+          value={keyInput}
+          onChange={handleKeyInputChange}
+        />
+        {keyInput !== '' && (
+          <ul className={styles.dropdownList}>
+            {dropdownWordsList.map((dropdownWord) => {
+              if (dropdownWord.includes(keyInput)) {
+                return (
+                  <li key={`dropdown-${dropdownWord}`}>
+                    <button type='button' onClick={() => handleKeyResultClick(dropdownWord)}>
+                      {dropdownWord}
+                    </button>
+                  </li>
+                )
+              }
+              return null
+            })}
+          </ul>
+        )}
+      </form>
+    </div>
   )
 }
 

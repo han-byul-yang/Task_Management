@@ -1,11 +1,16 @@
 @use '../../styles/constants/colors';
 
+.page {
+  width: 100%;
+}
+
 .boards {
+  position: relative;
+  z-index: 1;
   display: flex;
   width: auto;
-  height: 850px;
+  height: 875px;
   margin: 0 20px;
-  border: 1px solid black;
 }
 
 .processBox {
