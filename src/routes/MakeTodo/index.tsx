@@ -23,7 +23,7 @@ const MakeTodo = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div>
       <SearchInput />
       <main className={styles.boards}>
         {processList.map((process) => {
@@ -43,11 +43,9 @@ const MakeTodo = () => {
         })}
       </main>
       {openModal && (
-        <div className={styles.modalBackground}>
-          <ModalPortal>
-            <Modal processName={processName} setOpenModal={setOpenModal} />
-          </ModalPortal>
-        </div>
+        <ModalPortal>
+          <Modal processName={processName} setOpenModal={setOpenModal} />
+        </ModalPortal>
       )}
     </div>
   )

@@ -4,7 +4,7 @@
   width: calc(100% - 30px);
   height: auto;
   padding: 10px;
-  margin-top: 15px;
+  margin: 15px 0;
   border: 1px solid black;
   border-radius: 10px;
 }
@@ -29,7 +29,7 @@
 
     .settingBox {
       position: relative;
-      z-index: 100;
+      z-index: 50;
       display: flex;
       flex-direction: column;
       padding: 10px;
@@ -72,3 +72,6 @@
     margin-right: 5px;
   }
 }
+
+// border 없애기, 그림자
+// edit 박스 z-index 설정

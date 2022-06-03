@@ -119,75 +119,78 @@ const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
   }
 
   return (
-    <div className={styles.modalContainer}>
-      <div className={styles.modalBox}>
-        <div className={styles.modalHead}>
-          <div>Create a new task</div>
-          <XIcon className={styles.xBtn} onClick={handleCloseModal} />
-        </div>
-        <div className={styles.title}>
-          <div>Title</div>
-          <input type='text' placeholder='할 일을 입력해주세요' value={task} onChange={handleTaskChange} />
-        </div>
-        <div className={styles.category}>
-          <div>Task Type</div>
-          <form className={styles.categoryForm} onSubmit={handleCategorySubmit}>
-            <PlusIcon className={styles.categoryBtn} onClick={handleCategoryShow} />
-            <input
-              className={cx(styles.categoryInput, { [styles.show]: categoryShow })}
-              type='text'
-              placeholder='카테고리 입력해주세요'
-              value={category}
-              onChange={handleCategoryChange}
-            />
-          </form>
-          {categoryList.map((item, index) => {
-            return (
-              <button
-                className={styles.categoryItem}
-                type='button'
-                key={`category-${item}`}
-                onClick={() => handleCategoryDelete(index)}
-              >
-                {item}
-              </button>
-            )
-          })}
-        </div>
-        <div className={styles.detail}>
-          <div>Task Detail</div>
-          <div className={styles.date}>
-            <DatePicker
-              selected={startDate}
-              onChange={handleDateChange}
-              startDate={startDate}
-              endDate={endDate}
-              selectsRange
-              customInput={<CustomButton />}
-            />
+    <>
+      <div className={styles.background} />
+      <div className={styles.modalContainer}>
+        <div className={styles.modalBox}>
+          <div className={styles.modalHead}>
+            <div>Create a new task</div>
+            <XIcon className={styles.xBtn} onClick={handleCloseModal} />
           </div>
-          <div className={styles.image}>
-            <label className={styles.imageLabel} htmlFor='chooseFile'>
-              <ImageIcon className={styles.imageBtn} />
-              Choose Your Image 👈
-            </label>
-            <input type='file' id='chooseFile' accept='img/*' onChange={handleImageChange} />
+          <div className={styles.title}>
+            <div>Title</div>
+            <input type='text' placeholder='할 일을 입력해주세요' value={task} onChange={handleTaskChange} />
           </div>
-          <div className={styles.description}>
-            <FileIcon />
-            <input
-              type='text'
-              placeholder='상세한 내용을 입력하세요'
-              value={description}
-              onChange={handleDescriptionChange}
-            />
+          <div className={styles.category}>
+            <div>Task Type</div>
+            <form className={styles.categoryForm} onSubmit={handleCategorySubmit}>
+              <PlusIcon className={styles.categoryBtn} onClick={handleCategoryShow} />
+              <input
+                className={cx(styles.categoryInput, { [styles.show]: categoryShow })}
+                type='text'
+                placeholder='카테고리 입력해주세요'
+                value={category}
+                onChange={handleCategoryChange}
+              />
+            </form>
+            {categoryList.map((item, index) => {
+              return (
+                <button
+                  className={styles.categoryItem}
+                  type='button'
+                  key={`category-${item}`}
+                  onClick={() => handleCategoryDelete(index)}
+                >
+                  {item}
+                </button>
+              )
+            })}
           </div>
-          <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
-            Create Task
-          </button>
+          <div className={styles.detail}>
+            <div>Task Detail</div>
+            <div className={styles.date}>
+              <DatePicker
+                selected={startDate}
+                onChange={handleDateChange}
+                startDate={startDate}
+                endDate={endDate}
+                selectsRange
+                customInput={<CustomButton />}
+              />
+            </div>
+            <div className={styles.image}>
+              <label className={styles.imageLabel} htmlFor='chooseFile'>
+                <ImageIcon className={styles.imageBtn} />
+                Choose Your Image 👈
+              </label>
+              <input type='file' id='chooseFile' accept='img/*' onChange={handleImageChange} />
+            </div>
+            <div className={styles.description}>
+              <FileIcon />
+              <input
+                type='text'
+                placeholder='상세한 내용을 입력하세요'
+                value={description}
+                onChange={handleDescriptionChange}
+              />
+            </div>
+            <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
+              Create Task
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
