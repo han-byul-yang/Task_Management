@@ -54,20 +54,22 @@ const SearchInput = () => {
         value={keyInput}
         onChange={handleKeyInputChange}
       />
-      <ul>
-        {dropdownWordsList.map((dropdownWord) => {
-          if (dropdownWord.includes(keyInput)) {
-            return (
-              <li key={`dropdown-${dropdownWord}`}>
-                <button type='button' onClick={() => handleKeyResultClick(dropdownWord)}>
-                  {dropdownWord}
-                </button>
-              </li>
-            )
-          }
-          return null
-        })}
-      </ul>
+      {keyInput !== '' && (
+        <ul>
+          {dropdownWordsList.map((dropdownWord) => {
+            if (dropdownWord.includes(keyInput)) {
+              return (
+                <li key={`dropdown-${dropdownWord}`}>
+                  <button type='button' onClick={() => handleKeyResultClick(dropdownWord)}>
+                    {dropdownWord}
+                  </button>
+                </li>
+              )
+            }
+            return null
+          })}
+        </ul>
+      )}
     </form>
   )
 }
