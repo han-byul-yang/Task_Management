@@ -66,8 +66,8 @@ const BoardCard = ({ todo }: IBoardCardProps) => {
         <CalendarIcon className={styles.dateIcon} />
         <div>
           {!date[1]
-            ? dayjs(date[0]).format('YYYY-MM-DD')
-            : `${dayjs(date[0]).format('YYYY-MM-DD')}-${dayjs(date[1]).format('YYYY-MM-DD')}`}
+            ? dayjs(date[0]).format('YYYY.MM.DD')
+            : `${dayjs(date[0]).format('YYYY.MM.DD')}-${dayjs(date[1]).format('YYYY.MM.DD')}`}
         </div>
       </div>
       {openModal && (

@@ -3,7 +3,6 @@ import { useRecoilValue } from 'recoil'
 
 import { Todo, todosAtom } from 'store/atoms'
 import Modal from 'components/Modal'
-import NavBar from 'components/NavBar'
 import ModalPortal from 'components/Modal/ModalPortal'
 import BoardCard from 'components/BoardCard'
 import SearchInput from './SearchInput'

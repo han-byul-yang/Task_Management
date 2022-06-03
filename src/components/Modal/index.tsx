@@ -35,9 +35,9 @@ const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
     if (todo) {
       setTask(todo.task)
       setCategoryList(todo.category)
-      setStartDate(todo.date[0])
-      setImage(todo.image)
-      setDescription(todo.description)
+      setStartDate(new Date())
+      setImage(todo?.image)
+      setDescription(todo?.description)
     }
   })
 
@@ -75,6 +75,7 @@ const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
 
   const handleImageChange = (e: any) => {
     const file = e.target.files[0]
+    // 이미지 이름 (e.target.files[0].name)
     const reader = new FileReader()
 
     reader.readAsDataURL(file)
@@ -92,32 +93,44 @@ const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
 
   const handleCreateTaskClick = () => {
     if (task !== '' && categoryList.length !== 0) {
-      /* todo
-      ? setTodoList((oldTodos) => {
-          const todoIdx = oldTodos[processName].filter((oldTodo) => oldTodo.id === todo.id)
-          const deleteTodo = oldTodos[processName].splice()
+      if (todo) {
+        const todoIdArray = todoList[todo.process].map((todos) => todos.id)
+        const todoIdIndex = todoIdArray.indexOf(todo.id)
+        const copyArray = [...todoList[todo.process]]
+        copyArray.splice(todoIdIndex, 1, {
+          id: todo.id,
+          process: todo.process,
+          task,
+          category: categoryList,
+          date: [startDate, endDate],
+          image,
+          description,
+        })
+        setTodoList((oldTodos) => {
           return {
             ...oldTodos,
-            [processName]: [],
+            [todo.process]: [...copyArray],
           }
         })
-      : */ setTodoList((oldTodos) => {
-        return {
-          ...oldTodos,
-          [processName]: [
-            ...oldTodos[processName],
-            {
-              id: new Date(),
-              process: processName,
-              task,
-              category: categoryList,
-              date: [startDate, endDate],
-              image,
-              description,
-            },
-          ],
-        }
-      })
+      } else {
+        setTodoList((oldTodos) => {
+          return {
+            ...oldTodos,
+            [processName]: [
+              ...oldTodos[processName],
+              {
+                id: new Date(),
+                process: processName,
+                task,
+                category: categoryList,
+                date: [startDate, endDate],
+                image,
+                description,
+              },
+            ],
+          }
+        })
+      }
       handleCloseModal()
     }
     if (task === '') {
@@ -184,6 +197,7 @@ const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
               startDate={startDate}
               endDate={endDate}
               selectsRange
+              dateFormat='yyyy.MM.dd'
               customInput={<CustomButton />}
             />
           </div>
@@ -222,3 +236,5 @@ export default Modal
 // todo create시 모달창 닫히기
 // todo 있을 대 endDate setting 하기
 // 컴포넌트로 분리해주기
+// 컴포넌트 분리 후 dayjs를 여기서 이용해서 수정 하기
+// 이미지 이름 가져오기

@@ -79,3 +79,6 @@ const SearchInput = () => {
 export default SearchInput
 // onClick 함수형 바꿀 방법 모색(컴포넌트로 나눠 props로 전달해주는 것도 나쁘지 않을 듯)
 // 처음에 dropdown 안 나오게 하기
+// x 버튼 누르면 하이라이트 적용 취소
+// submit 혹은 dropdown 클릭시 input 안에 keyword 남아있기
+//
