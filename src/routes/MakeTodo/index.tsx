@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRecoilValue, useRecoilState } from 'recoil'
+import { useRecoilState } from 'recoil'
 
 import { processAtom, Todo, todosAtom } from 'store/atoms'
 import Modal from 'components/Modal'
@@ -39,24 +39,32 @@ const MakeTodo = () => {
   return (
     <div className={styles.page}>
       <SearchInput />
-      <main className={styles.boards}>
-        {processList.map((process) => {
-          return (
-            <div key={`process-${process}`} className={styles.processBox}>
-              <div className={styles.processTop}>
-                <div>{process}</div>
-                <button type='button' onClick={() => handleAddTodoClick(process)}>
-                  +
-                </button>
+      <main className={styles.main}>
+        <div className={styles.boards}>
+          {processList.map((process) => {
+            return (
+              <div key={`process-${process}`} className={styles.processBox}>
+                <div className={styles.processTop}>
+                  <div>{process}</div>
+                  <button type='button' onClick={() => handleAddTodoClick(process)}>
+                    +
+                  </button>
+                </div>
+                {todoList[process].map((todo: Todo) => {
+                  return <BoardCard key={`todo-${todo}`} todo={todo} />
+                })}
               </div>
-              {todoList[process].map((todo: Todo) => {
-                return <BoardCard key={`todo-${todo}`} todo={todo} />
-              })}
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
+        <div className={styles.icons}>
+          {processList.length <= 3 ? (
+            <AddIcon className={styles.addIcon} onClick={handleAddProcess} />
+          ) : (
+            <MinusIcon className={styles.deleteIcon} onClick={handleDeleteProcess} />
+          )}
+        </div>
       </main>
-      {processList.length <= 3 ? <AddIcon onClick={handleAddProcess} /> : <MinusIcon onClick={handleDeleteProcess} />}
       {openModal && (
         <ModalPortal>
           <Modal processName={processName} setOpenModal={setOpenModal} />

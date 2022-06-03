@@ -4,13 +4,17 @@
   width: 100%;
 }
 
+.main {
+  display: flex;
+}
+
 .boards {
   position: relative;
   z-index: 1;
   display: flex;
   width: auto;
   height: 875px;
-  margin: 0 20px;
+  margin: 0 0 0 20px;
 }
 
 .processBox {
@@ -18,7 +22,7 @@
   flex-direction: column;
   align-items: center;
   width: calc(calc(100vw - 300px) / 4);
-  min-width: 300px;
+  min-width: 240px;
   overflow-y: auto;
   border: 1px solid black;
 
@@ -49,6 +53,23 @@
     color: colors.$WHITE;
     background: colors.$LIGHTORANGE;
     border-radius: 10px;
+  }
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .addIcon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .deleteIcon {
+    width: 30px;
+    height: 30px;
   }
 }
 
