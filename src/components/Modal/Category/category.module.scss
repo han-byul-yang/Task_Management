@@ -1,0 +1,51 @@
+@use '../../../styles/constants/colors';
+
+.error {
+  margin-left: 5px;
+  font-size: 13px;
+  color: colors.$ERROR;
+}
+
+.category {
+  margin-top: 25px;
+
+  .categoryHead {
+    display: flex;
+    color: colors.$FONT;
+  }
+
+  .categoryForm {
+    display: flex;
+    justify-content: baseline;
+    width: 100%;
+    margin-top: 10px;
+    color: colors.$FONT;
+  }
+
+  .categoryBtn {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+
+  .categoryItem {
+    width: auto;
+    height: 30px;
+    padding: 3px 10px;
+    margin: 8px 5px 0 0;
+    font-size: 15px;
+    color: colors.$WHITE;
+    background: colors.$KEY;
+    border-radius: 10px;
+  }
+}
+
+.categoryInput {
+  display: none;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+
+.show {
+  display: inline-block;
+}

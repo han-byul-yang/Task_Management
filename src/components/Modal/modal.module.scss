@@ -1,0 +1,57 @@
+@use '../../styles/constants/colors';
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 30%);
+}
+
+.modalContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  width: 320px;
+  height: 500px;
+  padding: 10px 20px;
+  font-weight: 500;
+  background: colors.$WHITE;
+  border-radius: 10px;
+  transform: translate(-50%, -50%);
+}
+
+.modalHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  font-size: 20px;
+  color: colors.$FONT;
+
+  .xBtn {
+    cursor: pointer;
+  }
+}
+
+.createBtn {
+  position: absolute;
+  bottom: 20px;
+  width: 280px;
+  height: 50px;
+  font-size: 17px;
+  color: colors.$FONT;
+  color: colors.$WHITE;
+  background: colors.$GRAY_100;
+  border-radius: 20px;
+  transition: 0.2s linear;
+
+  &:hover {
+    background: colors.$KEY;
+  }
+}
+
+// 알파벳 마다 다르게 태그 색상 설정

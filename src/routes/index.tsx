@@ -1,25 +1,24 @@
+import NavBar from 'components/NavBar'
 import { Route, Routes } from 'react-router-dom'
-import { useSetRecoilState } from 'recoil'
-import { useMount } from 'react-use'
+import { RecoilRoot } from 'recoil'
 
-import healthDataJSON from 'data/health.json'
+import MakeTodo from './MakeTodo'
+import DashBoard from './DashBoard'
 
-import { Dashboard } from './Dashboard'
-import { Details } from './Details'
-import { healthDataState } from 'states/healthDataState'
+import styles from './routes.module.scss'
 
 const App = () => {
-  const setHealthData = useSetRecoilState(healthDataState)
-
-  useMount(() => {
-    setUserData(healthDataJSON)
-  })
   return (
-    <Routes>
-      <Route path='/' element={<Dashboard />} />
-      <Route path='details' element={<Details />} />
-      <Route path='*' element={<div>404</div>} />
-    </Routes>
+    <div className={styles.page}>
+      <NavBar />
+      <RecoilRoot>
+        <Routes>
+          <Route path='/' element={<MakeTodo />} />
+          <Route path='todo' element={<DashBoard />} />
+          <Route path='*' element={<div>404</div>} />
+        </Routes>
+      </RecoilRoot>
+    </div>
   )
 }
 

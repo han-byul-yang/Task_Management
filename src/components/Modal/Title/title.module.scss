@@ -1,0 +1,27 @@
+@use '../../../styles/constants/colors';
+
+.error {
+  margin-left: 5px;
+  font-size: 13px;
+  color: colors.$ERROR;
+}
+
+.title {
+  width: 260px;
+  font-size: 17px;
+  color: colors.$FONT;
+
+  .titleHead {
+    display: flex;
+    align-items: center;
+    color: colors.$FONT;
+  }
+
+  input {
+    width: 100%;
+    margin-top: 8px;
+    font-family: 'Nanum Gothic', sans-serif;
+    line-height: 28px;
+    border-bottom: 1px solid colors.$BLACK;
+  }
+}

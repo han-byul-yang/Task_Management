@@ -1,0 +1,90 @@
+@use '../../../styles/constants/colors';
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin: 15px 30px;
+
+  @media screen and (max-width: 1050px) {
+    align-items: center;
+    margin: 15px 10px;
+  }
+}
+
+.searchForm {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  width: 15px;
+  height: 15px;
+}
+
+.inputBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0%);
+}
+
+.searchInput {
+  width: 340px;
+  height: 44px;
+  padding-left: 35px;
+  font-family: 'Nanum Gothic', sans-serif;
+  color: colors.$FONT;
+  background: colors.$LIGHTPINK;
+  border-radius: 15px;
+
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+.xBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.dropdownList {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: auto;
+  margin-top: 5px;
+  background: colors.$LIGHTPINK;
+  border-radius: 10px;
+
+  li {
+    margin: 10px 20px;
+    margin-bottom: 10px;
+
+    button {
+      width: 100%;
+      padding: 5px;
+      font-family: 'Nanum Gothic', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: colors.$FONT;
+      text-align: left;
+      border-radius: 5px;
+      transition: 0.1s linear;
+
+      &:hover {
+        color: colors.$KEY;
+        background: colors.$WHITE;
+      }
+    }
+  }
+}
+
+// 키보드로 내리는 것도 하기
