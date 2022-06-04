@@ -1,6 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 
-import styles from '../modal.module.scss'
+import styles from './title.module.scss'
 
 interface ITitleProps {
   noTask: boolean

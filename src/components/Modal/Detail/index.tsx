@@ -4,7 +4,7 @@ import ReactDatePicker from 'react-datepicker'
 import { CustomButton } from '../utils/CustomButton'
 
 import { FileIcon, ImageIcon } from 'assets/svgs'
-import styles from '../modal.module.scss'
+import styles from './detail.module.scss'
 
 interface IDetailProps {
   setDate: Dispatch<SetStateAction<(Date | null)[]>>

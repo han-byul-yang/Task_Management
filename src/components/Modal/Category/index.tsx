@@ -2,7 +2,7 @@ import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'reac
 import cx from 'classnames'
 
 import { PlusIcon } from 'assets/svgs'
-import styles from '../modal.module.scss'
+import styles from './category.module.scss'
 
 interface ICategoryProps {
   noCategory: boolean
