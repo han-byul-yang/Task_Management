@@ -108,13 +108,7 @@ const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
         </div>
         <Title noTask={noTask} task={task} setTask={setTask} />
         <Category noCategory={noCategory} categoryList={categoryList} setCategoryList={setCategoryList} />
-        <Detail
-          setDate={setDate}
-          image={image}
-          setImage={setImage}
-          description={description}
-          setDescription={setDescription}
-        />
+        <Detail setDate={setDate} setImage={setImage} description={description} setDescription={setDescription} />
         <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
           Create Task
         </button>
