@@ -39,9 +39,10 @@ const MakeTodo = () => {
       setTodoList((allBoards) => {
         const sourceBoard = [...allBoards[source.droppableId]]
         const taskObj = sourceBoard[source.index]
+        const changeTaskObj = { ...taskObj, process: destination.droppableId }
         const destinationBoard = [...allBoards[destination.droppableId]]
         sourceBoard.splice(source.index, 1)
-        destinationBoard.splice(destination?.index, 0, taskObj)
+        destinationBoard.splice(destination?.index, 0, changeTaskObj)
         return {
           ...allBoards,
           [source.droppableId]: sourceBoard,
