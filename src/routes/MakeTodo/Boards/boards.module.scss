@@ -1,0 +1,55 @@
+@use '../../../styles/constants/colors';
+
+.processBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(calc(100vw - 270px) / 4);
+  min-width: 240px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid colors.$GRAY_100;
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 7px;
+    height: 9px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$GRAY_100;
+    border-radius: 8px;
+  }
+}
+
+.processTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 30px);
+  height: 40px;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  color: colors.$FONT;
+
+  button {
+    padding: 10px 14px;
+    color: colors.$WHITE;
+    background: colors.$LIGHTORANGE;
+    border-radius: 10px;
+  }
+}
+
+.noTaskMessage {
+  line-height: 100px;
+}
+
+.processInput {
+  width: 250px;
+  height: 50px;
+  padding-left: 10px;
+  color: colors.$FONT;
+  background: colors.$LIGHTPINK;
+  border-radius: 10px;
+}
