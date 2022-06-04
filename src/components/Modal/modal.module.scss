@@ -57,6 +57,7 @@
   input {
     width: 100%;
     margin-top: 8px;
+    font-family: 'Nanum Gothic', sans-serif;
     line-height: 28px;
     border-bottom: 1px solid colors.$BLACK;
   }
@@ -99,6 +100,7 @@
 
 .categoryInput {
   display: none;
+  font-family: 'Nanum Gothic', sans-serif;
 }
 
 .show {
@@ -150,6 +152,7 @@
   display: flex;
   align-items: center;
   margin-top: 15px;
+  font-family: 'Nanum Gothic', sans-serif;
   color: colors.$FONT;
 
   input {
