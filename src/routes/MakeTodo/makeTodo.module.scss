@@ -1,7 +1,7 @@
 @use '../../styles/constants/colors';
 
 .page {
-  width: 100%;
+  width: calc(100% - 230px);
 }
 
 .main {
@@ -14,14 +14,14 @@
   display: flex;
   width: auto;
   height: 875px;
-  margin: 0 0 0 20px;
+  margin: 0 0 0 5px;
 }
 
 .processBox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(calc(100vw - 300px) / 4);
+  width: calc(calc(100vw - 270px) / 4);
   min-width: 240px;
   overflow-y: auto;
   border-right: 1px solid colors.$GRAY_100;
