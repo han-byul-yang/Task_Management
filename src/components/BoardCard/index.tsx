@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
+import { Draggable } from 'react-beautiful-dnd'
 
 import { Todo, todosAtom, searchKeyAtom } from 'store/atoms'
 import { highlightWords } from './utils/highlightWords'
@@ -13,9 +14,10 @@ import styles from './boardCard.module.scss'
 
 interface IBoardCardProps {
   todo: Todo
+  index: number
 }
 
-const BoardCard = ({ todo }: IBoardCardProps) => {
+const BoardCard = ({ todo, index }: IBoardCardProps) => {
   const [todoList, setTodoList] = useRecoilState(todosAtom)
   const searchKey = useRecoilValue(searchKeyAtom)
   const [openModal, setOpenModal] = useState(false)
@@ -40,42 +42,51 @@ const BoardCard = ({ todo }: IBoardCardProps) => {
   const { highlightTask, highlightCategory } = highlightWords(searchKey, todo)
 
   return (
-    <div key={`todo-${todo}`} className={styles.boardCard}>
-      {image ? <img src={`${image}`} alt='todo-img' className={styles.image} /> : null}
-      <div className={styles.titleBox}>
-        <div className={styles.title}>{parse(highlightTask)}</div>
-        <div className={styles.setting}>
-          <EditIcon className={styles.settingIcon} />
-          <div className={styles.settingBox}>
-            <button className={styles.edit} type='button' onClick={handleEditClick}>
-              EDIT
-            </button>
-            <button className={styles.delete} type='button' onClick={handleDeleteClick}>
-              DELETE
-            </button>
+    <Draggable draggableId={`drag-${id}`} key={`drag-${id}`} index={index}>
+      {(handleDrag) => (
+        <div
+          className={styles.boardCard}
+          ref={handleDrag.innerRef}
+          {...handleDrag.draggableProps}
+          {...handleDrag.dragHandleProps}
+        >
+          {image ? <img src={`${image}`} alt='todo-img' className={styles.image} /> : null}
+          <div className={styles.titleBox}>
+            <div className={styles.title}>{parse(highlightTask)}</div>
+            <div className={styles.setting}>
+              <EditIcon className={styles.settingIcon} />
+              <div className={styles.settingBox}>
+                <button className={styles.edit} type='button' onClick={handleEditClick}>
+                  EDIT
+                </button>
+                <button className={styles.delete} type='button' onClick={handleDeleteClick}>
+                  DELETE
+                </button>
+              </div>
+            </div>
           </div>
+          <ul className={styles.category}>
+            {highlightCategory.map((item) => {
+              return <li key={`category-${item}`}>{parse(item)}</li>
+            })}
+          </ul>
+          <div className={styles.description}>{description}</div>
+          <div className={styles.dates}>
+            <CalendarIcon className={styles.dateIcon} />
+            <div>
+              {!date[1]
+                ? dayjs(date[0]).format('YYYY.MM.DD')
+                : `${dayjs(date[0]).format('YYYY.MM.DD')}-${dayjs(date[1]).format('YYYY.MM.DD')}`}
+            </div>
+          </div>
+          {openModal && (
+            <ModalPortal>
+              <Modal processName={process} todo={todo} setOpenModal={setOpenModal} />
+            </ModalPortal>
+          )}
         </div>
-      </div>
-      <ul className={styles.category}>
-        {highlightCategory.map((item) => {
-          return <li key={`category-${item}`}>{parse(item)}</li>
-        })}
-      </ul>
-      <div className={styles.description}>{description}</div>
-      <div className={styles.dates}>
-        <CalendarIcon className={styles.dateIcon} />
-        <div>
-          {!date[1]
-            ? dayjs(date[0]).format('YYYY.MM.DD')
-            : `${dayjs(date[0]).format('YYYY.MM.DD')}-${dayjs(date[1]).format('YYYY.MM.DD')}`}
-        </div>
-      </div>
-      {openModal && (
-        <ModalPortal>
-          <Modal processName={process} todo={todo} setOpenModal={setOpenModal} />
-        </ModalPortal>
       )}
-    </div>
+    </Draggable>
   )
 }
 
