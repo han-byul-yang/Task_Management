@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 
 import { ClockIcon } from 'assets/svgs'
-import styles from '../modal.module.scss'
+import styles from '../Detail/detail.module.scss'
 
 export const CustomButton = forwardRef(({ value, onClick }: any, ref: any) => (
   <div className={styles.dateBtn}>
