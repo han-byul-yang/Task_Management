@@ -38,12 +38,12 @@
   z-index: 50;
   width: 100%;
   height: auto;
-  padding: 10px 20px;
   margin-top: 5px;
   background: colors.$LIGHTPINK;
   border-radius: 10px;
 
   li {
+    margin: 10px 20px;
     margin-bottom: 10px;
 
     button {

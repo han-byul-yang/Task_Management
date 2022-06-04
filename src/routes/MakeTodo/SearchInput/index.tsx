@@ -1,7 +1,7 @@
 import { SearchIcon } from 'assets/svgs'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
-import { searchKeyAtom, todosAtom } from 'store/atoms'
+import { searchKeyAtom, Todo, todosAtom } from 'store/atoms'
 
 import styles from './searchInput.module.scss'
 
@@ -9,6 +9,11 @@ const SearchInput = () => {
   const [keyInput, setKeyInput] = useState('')
   const setSearchKey = useSetRecoilState(searchKeyAtom)
   const todoList = useRecoilValue(todosAtom)
+  const [openDropDown, setOpenDropDown] = useState(false)
+
+  // const allTasks: Todo[][] = []
+
+  // Object.keys(todoList).forEach((todoKey) => allTasks.push(todoList[todoKey]))
 
   const allTasks = [...todoList.TODO, ...todoList.DOING, ...todoList.DONE]
   const categoryWordsList = allTasks.reduce(
@@ -32,16 +37,19 @@ const SearchInput = () => {
 
   const handleKeyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyInput(e.currentTarget.value)
+    setOpenDropDown(true)
   }
 
   const handleKeyInputSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSearchKey(keyInput)
-    setKeyInput('')
+    setOpenDropDown(false)
   }
 
   const handleKeyResultClick = (dropdownWord: string) => {
     setSearchKey(dropdownWord)
+    setKeyInput(dropdownWord)
+    setOpenDropDown(false)
   }
 
   return (
@@ -50,12 +58,12 @@ const SearchInput = () => {
         <SearchIcon className={styles.searchIcon} />
         <input
           className={styles.searchInput}
-          type='text'
+          type='search'
           placeholder='search'
           value={keyInput}
           onChange={handleKeyInputChange}
         />
-        {keyInput !== '' && (
+        {openDropDown && (
           <ul className={styles.dropdownList}>
             {dropdownWordsList.map((dropdownWord) => {
               if (dropdownWord.includes(keyInput)) {
@@ -78,7 +86,6 @@ const SearchInput = () => {
 
 export default SearchInput
 // onClick 함수형 바꿀 방법 모색(컴포넌트로 나눠 props로 전달해주는 것도 나쁘지 않을 듯)
-// 처음에 dropdown 안 나오게 하기
 // x 버튼 누르면 하이라이트 적용 취소
 // submit 혹은 dropdown 클릭시 input 안에 keyword 남아있기
-//
+// 바깥에 누르면 폼 딛히기
