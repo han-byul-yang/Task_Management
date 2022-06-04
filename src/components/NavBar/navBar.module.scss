@@ -43,10 +43,8 @@
 
 .nonActivatedLink {
   color: colors.$LIGHTPINK;
-  border: none;
 }
 
 .activatedLink {
   color: colors.$KEY;
-  border-right: solid 3px colors.$LIGHTORANGE;
 }

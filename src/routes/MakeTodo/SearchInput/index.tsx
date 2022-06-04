@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { useSetRecoilState, useRecoilValue } from 'recoil'
-import { searchKeyAtom, Todo, todosAtom } from 'store/atoms'
+import { searchKeyAtom, todosAtom } from 'store/atoms'
 
 import { SearchIcon, XIcon } from 'assets/svgs'
 import styles from './searchInput.module.scss'
@@ -99,4 +99,3 @@ const SearchInput = () => {
 
 export default SearchInput
 // onClick 함수형 바꿀 방법 모색(컴포넌트로 나눠 props로 전달해주는 것도 나쁘지 않을 듯)
-// 바깥에 누르면 폼 딛히기

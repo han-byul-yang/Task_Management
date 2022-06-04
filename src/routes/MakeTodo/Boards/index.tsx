@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil'
 import { todosAtom, Todo } from 'store/atoms'
 import BoardCard from 'components/BoardCard'
 
-import styles from '../makeTodo.module.scss'
+import styles from './boards.module.scss'
 
 interface IBoardsProps {
   process: string

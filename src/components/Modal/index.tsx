@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react'
 import { useMount } from 'react-use'
 import cx from 'classnames'
-import DatePicker from 'react-datepicker'
+import ReactDatePicker from 'react-datepicker'
 import { useRecoilState } from 'recoil'
 
 import { CustomButton } from './utils/CustomButton'
@@ -14,10 +14,10 @@ import styles from './modal.module.scss'
 interface IModalProps {
   processName: string
   todo?: Todo
-  setOpenModal: Dispatch<SetStateAction<boolean>>
+  setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
+const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
   const [task, setTask] = useState('')
   const [category, setCategory] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
@@ -42,7 +42,7 @@ const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
   })
 
   const handleCloseModal = () => {
-    setOpenModal(false)
+    setModalOpen(false)
   }
 
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -191,7 +191,7 @@ const Modal = ({ processName, todo, setOpenModal }: IModalProps) => {
         <div className={styles.detail}>
           <div>Task Detail</div>
           <div className={styles.date}>
-            <DatePicker
+            <ReactDatePicker
               selected={startDate}
               onChange={handleDateChange}
               startDate={startDate}
@@ -233,8 +233,6 @@ export default Modal
 // dates any types
 // date Picker onSelect 생각해보기
 // change type
-// todo create시 모달창 닫히기
 // todo 있을 대 endDate setting 하기
 // 컴포넌트로 분리해주기
 // 컴포넌트 분리 후 dayjs를 여기서 이용해서 수정 하기
-// 이미지 이름 가져오기

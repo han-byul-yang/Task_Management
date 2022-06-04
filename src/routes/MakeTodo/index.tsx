@@ -13,7 +13,7 @@ import Boards from './Boards'
 
 const MakeTodo = () => {
   const [processName, setProcessName] = useState('')
-  const [openModal, setOpenModal] = useState(false)
+  const [openModal, setModalOpen] = useState(false)
   const setTodoList = useSetRecoilState(todosAtom)
   const [processList, setProcessList] = useRecoilState(processAtom)
   const [createProcess, setCreateProcess] = useState(false)
@@ -21,7 +21,6 @@ const MakeTodo = () => {
 
   const handleDragEnd = (info: DropResult) => {
     const { destination, source } = info
-    console.log(info)
     if (!destination) return
     if (destination?.droppableId === source.droppableId) {
       setTodoList((allBoards) => {
@@ -54,7 +53,7 @@ const MakeTodo = () => {
 
   const handleAddTodoClick = (process: string) => {
     setProcessName(process)
-    setOpenModal(true)
+    setModalOpen(true)
   }
 
   const handleAddBtnClick = () => {
@@ -119,7 +118,7 @@ const MakeTodo = () => {
       </DragDropContext>
       {openModal && (
         <ModalPortal>
-          <Modal processName={processName} setOpenModal={setOpenModal} />
+          <Modal processName={processName} setModalOpen={setModalOpen} />
         </ModalPortal>
       )}
     </div>

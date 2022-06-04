@@ -38,4 +38,5 @@ export const searchKeyAtom = atom<string>({
 export const processAtom = atom<string[]>({
   key: 'processKey',
   default: ['TODO', 'DOING', 'DONE'],
+  effects_UNSTABLE: [persistAtom],
 })
