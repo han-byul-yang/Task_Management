@@ -15,7 +15,7 @@ export interface Todo {
   process: string
   task: string
   category: string[]
-  date: [Date, null]
+  date: (Date | null)[]
   image?: string | ArrayBuffer | null
   description: string
 }
