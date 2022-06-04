@@ -20,9 +20,18 @@ interface IBoardCardProps {
 const BoardCard = ({ todo, index }: IBoardCardProps) => {
   const [todoList, setTodoList] = useRecoilState(todosAtom)
   const searchKey = useRecoilValue(searchKeyAtom)
-  const [openModal, setOpenModal] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [settingOpen, setSettingOpen] = useState(false)
 
   const { id, process, image, description, date } = todo
+
+  const handleSettingBtnClick = () => {
+    setSettingOpen((prevState) => !prevState)
+  }
+
+  const handleEditClick = () => {
+    setModalOpen(true)
+  }
 
   const handleDeleteClick = () => {
     const filterdTodo = todoList[process].filter((todos) => todos.id !== id)
@@ -33,10 +42,6 @@ const BoardCard = ({ todo, index }: IBoardCardProps) => {
         [process]: [...filterdTodo],
       }
     })
-  }
-
-  const handleEditClick = () => {
-    setOpenModal(true)
   }
 
   const { highlightTask, highlightCategory } = highlightWords(searchKey, todo)
@@ -54,15 +59,21 @@ const BoardCard = ({ todo, index }: IBoardCardProps) => {
           <div className={styles.titleBox}>
             <div className={styles.title}>{parse(highlightTask)}</div>
             <div className={styles.setting}>
-              <EditIcon className={styles.settingIcon} />
-              <div className={styles.settingBox}>
-                <button className={styles.edit} type='button' onClick={handleEditClick}>
-                  EDIT
-                </button>
-                <button className={styles.delete} type='button' onClick={handleDeleteClick}>
-                  DELETE
-                </button>
-              </div>
+              <EditIcon className={styles.settingIcon} onClick={handleSettingBtnClick} />
+              {settingOpen ? (
+                <>
+                  {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                  <div className={styles.settingBackground} onClick={handleSettingBtnClick} />
+                  <div className={styles.settingBox}>
+                    <button className={styles.edit} type='button' onClick={handleEditClick}>
+                      EDIT
+                    </button>
+                    <button className={styles.delete} type='button' onClick={handleDeleteClick}>
+                      DELETE
+                    </button>
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
           <ul className={styles.category}>
@@ -79,9 +90,9 @@ const BoardCard = ({ todo, index }: IBoardCardProps) => {
                 : `${dayjs(date[0]).format('YYYY.MM.DD')}-${dayjs(date[1]).format('YYYY.MM.DD')}`}
             </div>
           </div>
-          {openModal && (
+          {modalOpen && (
             <ModalPortal>
-              <Modal processName={process} todo={todo} setOpenModal={setOpenModal} />
+              <Modal processName={process} todo={todo} setModalOpen={setModalOpen} />
             </ModalPortal>
           )}
         </div>
