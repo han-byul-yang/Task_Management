@@ -12,16 +12,12 @@ const SearchInput = () => {
   const todoList = useRecoilValue(todosAtom)
   const [openDropDown, setOpenDropDown] = useState(false)
 
-  // const allTasks: Todo[][] = []
-
-  // Object.keys(todoList).forEach((todoKey) => allTasks.push(todoList[todoKey]))
-
   const allTasks = [...todoList.TODO, ...todoList.DOING, ...todoList.DONE]
   const categoryWordsList = allTasks.reduce(
     (acc, cur) => {
       return [...acc, ...cur.category]
     },
-    ['all']
+    ['']
   )
   const taskWordsList = allTasks.reduce(
     (acc, cur) => {

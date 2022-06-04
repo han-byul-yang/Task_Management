@@ -21,7 +21,7 @@ const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
   const [task, setTask] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [date, setDate] = useState<(Date | null)[]>([])
-  const [image, setImage] = useState<string | ArrayBuffer | null | undefined>('')
+  const [image, setImage] = useState<Blob>()
   const [description, setDescription] = useState<string>('')
   const [todoList, setTodoList] = useRecoilState(todosAtom)
   const [noTask, setNoTask] = useState(false)
@@ -108,7 +108,13 @@ const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
         </div>
         <Title noTask={noTask} task={task} setTask={setTask} />
         <Category noCategory={noCategory} categoryList={categoryList} setCategoryList={setCategoryList} />
-        <Detail setDate={setDate} setImage={setImage} description={description} setDescription={setDescription} />
+        <Detail
+          setDate={setDate}
+          image={image}
+          setImage={setImage}
+          description={description}
+          setDescription={setDescription}
+        />
         <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
           Create Task
         </button>

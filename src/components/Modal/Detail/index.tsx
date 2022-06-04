@@ -8,12 +8,13 @@ import styles from './detail.module.scss'
 
 interface IDetailProps {
   setDate: Dispatch<SetStateAction<(Date | null)[]>>
-  setImage: Dispatch<SetStateAction<string | ArrayBuffer | null | undefined>>
+  image: any
+  setImage: Dispatch<SetStateAction<any>>
   description: string
   setDescription: Dispatch<SetStateAction<string>>
 }
 
-const Detail = ({ setDate, setImage, description, setDescription }: IDetailProps) => {
+const Detail = ({ setDate, image, setImage, description, setDescription }: IDetailProps) => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
 
@@ -29,9 +30,7 @@ const Detail = ({ setDate, setImage, description, setDescription }: IDetailProps
 
   const handleImageChange = (e: any) => {
     const file = e.target.files[0]
-    // 이미지 이름 (e.target.files[0].name)
     const reader = new FileReader()
-
     reader.readAsDataURL(file)
 
     return new Promise(() => {
