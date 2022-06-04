@@ -47,6 +47,10 @@ const SearchInput = () => {
     setOpenDropDown(false)
   }
 
+  const handleCloseDropDownClick = () => {
+    setOpenDropDown(false)
+  }
+
   const handleKeyResultClick = (dropdownWord: string) => {
     setSearchKey(dropdownWord)
     setKeyInput(dropdownWord)
@@ -61,6 +65,8 @@ const SearchInput = () => {
   return (
     <div className={styles.inputBox}>
       <form className={styles.searchForm} onSubmit={handleKeyInputSubmit}>
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+        {openDropDown && <div className={styles.inputBackground} onClick={handleCloseDropDownClick} />}
         <SearchIcon className={styles.searchIcon} />
         <input
           className={styles.searchInput}
@@ -93,6 +99,4 @@ const SearchInput = () => {
 
 export default SearchInput
 // onClick 함수형 바꿀 방법 모색(컴포넌트로 나눠 props로 전달해주는 것도 나쁘지 않을 듯)
-// x 버튼 누르면 하이라이트 적용 취소
-// submit 혹은 dropdown 클릭시 input 안에 keyword 남아있기
 // 바깥에 누르면 폼 딛히기
