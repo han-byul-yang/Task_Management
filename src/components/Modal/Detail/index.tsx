@@ -8,13 +8,12 @@ import styles from './detail.module.scss'
 
 interface IDetailProps {
   setDate: Dispatch<SetStateAction<(Date | null)[]>>
-  image: any
   setImage: Dispatch<SetStateAction<any>>
   description: string
   setDescription: Dispatch<SetStateAction<string>>
 }
 
-const Detail = ({ setDate, image, setImage, description, setDescription }: IDetailProps) => {
+const Detail = ({ setDate, setImage, description, setDescription }: IDetailProps) => {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(null)
 
