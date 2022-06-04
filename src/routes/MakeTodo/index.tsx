@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { useRecoilState } from 'recoil'
 
 import { processAtom, Todo, todosAtom } from 'store/atoms'
@@ -15,25 +15,50 @@ const MakeTodo = () => {
   const [openModal, setOpenModal] = useState(false)
   const [todoList, setTodoList] = useRecoilState(todosAtom)
   const [processList, setProcessList] = useRecoilState(processAtom)
+  const [createProcess, setCreateProcess] = useState(false)
+  const [addProcessValue, setAddProcessValue] = useState('')
 
   const handleAddTodoClick = (process: string) => {
     setProcessName(process)
     setOpenModal(true)
   }
 
-  const handleAddProcess = () => {
-    setProcessList((prevProcess) => [...prevProcess, 'go'])
+  const handleAddBtnClick = () => {
+    setCreateProcess(true)
+  }
+
+  const handleAddProcessSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setProcessList((prevProcess) => [...prevProcess, addProcessValue])
     setTodoList((prevTodoList) => {
-      return { ...prevTodoList, go: [] }
+      return { ...prevTodoList, [addProcessValue]: [] }
     })
   }
 
-  const handleDeleteProcess = () => {
+  const handleDeleteProcessClick = () => {
     const copyProcessList = [...processList]
     copyProcessList.splice(processList.length - 1, 1)
     setProcessList(copyProcessList)
-    const { go, ...todoProcess } = todoList
+
+    const { DOGS, ...todoProcess } = todoList
     setTodoList(todoProcess)
+
+    setCreateProcess(false)
+    setAddProcessValue('')
+  }
+
+  const handleProcessInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setAddProcessValue(e.currentTarget.value)
+  }
+
+  const createAddProcess = () => {
+    if (createProcess)
+      return (
+        <form onSubmit={handleAddProcessSubmit}>
+          <input type='text' value={addProcessValue} onChange={handleProcessInputChange} />
+        </form>
+      )
+    return <AddIcon className={styles.addIcon} onClick={handleAddBtnClick} />
   }
 
   return (
@@ -50,18 +75,23 @@ const MakeTodo = () => {
                     +
                   </button>
                 </div>
-                {todoList[process].map((todo: Todo) => {
-                  return <BoardCard key={`todo-${todo}`} todo={todo} />
-                })}
+                {todoList[process].length === 0 ? (
+                  <div className={styles.noTaskMessage}>할일이 없습니다</div>
+                ) : (
+                  todoList[process].map((todo: Todo, index) => {
+                    const key = index
+                    return <BoardCard key={`todo-${key}`} todo={todo} />
+                  })
+                )}
               </div>
             )
           })}
         </div>
         <div className={styles.icons}>
           {processList.length <= 3 ? (
-            <AddIcon className={styles.addIcon} onClick={handleAddProcess} />
+            createAddProcess()
           ) : (
-            <MinusIcon className={styles.deleteIcon} onClick={handleDeleteProcess} />
+            <MinusIcon className={styles.deleteIcon} onClick={handleDeleteProcessClick} />
           )}
         </div>
       </main>
@@ -75,3 +105,6 @@ const MakeTodo = () => {
 }
 
 export default MakeTodo
+
+// 나중에는 theme도
+// 나중에 key값 index로 주지 않기
