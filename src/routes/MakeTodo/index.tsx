@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 import { processAtom, todosAtom } from 'store/atoms'
 import Modal from 'components/Modal'
@@ -19,8 +19,36 @@ const MakeTodo = () => {
   const [createProcess, setCreateProcess] = useState(false)
   const [addProcessValue, setAddProcessValue] = useState('')
 
-  const handleDragEnd = (t: any) => {
-    console.log(t)
+  const handleDragEnd = (info: DropResult) => {
+    const { destination, source } = info
+    console.log(info)
+    if (!destination) return
+    if (destination?.droppableId === source.droppableId) {
+      setTodoList((allBoards) => {
+        const boardCopy = [...allBoards[source.droppableId]]
+        const taskObj = boardCopy[source.index]
+        boardCopy.splice(source.index, 1)
+        boardCopy.splice(destination?.index, 0, taskObj)
+        return {
+          ...allBoards,
+          [source.droppableId]: boardCopy,
+        }
+      })
+    }
+    if (destination?.droppableId !== source.droppableId) {
+      setTodoList((allBoards) => {
+        const sourceBoard = [...allBoards[source.droppableId]]
+        const taskObj = sourceBoard[source.index]
+        const destinationBoard = [...allBoards[destination.droppableId]]
+        sourceBoard.splice(source.index, 1)
+        destinationBoard.splice(destination?.index, 0, taskObj)
+        return {
+          ...allBoards,
+          [source.droppableId]: sourceBoard,
+          [destination.droppableId]: destinationBoard,
+        }
+      })
+    }
   }
 
   const handleAddTodoClick = (process: string) => {

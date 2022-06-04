@@ -15,7 +15,7 @@ const Boards = ({ process, handleAddTodoClick }: IBoardsProps) => {
   const todoList = useRecoilValue(todosAtom)
 
   return (
-    <Droppable droppableId={`drop-${process}`} key={`drop-${process}`}>
+    <Droppable droppableId={`${process}`} key={`${process}`}>
       {(handleDrop) => (
         <div className={styles.processBox} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
           <div className={styles.processTop}>
