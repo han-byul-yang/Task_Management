@@ -1,8 +1,9 @@
-import { SearchIcon } from 'assets/svgs'
 import { ChangeEvent, FormEvent, useState } from 'react'
+
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 import { searchKeyAtom, Todo, todosAtom } from 'store/atoms'
 
+import { SearchIcon, XIcon } from 'assets/svgs'
 import styles from './searchInput.module.scss'
 
 const SearchInput = () => {
@@ -52,6 +53,11 @@ const SearchInput = () => {
     setOpenDropDown(false)
   }
 
+  const handleDeleteKeyInputClick = () => {
+    setSearchKey('')
+    setKeyInput('')
+  }
+
   return (
     <div className={styles.inputBox}>
       <form className={styles.searchForm} onSubmit={handleKeyInputSubmit}>
@@ -63,6 +69,7 @@ const SearchInput = () => {
           value={keyInput}
           onChange={handleKeyInputChange}
         />
+        {keyInput !== '' && <XIcon className={styles.xBtn} onClick={handleDeleteKeyInputClick} />}
         {openDropDown && (
           <ul className={styles.dropdownList}>
             {dropdownWordsList.map((dropdownWord) => {
