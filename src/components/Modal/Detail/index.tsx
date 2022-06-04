@@ -1,8 +1,6 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
 import ReactDatePicker from 'react-datepicker'
 
-import { dateAtom, descriptionAtom, imageAtom } from 'store/atoms'
 import { CustomButton } from '../utils/CustomButton'
 
 import { FileIcon, ImageIcon } from 'assets/svgs'

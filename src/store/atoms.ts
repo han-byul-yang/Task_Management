@@ -30,31 +30,6 @@ export const todosAtom = atom<Todoform>({
   effects_UNSTABLE: [persistAtom],
 })
 
-export const titleAtom = atom<string>({
-  key: 'taskTitle',
-  default: '',
-})
-
-export const categoryAtom = atom<string[]>({
-  key: 'taskCategory',
-  default: [],
-})
-
-export const dateAtom = atom<[Date, null]>({
-  key: 'taskDate',
-  default: [new Date(), null],
-})
-
-export const imageAtom = atom<string | ArrayBuffer | null | undefined>({
-  key: 'taskImage',
-  default: '',
-})
-
-export const descriptionAtom = atom<string>({
-  key: 'taskDescription',
-  default: '',
-})
-
 export const searchKeyAtom = atom<string>({
   key: 'searchKey',
   default: '',
