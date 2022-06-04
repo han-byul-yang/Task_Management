@@ -2,8 +2,8 @@ import NavBar from 'components/NavBar'
 import { Route, Routes } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
-import MainTodo from './MainTodo'
 import MakeTodo from './MakeTodo'
+import DashBoard from './DashBoard'
 
 import styles from './routes.module.scss'
 
@@ -13,8 +13,8 @@ const App = () => {
       <NavBar />
       <RecoilRoot>
         <Routes>
-          <Route path='/' element={<MainTodo />} />
-          <Route path='todo' element={<MakeTodo />} />
+          <Route path='/' element={<MakeTodo />} />
+          <Route path='todo' element={<DashBoard />} />
           <Route path='*' element={<div>404</div>} />
         </Routes>
       </RecoilRoot>

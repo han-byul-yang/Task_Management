@@ -13,7 +13,7 @@ const NavBar = () => {
         >
           <li className={styles.navItem}>
             <HomeIcon className={styles.navIcon} />
-            <div>DASHBOARD</div>
+            <div>TASK MANAGNE</div>
           </li>
         </NavLink>
         <NavLink
@@ -22,7 +22,7 @@ const NavBar = () => {
         >
           <li className={styles.navItem}>
             <ListIcon className={styles.navIcon} />
-            <div>TASK MANAGNE</div>
+            <div>DASHBOARD</div>
           </li>
         </NavLink>
       </ul>
