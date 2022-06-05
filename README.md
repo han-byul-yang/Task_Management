@@ -5,48 +5,58 @@
 📦src
  ┣ 📂assets
  ┃ ┗ 📂svgs
- ┃ ┃ ┣ 📜bannerImage.svg
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┣ 📜logo.svg
- ┃ ┃ ┗ 📜search.svg
+ ┃ ┃ ┣ 📜add-outline.svg
+ ┃ ┃ ┣ 📜calendar.svg
+ ┃ ┃ ┣ 📜edit.svg
+ ┃ ┃ ┣ 📜filetext.svg
+ ┃ ┃ ┣ 📜home.svg
+ ┃ ┃ ┣ 📜image.svg
+ ┃ ┃ ┣ 📜minus.svg
+ ┃ ┃ ┣ 📜plus.svg
+ ┃ ┃ ┣ 📜search.svg
+ ┃ ┃ ┣ 📜x.svg
+ ┃ ┃ ┗ 📜list.svg
  ┣ 📂components
- ┃ ┣ 📂Banner
- ┃ ┃ ┣ 📜Banner.module.scss
+ ┃ ┣ 📂BoardCard
+ ┃ ┃ ┣ 📂utils
+ ┃ ┃ ┃ ┣ 📜highlightWord.tsx
+ ┃ ┃ ┣ 📜boardCard.module.scss
  ┃ ┃ ┗ 📜index.tsx
- ┃ ┣ 📂Footer
- ┃ ┃ ┣ 📜Footer.module.scss
+ ┃ ┣ 📂Modal
+ ┃ ┃ ┣ 📜modal.module.scss
  ┃ ┃ ┗ 📜index.tsx
- ┃ ┣ 📂Header
- ┃ ┃ ┣ 📜Header.module.scss
+ ┃ ┃ ┗ 📜ModalPortal.tsx
+ ┃ ┃ ┣ 📂Category
+ ┃ ┃ ┣ 📜category.module.scss
  ┃ ┃ ┗ 📜index.tsx
- ┃ ┣ 📂KeywordRecommendItem
+ ┃ ┃ ┣ 📂Detail
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜KeywordRecommendItem.module.scss
- ┃ ┣ 📂KeywordRecommendList
+ ┃ ┃ ┗ 📜detail.module.scss
+ ┃ ┃ ┣ 📂Title
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜KeywordRecommendList.module.scss
- ┃ ┗ 📂SearchBar
+ ┃ ┃ ┗ 📜title.module.scss
+ ┃ ┗ 📂NavBar
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜SearchBar.module.scss
+ ┃ ┃ ┗ 📜NavBar.module.scss
  ┣ 📂hooks
  ┃ ┣ 📜index.ts
- ┃ ┗ 📜useQueryDebounce.ts
  ┣ 📂routes
- ┃ ┣ 📂SearchPage
+ ┃ ┣ 📂DashBoard
+ ┃ ┃ ┗ 📜index.tsx
+ ┃ ┣ 📂MakeTodo
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜SearchPage.module.scss
- ┃ ┣ 📂SearchResultPage
+ ┃ ┃ ┗ 📜makeTodo.module.scss
+ ┃ ┃ ┣ 📂Boards
  ┃ ┃ ┣ 📜index.tsx
- ┃ ┃ ┗ 📜SearchResultPage.module.scss
+ ┃ ┃ ┗ 📜boards.module.scss
+ ┃ ┃ ┣ 📂SearchInput
+ ┃ ┃ ┣ 📜index.tsx
+ ┃ ┃ ┗ 📜searchInput.module.scss
  ┃ ┣ 📜index.tsx
- ┃ ┗ 📜Routes.module.scss
- ┣ 📂services
- ┃ ┗ 📜search.ts
+ ┃ ┗ 📜routes.module.scss
  ┣ 📂store
- ┃ ┣ 📂slices
- ┃ ┃ ┣ 📜searchInputSlice.ts
- ┃ ┃ ┗ 📜searchSlice.ts
- ┃ ┗ 📜store.ts
+ ┃ ┣ 📜atoms.ts
  ┣ 📂styles
  ┃ ┣ 📂base
  ┃ ┃ ┣ 📜_fonts.scss
@@ -57,11 +67,8 @@
  ┃ ┃ ┣ 📜_levels.scss
  ┃ ┃ ┗ 📜_sizes.scss
  ┃ ┣ 📜index.js
+ ┃ ┣ 📜global.scss
  ┃ ┗ 📜index.scss
- ┣ 📂types
- ┃ ┗ 📜search.d.ts
- ┣ 📂utils
- ┃ ┗ 📜fuzzySearch.ts
  ┣ 📜index.tsx
  ┣ 📜react-app-env.d.ts
  ┗ 📜reportWebVitals.ts
