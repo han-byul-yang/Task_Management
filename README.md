@@ -90,7 +90,7 @@ https://han-byul-yang.github.io/Task_Management/
 
 ### 보드에 테스크 추가
 
-**확대를 위해 화면 일부만 찍어서 영상에서는 테스크 추가 모달이 한 쪽으로 치우쳐 보입니다.  
+**확대를 위해 화면 일부만 찍어서 영상에서는 테스크 추가 모달이 한 쪽으로 치우쳐 보입니다.**
 
 ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/67466789/172029945-f1d46bc6-7f90-4877-873a-fd0ade07140f.gif)
 
@@ -105,7 +105,7 @@ https://han-byul-yang.github.io/Task_Management/
 
 ### 테스크 카드 수정
 
-**확대를 위해 화면 일부만 찍어서 영상에서는 테스크 추가 모달이 한 쪽으로 치우쳐 보입니다. 
+**확대를 위해 화면 일부만 찍어서 영상에서는 테스크 추가 모달이 한 쪽으로 치우쳐 보입니다.**
 
 ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/67466789/172030182-d8e9b912-2416-41d4-bf81-936b4971344a.gif)
 
