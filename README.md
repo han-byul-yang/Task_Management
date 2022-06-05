@@ -71,15 +71,11 @@
 
 ### 네비게이션 바
 
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/67466789/172029489-058b46f3-77c5-4ac4-9f20-9d69ab104a3d.gif)
+![ezgif com-gif-maker (10)](https://user-images.githubusercontent.com/67466789/172030480-9efe3684-5d40-4779-b5c8-1a90b11be26d.gif)
 
 ### 보드에 테스크 추가
 
 ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/67466789/172029945-f1d46bc6-7f90-4877-873a-fd0ade07140f.gif)
-
-### 드래그 앤 드랍
-
-![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/67466789/172030341-11143681-33ab-48a7-88f2-bd3afcacb64f.gif)
 
 
 ### 테스크 카드 수정
@@ -94,6 +90,10 @@
 ### 새로운 보드 생성
 
 ![ezgif com-gif-maker (7)](https://user-images.githubusercontent.com/67466789/172030293-823221d3-dfb8-4aff-a3ac-9e7ca698692c.gif)
+
+### 드래그 앤 드랍
+
+![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/67466789/172030341-11143681-33ab-48a7-88f2-bd3afcacb64f.gif)
 
 ### 테스크 키워드 서치
 
