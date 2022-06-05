@@ -1,4 +1,5 @@
 @use '../../../styles/constants/colors';
+@use '../../../styles/constants/levels';
 
 .inputBox {
   display: flex;
@@ -28,7 +29,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: levels.$MIDDLEBACK;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0%);
@@ -57,7 +58,7 @@
 
 .dropdownList {
   position: absolute;
-  z-index: 10;
+  z-index: levels.$MIDDLE;
   width: 100%;
   height: auto;
   margin-top: 5px;
@@ -86,5 +87,3 @@
     }
   }
 }
-
-// 키보드로 내리는 것도 하기

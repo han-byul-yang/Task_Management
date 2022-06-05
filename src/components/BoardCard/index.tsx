@@ -102,7 +102,3 @@ const BoardCard = ({ todo, index }: IBoardCardProps) => {
 }
 
 export default BoardCard
-
-// processname을 리팩토링 할 수 있을 것
-// 전체 텍스트 하이라이트도 나중에 해볼 수 있을 것
-// 하이라이트 된 카드만 보여줄 수 있을 것

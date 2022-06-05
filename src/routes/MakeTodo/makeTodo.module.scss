@@ -1,4 +1,5 @@
 @use '../../styles/constants/colors';
+@use '../../styles/constants/levels';
 
 .page {
   width: calc(100% - 230px);
@@ -10,7 +11,7 @@
 
 .boards {
   position: relative;
-  z-index: 1;
+  z-index: levels.$BASIC;
   display: flex;
   width: auto;
   height: 875px;
@@ -42,5 +43,3 @@
   background: colors.$LIGHTPINK;
   border-radius: 10px;
 }
-
-// 스크롤 가로 구현

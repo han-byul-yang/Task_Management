@@ -1,5 +1,6 @@
 @use '../../styles/constants/colors';
 @use '../../styles/base/fonts';
+@use '../../styles/constants/levels';
 
 .boardCard {
   width: calc(100% - 30px);
@@ -40,7 +41,7 @@
       position: fixed;
       top: 0;
       left: 0;
-      z-index: 5;
+      z-index: levels.$MIDDLEBACK;
       width: 100%;
       height: 100%;
       cursor: auto;
@@ -50,7 +51,7 @@
     .settingBox {
       position: absolute;
       left: -50px;
-      z-index: 10;
+      z-index: levels.$MIDDLE;
       display: flex;
       flex-direction: column;
       padding: 15px;
@@ -72,7 +73,7 @@
 
 .category {
   position: relative;
-  z-index: 1;
+  z-index: levels.$BASIC;
   display: flex;
 
   li {

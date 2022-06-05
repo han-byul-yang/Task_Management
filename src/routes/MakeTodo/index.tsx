@@ -6,10 +6,10 @@ import { processAtom, todosAtom } from 'store/atoms'
 import Modal from 'components/Modal'
 import ModalPortal from 'components/Modal/ModalPortal'
 import SearchInput from './SearchInput'
+import Boards from './Boards'
 
 import styles from './makeTodo.module.scss'
 import { AddIcon, MinusIcon } from 'assets/svgs'
-import Boards from './Boards'
 
 const MakeTodo = () => {
   const [processName, setProcessName] = useState('')
@@ -72,7 +72,7 @@ const MakeTodo = () => {
     const copyProcessList = [...processList]
     copyProcessList.splice(processList.length - 1, 1)
     setProcessList(copyProcessList)
-
+    setAddProcessValue('')
     setCreateProcess(false)
   }
 
@@ -126,6 +126,3 @@ const MakeTodo = () => {
 }
 
 export default MakeTodo
-
-// 나중에는 theme도
-// 나중에 key값 index로 주지 않기

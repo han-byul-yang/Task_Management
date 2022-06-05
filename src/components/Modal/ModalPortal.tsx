@@ -6,5 +6,3 @@ const ModalPortal = ({ children }: any) => {
 }
 
 export default ModalPortal
-
-// type 설정

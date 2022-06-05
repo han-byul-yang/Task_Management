@@ -118,12 +118,3 @@ const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
 }
 
 export default Modal
-
-// 선택된 파일 없음 말고 파일 이름 띄워주기
-// 카테고리 중복으로 했을 때 처리
-// dates any types
-// date Picker onSelect 생각해보기
-// change type
-// todo 있을 대 endDate setting 하기
-// 컴포넌트로 분리해주기
-// 컴포넌트 분리 후 dayjs를 여기서 이용해서 수정 하기

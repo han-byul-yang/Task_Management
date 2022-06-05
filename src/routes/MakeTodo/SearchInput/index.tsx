@@ -94,4 +94,3 @@ const SearchInput = () => {
 }
 
 export default SearchInput
-// onClick 함수형 바꿀 방법 모색(컴포넌트로 나눠 props로 전달해주는 것도 나쁘지 않을 듯)

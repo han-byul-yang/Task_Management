@@ -1,5 +1,7 @@
+@use '../styles/constants/levels';
+
 .page {
   position: relative;
-  z-index: 1;
+  z-index: levels.$BASIC;
   display: flex;
 }
