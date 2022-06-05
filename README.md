@@ -186,6 +186,8 @@
 
 - 보드 생성 시 process 배열과 todoList의 key 속성 값으로 새로운 process를 추가해주는 부분에서 어려움을 겪었다. 
 
+- react-date-picker에서 받은 데이터를 dayjs를  포맷팅하여 날짜를 띄워주었다. 
+
 
 
 ### 드래그 앤 드랍
@@ -221,29 +223,26 @@
 
 
 ## Tech & Libraries
-서버 및 API 통신 관련
-- axios
-- cors
-- express
-- react-query
 
-라우팅
+**라우팅**
 - react-router-dom
 
-스타일
+**스타일**
 - scss
 - css module
 - classnames
 
-중앙 저장소
-- react-redux
-- redux toolkit
+**중앙 저장소**
+- recoil
+- recoil-persist(브라우저 localStorage)
 
-코딩 컨벤션
+**코딩 컨벤션**
 - eslint
 - prettier
 - stylelint
 
-기타
+**기타**
 - html-react-parser: `dangerouslySetInnerHTML`의 안전한 대체제
-- lodash.escaperegexp: 퍼지 문자열 검색을 위한 정규 표현식
+- react-beautiful-dnd: 드래그 앤 드롭 구현
+- react-datepicker: 날짜 선택 가능 달력 모달 라이브러리
+- dayjs: 날짜 포맷팅
