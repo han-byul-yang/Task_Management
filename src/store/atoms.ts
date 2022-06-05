@@ -3,7 +3,7 @@ import { recoilPersist } from 'recoil-persist'
 
 const { persistAtom } = recoilPersist({
   key: 'storeDatas',
-  storage: sessionStorage,
+  storage: localStorage,
 })
 
 export interface Todoform {
