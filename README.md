@@ -232,7 +232,7 @@ https://han-byul-yang.github.io/Task_Management/
 
 - 테스크 생성 시 시간 입력하여 알림 기능
 
-- 데시보드 페이지
+- 대시보드 페이지
 
 - 다크 모드
 
