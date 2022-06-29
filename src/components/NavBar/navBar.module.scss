@@ -43,8 +43,10 @@
 
 .nonActivatedLink {
   color: colors.$LIGHTPINK;
+  fill: colors.$LIGHTPINK;
 }
 
 .activatedLink {
   color: colors.$KEY;
+  fill: colors.$KEY;
 }
