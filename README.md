@@ -83,7 +83,7 @@ https://han-byul-yang.github.io/Task_Management/
 
 ![ezgif com-gif-maker (10)](https://user-images.githubusercontent.com/67466789/172030480-9efe3684-5d40-4779-b5c8-1a90b11be26d.gif)
 
-- TASK MANAGE 탭을 클릭하면 테스크를 관리할 수 있는 페이지로 이동하고, DASHBOARD 탭을 클릭하면 데시보드 페이지로 이동한다.
+- TASK MANAGE 탭을 클릭하면 테스크를 관리할 수 있는 페이지로 이동하고, DASHBOARD 탭을 클릭하면 대시보드 페이지로 이동한다.
 
 - `활성화 되는 탭`의 색상이 변화한다. 
 
@@ -232,7 +232,7 @@ https://han-byul-yang.github.io/Task_Management/
 
 - 테스크 생성 시 시간 입력하여 알림 기능
 
-- 데시보드 페이지
+- 대시보드 페이지
 
 - 다크 모드
 
