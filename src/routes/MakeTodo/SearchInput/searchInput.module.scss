@@ -15,6 +15,10 @@
 
 .searchForm {
   position: relative;
+
+  @media screen and (max-width: 1050px) {
+    width: 100%;
+  }
 }
 
 .searchIcon {
@@ -46,6 +50,10 @@
 
   &::-webkit-search-cancel-button {
     display: none;
+  }
+
+  @media screen and (max-width: 1050px) {
+    width: 100%;
   }
 }
 
