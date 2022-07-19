@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-
 import { useSetRecoilState, useRecoilValue } from 'recoil'
+
 import { searchKeyAtom, todosAtom } from 'store/atoms'
 
 import { SearchIcon, XIcon } from 'assets/svgs'

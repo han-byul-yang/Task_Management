@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom'
 
 import { HomeIcon, ListIcon } from 'assets/svgs'
-import styles from './navBar.module.scss'
+import styles from './gnb.module.scss'
 
-const NavBar = () => {
+const GNB = () => {
   return (
-    <nav className={styles.navBar}>
+    <nav className={styles.gnb}>
       <div className={styles.title}>MANAGE YOUR LIFE</div>
       <ul className={styles.navList}>
         <NavLink
@@ -31,4 +31,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default GNB
