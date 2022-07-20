@@ -101,7 +101,7 @@ const MakeTodo = () => {
     <div className={styles.page}>
       <SearchInput />
       <DragDropContext onDragEnd={handleDragEnd}>
-        <main className={styles.main}>
+        <section className={styles.section}>
           <div className={styles.boards}>
             {processList.map((process) => {
               return <Boards key={`process-${process}`} process={process} handleAddTodoClick={handleAddTodoClick} />
@@ -114,7 +114,7 @@ const MakeTodo = () => {
               <MinusIcon className={styles.deleteIcon} onClick={handleDeleteProcessClick} />
             )}
           </div>
-        </main>
+        </section>
       </DragDropContext>
       {openModal && (
         <ModalPortal>

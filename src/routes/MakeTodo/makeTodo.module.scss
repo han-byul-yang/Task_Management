@@ -2,10 +2,10 @@
 @use '../../styles/constants/levels';
 
 .page {
-  width: calc(100% - 230px);
+  width: 100%;
 }
 
-.main {
+.section {
   display: flex;
 }
 

@@ -1,10 +1,11 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
-
 import { createRoot } from 'react-dom/client'
 import reportWebVitals from './reportWebVitals'
-import './styles/index.scss'
+
 import App from 'routes'
+
+import './styles/index.scss'
 
 const container = document.getElementById('root')!
 const root = createRoot(container)

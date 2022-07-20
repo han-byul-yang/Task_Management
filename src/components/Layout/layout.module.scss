@@ -1,0 +1,12 @@
+@use '../../styles/constants/levels';
+
+.container {
+  position: relative;
+  z-index: levels.$BASIC;
+  display: flex;
+  width: 100vw;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
