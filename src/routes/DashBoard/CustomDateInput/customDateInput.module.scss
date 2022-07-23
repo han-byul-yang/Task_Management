@@ -1,0 +1,25 @@
+@use 'styles/constants/colors';
+
+.customButton {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 15px;
+  color: colors.$KEY;
+
+  div {
+    margin: 0 5px;
+  }
+
+  .calendarIcon {
+    width: 25px;
+    height: 25px;
+    fill: colors.$KEY;
+  }
+
+  .arrowDownIcon {
+    width: 25px;
+    height: 25px;
+    fill: colors.$KEY;
+  }
+}
