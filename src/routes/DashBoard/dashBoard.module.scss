@@ -1,0 +1,30 @@
+@use 'styles/constants/colors';
+
+.header {
+  display: flex;
+  align-items: center;
+
+  .nickNameContainer {
+    display: flex;
+    align-items: center;
+    margin: 10px 15px 0 0;
+
+    .nickNameForm {
+      input {
+        width: 150px;
+      }
+    }
+
+    .nickName {
+      width: 190px;
+      font-size: 22px;
+      color: colors.$KEY;
+    }
+
+    .editIcon {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+    }
+  }
+}
