@@ -1,11 +1,11 @@
-import { forwardRef, MouseEventHandler, ReactNode } from 'react'
+import { MouseEventHandler, ReactNode } from 'react'
 
 interface CustomDateInputProps {
   value: ReactNode
   onClick: MouseEventHandler<HTMLButtonElement>
 }
 
-const CustomDateInput = ({ value, onClick }: CustomDateInputProps) => (
+const CustomDateInput = ({ value, onClick }: any) => (
   <button type='button' onClick={onClick}>
     {value}
   </button>
@@ -14,3 +14,5 @@ const CustomDateInput = ({ value, onClick }: CustomDateInputProps) => (
 CustomDateInput.displayName = 'CustomDateInput'
 
 export default CustomDateInput
+
+// any
