@@ -46,11 +46,11 @@
 }
 
 .nonActivatedLink {
-  color: colors.$LIGHTPINK;
-  fill: colors.$LIGHTPINK;
+  color: colors.$LIGHTORANGE;
+  fill: colors.$LIGHTORANGE;
 }
 
-.activatedLink {
+.activated {
   color: colors.$KEY;
   fill: colors.$KEY;
 }
