@@ -3,7 +3,7 @@ import { forwardRef, LegacyRef, MouseEventHandler, ReactNode } from 'react'
 import { CalendarIcon, ArrowDownIcon } from 'assets/svgs'
 import styles from './customDateInput.module.scss'
 
-interface CustomDateInputProps {
+interface ICustomDateInputProps {
   value: ReactNode
   onClick: MouseEventHandler<HTMLButtonElement>
 }

@@ -1,7 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
 import ReactDatePicker from 'react-datepicker'
 
-import CustomDateInput from './CustomDateInput'
+import CustomDateInput from './utils/CustomDateInput'
+import TodayTask from './TodayTask'
 
 import { EditIcon } from 'assets/svgs'
 import styles from './dashBoard.module.scss'
@@ -45,8 +46,11 @@ const DashBoard = () => {
         dateFormat='eee, dd MMMM yyyy'
         customInput={<CustomDateInput />}
       />
+      <TodayTask startDate={startDate} />
     </header>
   )
 }
 
 export default DashBoard
+
+// strong 태그 왜 적용 안됨
