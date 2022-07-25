@@ -25,13 +25,13 @@ const TodayTask = ({ startDate }: ITodayTaskProps) => {
           const todoStartDate = Number(dayjs(todo.date[0]).format('YYMMDD'))
           const todoEndDate = Number(dayjs(todo.date[1]).format('YYMMDD'))
 
-          if (todoStartDate !== null && todoEndDate === null) {
-            return null
-          }
-          if (todoStartDate !== null && todoEndDate !== null) {
+          if (!isNaN(todoStartDate) && !isNaN(todoEndDate)) {
             return todoStartDate <= selectedDate && todoEndDate >= selectedDate
           }
-          return todoStartDate === selectedDate
+          if (!isNaN(todoStartDate) && isNaN(todoEndDate)) {
+            return todoStartDate === selectedDate
+          }
+          return null
         })
     )
   }, [selectedDate, todoList])
