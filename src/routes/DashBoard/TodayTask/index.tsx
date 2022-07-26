@@ -13,6 +13,8 @@ interface ITodayTaskProps {
 const TodayTask = ({ startDate }: ITodayTaskProps) => {
   const todoList = useRecoilValue(todosAtom)
   const [todayTaskList, setTodayTaskList] = useState<Todo[]>([])
+  const [isChecked, setIsChecked] = useState(false)
+
   const selectedDate = Number(dayjs(startDate).format('YYMMDD'))
 
   useEffect(() => {
@@ -40,6 +42,10 @@ const TodayTask = ({ startDate }: ITodayTaskProps) => {
     console.log(todoList)
   }
 
+  const handleCheckChange = () => {
+    setIsChecked((prev) => !prev)
+  }
+
   return (
     <div className={styles.todayTaskContainer}>
       <div>Today&apos;s Tasks</div>
@@ -49,9 +55,11 @@ const TodayTask = ({ startDate }: ITodayTaskProps) => {
       <ul className={styles.taskList}>
         {todayTaskList.map((task) => {
           return (
-            <li key={`${task.id}`}>
+            <li key={`${task.id}`} className={styles.taskItem}>
+              <input type='checkbox' value={task.task} checked={isChecked} onChange={handleCheckChange} />
               <button type='button'>
                 <div>{task.task}</div>
+                <div>{task.process}</div>
               </button>
             </li>
           )
