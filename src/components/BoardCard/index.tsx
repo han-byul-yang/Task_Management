@@ -6,7 +6,7 @@ import { Draggable } from 'react-beautiful-dnd'
 
 import { Todo, todosAtom, searchKeyAtom } from 'store/atoms'
 import { highlightWords } from './utils/highlightWords'
-import Modal from 'components/Modal'
+import Modal from 'components/Modal/DashBoardModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 
 import { CalendarIcon, EditIcon } from 'assets/svgs'

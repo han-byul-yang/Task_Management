@@ -3,13 +3,13 @@ import { useMount } from 'react-use'
 import { useRecoilState } from 'recoil'
 
 import { Todo, todosAtom } from 'store/atoms'
-import Title from './Title'
-import Category from './Category'
-import Detail from './Detail'
+import Title from '../components/Title'
+import Category from '../components/Category'
+import Detail from '../components/Detail'
 
 import { XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
-import styles from './modal.module.scss'
+import styles from './dashBoardModal.module.scss'
 
 interface IModalProps {
   processName: string

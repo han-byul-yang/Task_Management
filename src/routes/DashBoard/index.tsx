@@ -27,27 +27,29 @@ const DashBoard = () => {
   }
 
   return (
-    <header className={styles.header}>
-      <div className={styles.nickNameContainer}>
-        {editNickName ? (
-          <form className={styles.nickNameForm} onSubmit={handleNickNameSubmit}>
-            <input value={nickName} onChange={handleNickNameChange} placeholder='Please put your nickname' />
-          </form>
-        ) : (
-          <div className={styles.nickName}>
-            Welcome back <strong>{nickName}</strong>!
-          </div>
-        )}
-        <EditIcon className={styles.editIcon} onClick={handleNickNameEditClick} />
-      </div>
-      <ReactDatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        dateFormat='eee, dd MMMM yyyy'
-        customInput={<CustomDateInput />}
-      />
+    <>
+      <header className={styles.header}>
+        <div className={styles.nickNameContainer}>
+          {editNickName ? (
+            <form className={styles.nickNameForm} onSubmit={handleNickNameSubmit}>
+              <input value={nickName} onChange={handleNickNameChange} placeholder='Please put your nickname' />
+            </form>
+          ) : (
+            <div className={styles.nickName}>
+              Welcome back <strong>{nickName}</strong>!
+            </div>
+          )}
+          <EditIcon className={styles.editIcon} onClick={handleNickNameEditClick} />
+        </div>
+        <ReactDatePicker
+          selected={startDate}
+          onChange={(date) => setStartDate(date)}
+          dateFormat='eee, dd MMMM yyyy'
+          customInput={<CustomDateInput />}
+        />
+      </header>
       <TodayTask startDate={startDate} />
-    </header>
+    </>
   )
 }
 
