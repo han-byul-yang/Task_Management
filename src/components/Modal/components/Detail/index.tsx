@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
 
-import { CustomButton } from '../../utils/CustomButton'
+import { CustomButton } from './CustomButton'
 
 import { FileIcon, ImageIcon } from 'assets/svgs'
 import styles from './detail.module.scss'
