@@ -1,0 +1,17 @@
+@use '../../../../styles/constants/colors';
+
+.date {
+  margin-top: 15px;
+  color: colors.$FONT;
+  cursor: pointer;
+
+  .dateBtn {
+    display: flex;
+    align-items: center;
+
+    button {
+      margin-left: 5px;
+      font-size: 16px;
+    }
+  }
+}

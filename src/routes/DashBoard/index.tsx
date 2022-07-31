@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState, ChangeEvent, FormEvent, useRef, useEffect } from 'react'
 import ReactDatePicker from 'react-datepicker'
 
 import CustomDateInput from './utils/CustomDateInput'
@@ -11,6 +11,7 @@ const DashBoard = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date())
   const [nickName, setNickName] = useState('')
   const [editNickName, setEditNickName] = useState(true)
+  const ref = useRef<HTMLInputElement | null>(null)
 
   const handleNickNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNickName(e.currentTarget.value)
@@ -25,6 +26,10 @@ const DashBoard = () => {
   const handleNickNameEditClick = () => {
     setEditNickName(true)
   }
+
+  useEffect(() => {
+    console.log(ref.current!.getBoundingClientRect())
+  }, [])
 
   return (
     <>
@@ -49,6 +54,8 @@ const DashBoard = () => {
         />
       </header>
       <TodayTask startDate={startDate} />
+      <input type='text' value='hi' ref={ref} />
+      <button type='button'>+</button>
     </>
   )
 }

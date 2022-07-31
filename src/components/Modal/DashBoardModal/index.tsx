@@ -5,7 +5,9 @@ import { useRecoilState } from 'recoil'
 import { Todo, todosAtom } from 'store/atoms'
 import Title from '../components/Title'
 import Category from '../components/Category'
-import Detail from '../components/Detail'
+import Description from '../components/Description'
+import Picture from '../components/Picture'
+import Schedule from '../components/Schedule'
 
 import { XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -108,7 +110,9 @@ const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
         </div>
         <Title noTask={noTask} task={task} setTask={setTask} />
         <Category noCategory={noCategory} categoryList={categoryList} setCategoryList={setCategoryList} />
-        <Detail setDate={setDate} setImage={setImage} description={description} setDescription={setDescription} />
+        <Schedule setDate={setDate} />
+        <Picture setImage={setImage} />
+        <Description description={description} setDescription={setDescription} />
         <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
           Create Task
         </button>

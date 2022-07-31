@@ -1,0 +1,21 @@
+@use '../../../../styles/constants/colors';
+
+.image {
+  margin-top: 10px;
+  color: colors.$FONT;
+
+  .imageLabel {
+    display: flex;
+    align-items: center;
+    color: colors.$FONT;
+    cursor: pointer;
+
+    .imageBtn {
+      margin-right: 5px;
+    }
+  }
+
+  input {
+    display: none;
+  }
+}
