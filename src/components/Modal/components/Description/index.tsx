@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
 
 import { FileIcon } from 'assets/svgs'
-import styles from './detail.module.scss'
+import styles from './description.module.scss'
 
 interface IDetailProps {
   description: string
@@ -31,3 +31,5 @@ const Description = ({ description, setDescription }: IDetailProps) => {
 }
 
 export default Description
+
+// task detail title을 어디로 보낼지 생각

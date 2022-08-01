@@ -3,6 +3,8 @@ import ReactDatePicker from 'react-datepicker'
 
 import CustomDateInput from './utils/CustomDateInput'
 import TodayTask from './TodayTask'
+import ModalPortal from 'components/Modal/ModalPortal'
+import TaskManageModal from 'components/Modal/TaskManageModal'
 
 import { EditIcon } from 'assets/svgs'
 import styles from './dashBoard.module.scss'
@@ -11,6 +13,7 @@ const DashBoard = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date())
   const [nickName, setNickName] = useState('')
   const [editNickName, setEditNickName] = useState(true)
+  const [openModal, setModalOpen] = useState(false)
   const ref = useRef<HTMLInputElement | null>(null)
 
   const handleNickNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +59,11 @@ const DashBoard = () => {
       <TodayTask startDate={startDate} />
       <input type='text' value='hi' ref={ref} />
       <button type='button'>+</button>
+      {openModal && (
+        <ModalPortal>
+          <TaskManageModal setModalOpen={setModalOpen} />
+        </ModalPortal>
+      )}
     </>
   )
 }

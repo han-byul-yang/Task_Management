@@ -3,7 +3,7 @@ import ReactDatePicker from 'react-datepicker'
 
 import { CustomButton } from './CustomButton'
 
-import styles from './date.module.scss'
+import styles from './schedule.module.scss'
 
 interface IDateProps {
   setDate: Dispatch<SetStateAction<(Date | null)[]>>

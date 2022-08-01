@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 import { processAtom, todosAtom } from 'store/atoms'
-import Modal from 'components/Modal/DashBoardModal'
+import DashBoardModal from 'components/Modal/DashBoardModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 import SearchInput from './SearchInput'
 import Boards from './Boards'
@@ -118,7 +118,7 @@ const MakeTodo = () => {
       </DragDropContext>
       {openModal && (
         <ModalPortal>
-          <Modal processName={processName} setModalOpen={setModalOpen} />
+          <DashBoardModal processName={processName} setModalOpen={setModalOpen} />
         </ModalPortal>
       )}
     </div>

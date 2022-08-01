@@ -13,13 +13,13 @@ import { XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './dashBoardModal.module.scss'
 
-interface IModalProps {
+interface IDashBoardModalProps {
   processName: string
   todo?: Todo
   setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
+const DashBoardModal = ({ processName, todo, setModalOpen }: IDashBoardModalProps) => {
   const [task, setTask] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [date, setDate] = useState<(Date | null)[]>([])
@@ -110,9 +110,9 @@ const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
         </div>
         <Title noTask={noTask} task={task} setTask={setTask} />
         <Category noCategory={noCategory} categoryList={categoryList} setCategoryList={setCategoryList} />
+        <Description description={description} setDescription={setDescription} />
         <Schedule setDate={setDate} />
         <Picture setImage={setImage} />
-        <Description description={description} setDescription={setDescription} />
         <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
           Create Task
         </button>
@@ -121,4 +121,4 @@ const Modal = ({ processName, todo, setModalOpen }: IModalProps) => {
   )
 }
 
-export default Modal
+export default DashBoardModal
