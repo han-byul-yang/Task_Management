@@ -2,7 +2,8 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { useMount } from 'react-use'
 import { useRecoilState } from 'recoil'
 
-import { Todo, tasksAtom } from 'store/atoms'
+import { tasksAtom } from 'store/atoms'
+import { Task } from 'types/taskType'
 import Title from '../components/Title'
 import Category from '../components/Category'
 import Description from '../components/Description'
@@ -15,7 +16,7 @@ import styles from './addTaskModal.module.scss'
 
 interface IDashBoardModalProps {
   addTaskProcessName: string
-  todo?: Todo
+  todo?: Task
   setIsAddTaskModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
@@ -122,3 +123,5 @@ const AddTaskModal = ({ addTaskProcessName, todo, setIsAddTaskModalOpen }: IDash
 }
 
 export default AddTaskModal
+
+// todo -> task 로 변경

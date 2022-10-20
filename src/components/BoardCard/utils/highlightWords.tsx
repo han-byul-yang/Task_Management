@@ -1,6 +1,6 @@
-import { Todo } from 'store/atoms'
+import { Task } from 'types/taskType'
 
-export const highlightWords = (searchKey: string, todo: Todo) => {
+export const highlightWords = (searchKey: string, todo: Task) => {
   const { task, category } = todo
 
   let highlightCategory

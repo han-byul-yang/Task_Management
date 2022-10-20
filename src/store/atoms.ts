@@ -1,26 +1,13 @@
 import { atom } from 'recoil'
 import { recoilPersist } from 'recoil-persist'
+import { BoardTaskList } from 'types/taskType'
 
 const { persistAtom } = recoilPersist({
   key: 'storeDatas',
   storage: localStorage,
 })
 
-export interface Todoform {
-  [key: string]: Todo[]
-}
-
-export interface Todo {
-  id: Date
-  process: string
-  task: string
-  category: string[]
-  date: (Date | null)[]
-  image: any
-  description: string
-}
-
-export const tasksAtom = atom<Todoform>({
+export const tasksAtom = atom<BoardTaskList>({
   key: 'tasks',
   default: {
     TODO: [],
