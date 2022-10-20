@@ -11,7 +11,7 @@ import Schedule from '../components/Schedule'
 
 import { XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
-import styles from './dashBoardModal.module.scss'
+import styles from './addTaskModal.module.scss'
 
 interface IDashBoardModalProps {
   processName: string
@@ -19,7 +19,7 @@ interface IDashBoardModalProps {
   setModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const DashBoardModal = ({ processName, todo, setModalOpen }: IDashBoardModalProps) => {
+const AddTaskModal = ({ processName, todo, setModalOpen }: IDashBoardModalProps) => {
   const [task, setTask] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [date, setDate] = useState<(Date | null)[]>([])
@@ -121,4 +121,4 @@ const DashBoardModal = ({ processName, todo, setModalOpen }: IDashBoardModalProp
   )
 }
 
-export default DashBoardModal
+export default AddTaskModal
