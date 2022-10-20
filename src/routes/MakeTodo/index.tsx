@@ -1,70 +1,34 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
-import { processAtom, todosAtom } from 'store/atoms'
-import DashBoardModal from 'components/Modal/DashBoardModal'
+import { isOpenAddBoardModalAtom } from 'store/atoms'
+import AddTaskModal from 'components/Modal/AddTaskModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 import SearchInput from './SearchInput'
-import Boards from './Boards'
+import Boards from './Board'
+import BoardsContainer from './BoardsContainer'
+import AddBoardModal from 'components/Modal/AddBoardModal'
 
 import styles from './makeTodo.module.scss'
 import { AddIcon, MinusIcon } from 'assets/svgs'
 
 const MakeTodo = () => {
-  const [processName, setProcessName] = useState('')
-  const [openModal, setModalOpen] = useState(false)
-  const setTodoList = useSetRecoilState(todosAtom)
-  const [processList, setProcessList] = useRecoilState(processAtom)
+  const [addTaskProcessName, setAddTaskProcessName] = useState('')
   const [createProcess, setCreateProcess] = useState(false)
   const [addProcessValue, setAddProcessValue] = useState('')
-
-  const handleDragEnd = (info: DropResult) => {
-    const { destination, source } = info
-    if (!destination) return
-    if (destination?.droppableId === source.droppableId) {
-      setTodoList((allBoards) => {
-        const boardCopy = [...allBoards[source.droppableId]]
-        const taskObj = boardCopy[source.index]
-        boardCopy.splice(source.index, 1)
-        boardCopy.splice(destination?.index, 0, taskObj)
-        return {
-          ...allBoards,
-          [source.droppableId]: boardCopy,
-        }
-      })
-    }
-    if (destination?.droppableId !== source.droppableId) {
-      setTodoList((allBoards) => {
-        const sourceBoard = [...allBoards[source.droppableId]]
-        const taskObj = sourceBoard[source.index]
-        const changeTaskObj = { ...taskObj, process: destination.droppableId }
-        const destinationBoard = [...allBoards[destination.droppableId]]
-        sourceBoard.splice(source.index, 1)
-        destinationBoard.splice(destination?.index, 0, changeTaskObj)
-        return {
-          ...allBoards,
-          [source.droppableId]: sourceBoard,
-          [destination.droppableId]: destinationBoard,
-        }
-      })
-    }
-  }
-
-  const handleAddTodoClick = (process: string) => {
-    setProcessName(process)
-    setModalOpen(true)
-  }
+  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
+  const isOpenAddBoardModal = useRecoilValue(isOpenAddBoardModalAtom)
 
   const handleAddBtnClick = () => {
     setCreateProcess(true)
   }
 
-  const handleAddProcessSubmit = (e: FormEvent<HTMLFormElement>) => {
+  /* const handleAddProcessSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setProcessList((prevProcess) => [...prevProcess, addProcessValue])
-    setTodoList((prevTodoList) => {
-      return { ...prevTodoList, [addProcessValue]: [] }
+    setboardsTasks((prevboardsTasks) => {
+      return { ...prevboardsTasks, [addProcessValue]: [] }
     })
   }
 
@@ -95,33 +59,27 @@ const MakeTodo = () => {
       )
     }
     return <AddIcon className={styles.addIcon} onClick={handleAddBtnClick} />
-  }
+  } */
 
   return (
-    <div className={styles.page}>
-      <SearchInput />
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <section className={styles.section}>
-          <div className={styles.boards}>
-            {processList.map((process) => {
-              return <Boards key={`process-${process}`} process={process} handleAddTodoClick={handleAddTodoClick} />
-            })}
-          </div>
-          <div className={styles.icons}>
-            {processList.length <= 3 ? (
-              createAddProcess()
-            ) : (
-              <MinusIcon className={styles.deleteIcon} onClick={handleDeleteProcessClick} />
-            )}
-          </div>
-        </section>
-      </DragDropContext>
-      {openModal && (
+    <>
+      <header>
+        <SearchInput />
+      </header>
+      <main>
+        <BoardsContainer setIsAddTaskModalOpen={setIsAddTaskModalOpen} setAddTaskProcessName={setAddTaskProcessName} />
+      </main>
+      {isAddTaskModalOpen && (
         <ModalPortal>
-          <DashBoardModal processName={processName} setModalOpen={setModalOpen} />
+          <AddTaskModal addTaskProcessName={addTaskProcessName} setIsAddTaskModalOpen={setIsAddTaskModalOpen} />
         </ModalPortal>
       )}
-    </div>
+      {isOpenAddBoardModal && (
+        <ModalPortal>
+          <AddBoardModal />
+        </ModalPortal>
+      )}
+    </>
   )
 }
 
