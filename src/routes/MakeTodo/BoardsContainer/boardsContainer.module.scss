@@ -1,0 +1,32 @@
+@use '../../../styles/constants/colors';
+@use '../../../styles/constants/levels';
+
+.section {
+  display: flex;
+}
+
+.boards {
+  position: relative;
+  z-index: levels.$BASIC;
+  display: flex;
+  width: auto;
+  height: 875px;
+  margin: 0 0 0 5px;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .addIcon {
+    width: 45px;
+    height: 45px;
+  }
+
+  .deleteIcon {
+    width: 30px;
+    height: 30px;
+  }
+}
