@@ -9,10 +9,10 @@ import styles from './searchInput.module.scss'
 const SearchInput = () => {
   const [keyInput, setKeyInput] = useState('')
   const setSearchKey = useSetRecoilState(searchKeyAtom)
-  const todoList = useRecoilValue(tasksAtom)
+  const boardsTasks = useRecoilValue(tasksAtom)
   const [openDropDown, setOpenDropDown] = useState(false)
 
-  const allTasks = [...todoList.TODO, ...todoList.DOING, ...todoList.DONE]
+  const allTasks = [...boardsTasks.TODO, ...boardsTasks.DOING, ...boardsTasks.DONE]
   const categoryWordsList = allTasks.reduce(
     (acc, cur) => {
       return [...acc, ...cur.category]

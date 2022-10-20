@@ -11,7 +11,7 @@ interface ITodayTaskProps {
 }
 
 const TodayTask = ({ startDate }: ITodayTaskProps) => {
-  const todoList = useRecoilValue(tasksAtom)
+  const boardsTasks = useRecoilValue(tasksAtom)
   const [todayTaskList, setTodayTaskList] = useState<Todo[]>([])
   const [isChecked, setIsChecked] = useState(false)
 
@@ -20,8 +20,8 @@ const TodayTask = ({ startDate }: ITodayTaskProps) => {
   useEffect(() => {
     // 리팩토링
     setTodayTaskList(
-      Object.keys(todoList)
-        .map((key) => todoList[key])
+      Object.keys(boardsTasks)
+        .map((key) => boardsTasks[key])
         .reduce((acc, cur) => [...acc, ...cur], [])
         .filter((todo) => {
           const todoStartDate = Number(dayjs(todo.date[0]).format('YYMMDD'))
@@ -36,10 +36,10 @@ const TodayTask = ({ startDate }: ITodayTaskProps) => {
           return null
         })
     )
-  }, [selectedDate, todoList])
+  }, [selectedDate, boardsTasks])
 
   const handleAddTodayTaskClick = () => {
-    console.log(todoList)
+    console.log(boardsTasks)
   }
 
   const handleCheckChange = () => {

@@ -14,18 +14,18 @@ import 'react-datepicker/dist/react-datepicker.css'
 import styles from './addTaskModal.module.scss'
 
 interface IDashBoardModalProps {
-  processName: string
+  addTaskProcessName: string
   todo?: Todo
-  setModalOpen: Dispatch<SetStateAction<boolean>>
+  setIsAddTaskModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const AddTaskModal = ({ processName, todo, setModalOpen }: IDashBoardModalProps) => {
+const AddTaskModal = ({ addTaskProcessName, todo, setIsAddTaskModalOpen }: IDashBoardModalProps) => {
   const [task, setTask] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [date, setDate] = useState<(Date | null)[]>([])
   const [image, setImage] = useState<Blob>()
   const [description, setDescription] = useState<string>('')
-  const [todoList, setTodoList] = useRecoilState(tasksAtom)
+  const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const [noTask, setNoTask] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
 
@@ -41,15 +41,15 @@ const AddTaskModal = ({ processName, todo, setModalOpen }: IDashBoardModalProps)
   })
 
   const handleCloseModal = () => {
-    setModalOpen(false)
+    setIsAddTaskModalOpen(false)
   }
 
   const handleCreateTaskClick = () => {
     if (task !== '' && categoryList.length !== 0) {
       if (todo) {
-        const todoIdArray = todoList[todo.process].map((todos) => todos.id)
+        const todoIdArray = boardsTasks[todo.process].map((todos) => todos.id)
         const todoIdIndex = todoIdArray.indexOf(todo.id)
-        const copyArray = [...todoList[todo.process]]
+        const copyArray = [...boardsTasks[todo.process]]
         copyArray.splice(todoIdIndex, 1, {
           id: todo.id,
           process: todo.process,
@@ -59,21 +59,21 @@ const AddTaskModal = ({ processName, todo, setModalOpen }: IDashBoardModalProps)
           image,
           description,
         })
-        setTodoList((oldTodos) => {
+        setboardsTasks((oldTodos) => {
           return {
             ...oldTodos,
             [todo.process]: [...copyArray],
           }
         })
       } else {
-        setTodoList((oldTodos) => {
+        setboardsTasks((oldTodos) => {
           return {
             ...oldTodos,
-            [processName]: [
-              ...oldTodos[processName],
+            [addTaskProcessName]: [
+              ...oldTodos[addTaskProcessName],
               {
                 id: new Date(),
-                process: processName,
+                process: addTaskProcessName,
                 task,
                 category: categoryList,
                 date,

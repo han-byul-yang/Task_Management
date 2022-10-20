@@ -6,7 +6,7 @@ import { Draggable } from 'react-beautiful-dnd'
 
 import { Todo, tasksAtom, searchKeyAtom } from 'store/atoms'
 import { highlightWords } from './utils/highlightWords'
-import Modal from 'components/Modal/AddTaskModal'
+import AddTaskModal from 'components/Modal/AddTaskModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 
 import { CalendarIcon, EditIcon } from 'assets/svgs'
@@ -18,7 +18,7 @@ interface IBoardCardProps {
 }
 
 const BoardCard = ({ todo, index }: IBoardCardProps) => {
-  const [todoList, setTodoList] = useRecoilState(tasksAtom)
+  const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const searchKey = useRecoilValue(searchKeyAtom)
   const [modalOpen, setModalOpen] = useState(false)
   const [settingOpen, setSettingOpen] = useState(false)
@@ -34,9 +34,9 @@ const BoardCard = ({ todo, index }: IBoardCardProps) => {
   }
 
   const handleDeleteClick = () => {
-    const filterdTodo = todoList[process].filter((todos) => todos.id !== id)
+    const filterdTodo = boardsTasks[process].filter((todos) => todos.id !== id)
 
-    setTodoList((prevState) => {
+    setboardsTasks((prevState) => {
       return {
         ...prevState,
         [process]: [...filterdTodo],
@@ -92,7 +92,7 @@ const BoardCard = ({ todo, index }: IBoardCardProps) => {
           </div>
           {modalOpen && (
             <ModalPortal>
-              <Modal processName={process} todo={todo} setModalOpen={setModalOpen} />
+              <AddTaskModal addTaskProcessName={process} todo={todo} setIsAddTaskModalOpen={setModalOpen} />
             </ModalPortal>
           )}
         </div>
