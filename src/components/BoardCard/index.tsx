@@ -4,9 +4,9 @@ import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Draggable } from 'react-beautiful-dnd'
 
-import { Todo, todosAtom, searchKeyAtom } from 'store/atoms'
+import { Todo, tasksAtom, searchKeyAtom } from 'store/atoms'
 import { highlightWords } from './utils/highlightWords'
-import Modal from 'components/Modal/DashBoardModal'
+import Modal from 'components/Modal/AddTaskModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 
 import { CalendarIcon, EditIcon } from 'assets/svgs'
@@ -18,7 +18,7 @@ interface IBoardCardProps {
 }
 
 const BoardCard = ({ todo, index }: IBoardCardProps) => {
-  const [todoList, setTodoList] = useRecoilState(todosAtom)
+  const [todoList, setTodoList] = useRecoilState(tasksAtom)
   const searchKey = useRecoilValue(searchKeyAtom)
   const [modalOpen, setModalOpen] = useState(false)
   const [settingOpen, setSettingOpen] = useState(false)

@@ -20,7 +20,7 @@ export interface Todo {
   description: string
 }
 
-export const todosAtom = atom<Todoform>({
+export const tasksAtom = atom<Todoform>({
   key: 'todos',
   default: {
     TODO: [],

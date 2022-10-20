@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { useMount } from 'react-use'
 import { useRecoilState } from 'recoil'
 
-import { Todo, todosAtom } from 'store/atoms'
+import { Todo, tasksAtom } from 'store/atoms'
 import Title from '../components/Title'
 import Category from '../components/Category'
 import Description from '../components/Description'
@@ -25,7 +25,7 @@ const AddTaskModal = ({ processName, todo, setModalOpen }: IDashBoardModalProps)
   const [date, setDate] = useState<(Date | null)[]>([])
   const [image, setImage] = useState<Blob>()
   const [description, setDescription] = useState<string>('')
-  const [todoList, setTodoList] = useRecoilState(todosAtom)
+  const [todoList, setTodoList] = useRecoilState(tasksAtom)
   const [noTask, setNoTask] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
 

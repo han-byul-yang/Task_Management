@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useSetRecoilState, useRecoilValue } from 'recoil'
 
-import { searchKeyAtom, todosAtom } from 'store/atoms'
+import { searchKeyAtom, tasksAtom } from 'store/atoms'
 
 import { SearchIcon, XIcon } from 'assets/svgs'
 import styles from './searchInput.module.scss'
@@ -9,7 +9,7 @@ import styles from './searchInput.module.scss'
 const SearchInput = () => {
   const [keyInput, setKeyInput] = useState('')
   const setSearchKey = useSetRecoilState(searchKeyAtom)
-  const todoList = useRecoilValue(todosAtom)
+  const todoList = useRecoilValue(tasksAtom)
   const [openDropDown, setOpenDropDown] = useState(false)
 
   const allTasks = [...todoList.TODO, ...todoList.DOING, ...todoList.DONE]

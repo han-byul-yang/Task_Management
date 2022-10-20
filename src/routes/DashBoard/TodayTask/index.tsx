@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import dayjs from 'dayjs'
 
-import { Todo, todosAtom } from 'store/atoms'
+import { Todo, tasksAtom } from 'store/atoms'
 
 import styles from './todayTask.module.scss'
 
@@ -11,7 +11,7 @@ interface ITodayTaskProps {
 }
 
 const TodayTask = ({ startDate }: ITodayTaskProps) => {
-  const todoList = useRecoilValue(todosAtom)
+  const todoList = useRecoilValue(tasksAtom)
   const [todayTaskList, setTodayTaskList] = useState<Todo[]>([])
   const [isChecked, setIsChecked] = useState(false)
 
