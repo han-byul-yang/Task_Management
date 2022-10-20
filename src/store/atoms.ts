@@ -21,13 +21,13 @@ export interface Todo {
 }
 
 export const tasksAtom = atom<Todoform>({
-  key: 'todos',
+  key: 'tasks',
   default: {
     TODO: [],
     DOING: [],
     DONE: [],
   },
-  effects_UNSTABLE: [persistAtom],
+  // effects_UNSTABLE: [persistAtom],
 })
 
 export const searchKeyAtom = atom<string>({
@@ -35,8 +35,18 @@ export const searchKeyAtom = atom<string>({
   default: '',
 })
 
-export const processAtom = atom<string[]>({
-  key: 'processKey',
+export const boardProcessAtom = atom<string[]>({
+  key: 'boardProcessKey',
   default: ['TODO', 'DOING', 'DONE'],
-  effects_UNSTABLE: [persistAtom],
+  // effects_UNSTABLE: [persistAtom],
 })
+
+export const isOpenAddBoardModalAtom = atom({
+  key: 'isOpenAddBoardModal',
+  default: false,
+})
+
+/* export const isOpenAddTaskModalAtom = atom({
+  key: 'isOpenAddTaskModal',
+  default: false,
+}) */
