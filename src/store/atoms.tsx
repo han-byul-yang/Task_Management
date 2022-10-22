@@ -43,6 +43,16 @@ export const isOpenAddBoardModalAtom = atom({
   default: false,
 }) */
 
+export const isOpenNoticeModalAtom = atom({
+  key: 'isOpenNoticeModal',
+  default: false,
+})
+
+export const noticeMessageAtom = atom({
+  key: 'noticeMessage',
+  default: '',
+})
+
 export const boardsRoutesAtom = atom({
   key: 'boardsRoutes',
   default: [
