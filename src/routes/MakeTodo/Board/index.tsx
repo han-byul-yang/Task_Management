@@ -13,19 +13,20 @@ import { HamburgerIcon, Plus2Icon } from 'assets/svgs'
 interface IBoardsProps {
   process: string
   setIsAddTaskModalOpen?: Dispatch<React.SetStateAction<boolean>>
-  setAddTaskProcessName?: Dispatch<React.SetStateAction<string>>
+  setBoardProcessName?: Dispatch<React.SetStateAction<string>>
 }
 
-const Board = ({ process, setIsAddTaskModalOpen, setAddTaskProcessName }: IBoardsProps) => {
+const Board = ({ process, setIsAddTaskModalOpen, setBoardProcessName }: IBoardsProps) => {
   const [isBoardSettingBoxOpen, setIsBoardSettingBoxOpen] = useState(false)
   const boardsTasks = useRecoilValue(tasksAtom)
 
   const handleAddTodoClick = () => {
-    setAddTaskProcessName!(process)
+    setBoardProcessName!(process)
     setIsAddTaskModalOpen!(true)
   }
 
   const handleBoardSettingClick = () => {
+    setBoardProcessName!(process)
     setIsBoardSettingBoxOpen(true)
   }
 

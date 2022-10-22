@@ -94,7 +94,7 @@ const BoardCard = ({ task, index }: IBoardCardProps) => {
             </div>
             {modalOpen && (
               <ModalPortal>
-                <AddTaskModal addTaskProcessName={process} todo={task} setIsAddTaskModalOpen={setModalOpen} />
+                <AddTaskModal boardProcessName={process} todo={task} setIsAddTaskModalOpen={setModalOpen} />
               </ModalPortal>
             )}
           </div>
@@ -105,3 +105,5 @@ const BoardCard = ({ task, index }: IBoardCardProps) => {
 }
 
 export default BoardCard
+
+// useOutsideCLick hook 이용

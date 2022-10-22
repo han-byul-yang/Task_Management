@@ -14,7 +14,7 @@ import styles from './makeTodo.module.scss'
 import { AddIcon, MinusIcon } from 'assets/svgs'
 
 const MakeTodo = () => {
-  const [addTaskProcessName, setAddTaskProcessName] = useState('')
+  const [boardProcessName, setBoardProcessName] = useState('')
   const [createProcess, setCreateProcess] = useState(false)
   const [addProcessValue, setAddProcessValue] = useState('')
   const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
@@ -66,17 +66,17 @@ const MakeTodo = () => {
       <header>
         <SearchInput />
       </header>
-      <main>
-        <BoardsContainer setIsAddTaskModalOpen={setIsAddTaskModalOpen} setAddTaskProcessName={setAddTaskProcessName} />
+      <main className={styles.main}>
+        <BoardsContainer setIsAddTaskModalOpen={setIsAddTaskModalOpen} setBoardProcessName={setBoardProcessName} />
       </main>
       {isAddTaskModalOpen && (
         <ModalPortal>
-          <AddTaskModal addTaskProcessName={addTaskProcessName} setIsAddTaskModalOpen={setIsAddTaskModalOpen} />
+          <AddTaskModal boardProcessName={boardProcessName} setIsAddTaskModalOpen={setIsAddTaskModalOpen} />
         </ModalPortal>
       )}
-      {isOpenAddBoardModal && (
+      {isOpenAddBoardModal.isOpen && (
         <ModalPortal>
-          <AddBoardModal />
+          <AddBoardModal boardProcessName={boardProcessName} />
         </ModalPortal>
       )}
     </>

@@ -15,12 +15,12 @@ import 'react-datepicker/dist/react-datepicker.css'
 import styles from './addTaskModal.module.scss'
 
 interface IDashBoardModalProps {
-  addTaskProcessName: string
+  boardProcessName: string
   todo?: Task
   setIsAddTaskModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const AddTaskModal = ({ addTaskProcessName, todo, setIsAddTaskModalOpen }: IDashBoardModalProps) => {
+const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBoardModalProps) => {
   const [task, setTask] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [date, setDate] = useState<(Date | null)[]>([])
@@ -70,11 +70,11 @@ const AddTaskModal = ({ addTaskProcessName, todo, setIsAddTaskModalOpen }: IDash
         setboardsTasks((oldTodos) => {
           return {
             ...oldTodos,
-            [addTaskProcessName]: [
-              ...oldTodos[addTaskProcessName],
+            [boardProcessName]: [
+              ...oldTodos[boardProcessName],
               {
                 id: new Date(),
-                process: addTaskProcessName,
+                process: boardProcessName,
                 task,
                 category: categoryList,
                 date,

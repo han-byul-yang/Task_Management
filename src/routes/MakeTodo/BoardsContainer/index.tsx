@@ -1,4 +1,5 @@
 import React, { Dispatch } from 'react'
+import { Route, Routes } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
@@ -9,12 +10,11 @@ import styles from './boardsContainer.module.scss'
 
 interface IBoardsContainerProps {
   setIsAddTaskModalOpen: Dispatch<React.SetStateAction<boolean>>
-  setAddTaskProcessName: Dispatch<React.SetStateAction<string>>
+  setBoardProcessName: Dispatch<React.SetStateAction<string>>
 }
 
-const BoardsContainer = ({ setIsAddTaskModalOpen, setAddTaskProcessName }: IBoardsContainerProps) => {
+const BoardsContainer = ({ setIsAddTaskModalOpen, setBoardProcessName }: IBoardsContainerProps) => {
   const boardProcessList = useRecoilValue(boardProcessAtom)
-  // const [boardProcessList, setBoardProcessList] = useState(['TODO', 'DOING', 'DONE'])
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
 
@@ -50,28 +50,30 @@ const BoardsContainer = ({ setIsAddTaskModalOpen, setAddTaskProcessName }: IBoar
     }
   }
 
-  const handleAddTodoClick = (process: string) => {
-    setAddTaskProcessName(process)
-    setIsAddTaskModalOpen(true)
-  }
-
   const handleOpenAddBoardModalClick = () => {
-    setIsOpenAddBoardModal(true)
+    setIsOpenAddBoardModal({ type: 'add', isOpen: true })
   }
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <section className={styles.section}>
+      <div className={styles.boardsContainer}>
         <ul className={styles.boards}>
           {boardProcessList.map((process) => {
             const boardKey = `board-${process}`
-            return <Board key={boardKey} process={process} handleAddTodoClick={handleAddTodoClick} />
+            return (
+              <Board
+                key={boardKey}
+                process={process}
+                setIsAddTaskModalOpen={setIsAddTaskModalOpen}
+                setBoardProcessName={setBoardProcessName}
+              />
+            )
           })}
         </ul>
         <button className={styles.boardAddButton} type='button' onClick={handleOpenAddBoardModalClick}>
-          보드 추가
+          <p>보드 추가</p>
         </button>
-      </section>
+      </div>
     </DragDropContext>
   )
 }
