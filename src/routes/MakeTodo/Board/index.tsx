@@ -39,17 +39,19 @@ const Board = ({ process, setIsAddTaskModalOpen, setAddTaskProcessName }: IBoard
               <Plus2Icon className={styles.plus2Icon} onClick={handleAddTodoClick} />
               <HamburgerIcon className={styles.hamburgerIcon} onClick={handleBoardSettingClick} />
             </div>
-            {boardsTasks[process].length === 0 ? (
-              <p className={styles.noTaskMessage}>할일이 없습니다</p>
-            ) : (
-              <ul className={styles.cardsList}>
-                {isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
-                {boardsTasks[process].map((task: Task, iCard) => {
-                  const cardKey = `card=${iCard}`
-                  return <BoardCard key={cardKey} task={task} index={iCard} />
-                })}
-              </ul>
-            )}
+            <div className={styles.cardList}>
+              {isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
+              {boardsTasks[process].length === 0 ? (
+                <p className={styles.noTaskMessage}>할일이 없습니다</p>
+              ) : (
+                <ul>
+                  {boardsTasks[process].map((task: Task, iCard) => {
+                    const cardKey = `card=${iCard}`
+                    return <BoardCard key={cardKey} task={task} index={iCard} />
+                  })}
+                </ul>
+              )}
+            </div>
             {handleDrop.placeholder}
           </div>
         )}
