@@ -1,6 +1,8 @@
 import { atom } from 'recoil'
 import { recoilPersist } from 'recoil-persist'
+
 import { BoardTaskList } from 'types/taskType'
+import Board from 'routes/MakeTodo/Board'
 
 const { persistAtom } = recoilPersist({
   key: 'storeDatas',
@@ -14,7 +16,7 @@ export const tasksAtom = atom<BoardTaskList>({
     DOING: [],
     DONE: [],
   },
-  // effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtom],
 })
 
 export const searchKeyAtom = atom<string>({
@@ -30,10 +32,31 @@ export const boardProcessAtom = atom<string[]>({
 
 export const isOpenAddBoardModalAtom = atom({
   key: 'isOpenAddBoardModal',
-  default: false,
-})
+  default: {
+    type: 'add',
+    isOpen: false,
+  },
+}) // isOpenSettingBoardNameModal name은 어던가
 
 /* export const isOpenAddTaskModalAtom = atom({
   key: 'isOpenAddTaskModal',
   default: false,
 }) */
+
+export const boardsRoutesAtom = atom({
+  key: 'boardsRoutes',
+  default: [
+    {
+      path: 'todo',
+      element: <Board process='todo' />,
+    },
+    {
+      path: 'doing',
+      element: <Board process='doing' />,
+    },
+    {
+      path: 'done',
+      element: <Board process='done' />,
+    },
+  ],
+})
