@@ -1,8 +1,8 @@
-export interface BoardTaskList {
+export interface IBoardTaskList {
   [key: string]: Task[]
 }
 
-export interface Task {
+export interface ITask {
   id: Date
   process: string
   task: string

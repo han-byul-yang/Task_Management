@@ -1,15 +1,16 @@
 import { atom } from 'recoil'
 import { recoilPersist } from 'recoil-persist'
 
-import { BoardTaskList } from 'types/taskType'
+import { IBoardTaskList } from 'types/taskType'
 import Board from 'routes/MakeTodo/Board'
+import { INoticeMessage } from 'types/noticeMessageType'
 
 const { persistAtom } = recoilPersist({
   key: 'storeDatas',
   storage: localStorage,
 })
 
-export const tasksAtom = atom<BoardTaskList>({
+export const tasksAtom = atom<IBoardTaskList>({
   key: 'tasks',
   default: {
     TODO: [],
@@ -36,21 +37,24 @@ export const isOpenAddBoardModalAtom = atom({
     type: 'add',
     isOpen: false,
   },
-}) // isOpenSettingBoardNameModal name은 어던가
+}) // isOpenSettingBoardNameModal name은 어던가, type 설정
 
 /* export const isOpenAddTaskModalAtom = atom({
   key: 'isOpenAddTaskModal',
   default: false,
 }) */
 
-export const isOpenNoticeModalAtom = atom({
+export const isOpenNoticeModalAtom = atom<boolean>({
   key: 'isOpenNoticeModal',
   default: false,
 })
 
-export const noticeMessageAtom = atom({
+export const noticeMessageAtom = atom<INoticeMessage>({
   key: 'noticeMessage',
-  default: '',
+  default: {
+    message: '',
+    noticeMessageOkButtonHandle: () => {},
+  },
 })
 
 export const boardsRoutesAtom = atom({
