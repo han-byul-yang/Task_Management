@@ -5,7 +5,7 @@ import parse from 'html-react-parser'
 import { Draggable } from 'react-beautiful-dnd'
 
 import { tasksAtom, searchKeyAtom } from 'store/atoms'
-import { Task } from 'types/taskType'
+import { ITask } from 'types/taskType'
 import { highlightWords } from './utils/highlightWords'
 import AddTaskModal from 'components/Modal/AddTaskModal'
 import ModalPortal from 'components/Modal/ModalPortal'
@@ -14,7 +14,7 @@ import { CalendarIcon, EditIcon } from 'assets/svgs'
 import styles from './boardCard.module.scss'
 
 interface IBoardCardProps {
-  task: Task
+  task: ITask
   index: number
 }
 

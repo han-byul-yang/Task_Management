@@ -3,7 +3,7 @@ import { useMount } from 'react-use'
 import { useRecoilState } from 'recoil'
 
 import { tasksAtom } from 'store/atoms'
-import { Task } from 'types/taskType'
+import { ITask } from 'types/taskType'
 import Title from '../components/Title'
 import Category from '../components/Category'
 import Description from '../components/Description'
@@ -16,7 +16,7 @@ import styles from './addTaskModal.module.scss'
 
 interface IDashBoardModalProps {
   boardProcessName: string
-  todo?: Task
+  todo?: ITask
   setIsAddTaskModalOpen: Dispatch<SetStateAction<boolean>>
 }
 

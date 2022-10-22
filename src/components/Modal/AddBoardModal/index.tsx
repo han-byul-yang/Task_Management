@@ -11,7 +11,7 @@ interface IAddBoardModalProps {
 
 const AddBoardModal = ({ boardProcessName }: IAddBoardModalProps) => {
   const [isOpenAddBoardModal, setIsOpenAddBoardModal] = useRecoilState(isOpenAddBoardModalAtom)
-  const [boardsTasks, setBoardsTasks] = useRecoilState(tasksAtom)
+  const setBoardsTasks = useSetRecoilState(tasksAtom)
   const setBoardProcessList = useSetRecoilState(boardProcessAtom)
   const [boardName, setBoardName] = useState(isOpenAddBoardModal.type === 'add' ? '' : boardProcessName)
   const inputRef = useRef(null)
@@ -38,7 +38,7 @@ const AddBoardModal = ({ boardProcessName }: IAddBoardModalProps) => {
     })
     setBoardsTasks((prevTasks) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { [boardProcessName]: prevProcessName, ...otherProcessNames } = boardsTasks
+      const { [boardProcessName]: prevProcessName, ...otherProcessNames } = prevTasks
       return { ...otherProcessNames, [boardName]: [...prevTasks[boardProcessName]] }
     })
     setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))

@@ -3,7 +3,7 @@ import { Droppable } from 'react-beautiful-dnd'
 import { useRecoilValue } from 'recoil'
 
 import { tasksAtom } from 'store/atoms'
-import { Task } from 'types/taskType'
+import { ITask } from 'types/taskType'
 import BoardCard from 'components/BoardCard'
 import BoardSettingBox from './BoardSettingBox'
 
@@ -41,12 +41,14 @@ const Board = ({ process, setIsAddTaskModalOpen, setBoardProcessName }: IBoardsP
               <HamburgerIcon className={styles.hamburgerIcon} onClick={handleBoardSettingClick} />
             </div>
             <div className={styles.cardList}>
-              {isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
+              {isBoardSettingBoxOpen && (
+                <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} process={process} />
+              )}
               {boardsTasks[process].length === 0 ? (
                 <p className={styles.noTaskMessage}>할일이 없습니다</p>
               ) : (
                 <ul>
-                  {boardsTasks[process].map((task: Task, iCard) => {
+                  {boardsTasks[process].map((task: ITask, iCard) => {
                     const cardKey = `card=${iCard}`
                     return <BoardCard key={cardKey} task={task} index={iCard} />
                   })}
@@ -64,3 +66,5 @@ const Board = ({ process, setIsAddTaskModalOpen, setBoardProcessName }: IBoardsP
 export default Board
 
 // ?와 ! 삭제
+// process 이름 네이밍
+// setIsOpenAddModal 네이밍
