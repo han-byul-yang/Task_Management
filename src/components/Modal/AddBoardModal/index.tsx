@@ -1,45 +1,73 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import { boardProcessAtom, isOpenAddBoardModalAtom, tasksAtom } from 'store/atoms'
 
 import styles from './addBoardModal.module.scss'
 
-const AddBoardModal = () => {
-  const [addBoardName, setAddBoardName] = useState('')
+interface IAddBoardModalProps {
+  boardProcessName: string
+}
+
+const AddBoardModal = ({ boardProcessName }: IAddBoardModalProps) => {
+  const [isOpenAddBoardModal, setIsOpenAddBoardModal] = useRecoilState(isOpenAddBoardModalAtom)
+  const [boardsTasks, setBoardsTasks] = useRecoilState(tasksAtom)
   const setBoardProcessList = useSetRecoilState(boardProcessAtom)
-  const setBoardsTasks = useSetRecoilState(tasksAtom)
-  const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
+  const [boardName, setBoardName] = useState(isOpenAddBoardModal.type === 'add' ? '' : boardProcessName)
   const inputRef = useRef(null)
 
   /* useEffect(() => {
     if (inputRef && inputRef.current) inputRef.current.focus()
   }, []) */
 
-  const handleAddBoardNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setAddBoardName(e.currentTarget.value)
+  const handleBoardNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setBoardName(e.currentTarget.value)
   }
 
   const handleAddBoardClick = () => {
-    setBoardProcessList((prevProcess) => [...prevProcess, addBoardName])
-    setBoardsTasks((prevTasks) => ({ ...prevTasks, addBoardName: [] }))
-    setIsOpenAddBoardModal(false)
+    setBoardProcessList((prevProcess) => [...prevProcess, boardName])
+    setBoardsTasks((prevTasks) => ({ ...prevTasks, [boardName]: [] }))
+    setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+  }
+
+  const handleEditBoardClick = () => {
+    setBoardProcessList((prevProcess) => {
+      const tempBoardProcessList = [...prevProcess]
+      tempBoardProcessList.splice(tempBoardProcessList.indexOf(boardProcessName), 1, boardName)
+      return tempBoardProcessList
+    })
+    setBoardsTasks((prevTasks) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [boardProcessName]: prevProcessName, ...otherProcessNames } = boardsTasks
+      return { ...otherProcessNames, [boardName]: [...prevTasks[boardProcessName]] }
+    })
+    setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
   }
 
   const handleCancelClick = () => {
-    setIsOpenAddBoardModal(false)
+    setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
   }
 
   return (
     <>
       <div className={styles.background} />
       <div className={styles.modalBox}>
-        <p>추가 하려는 보드 이름을 입력하세요</p>
-        <input type='text' value={addBoardName} ref={inputRef} onChange={handleAddBoardNameChange} />
+        <p>
+          {isOpenAddBoardModal.type === 'add'
+            ? '추가 하려는 보드 이름을 입력하세요'
+            : '수정하려는 보드 이름을 입력하세요'}
+        </p>
+        <input type='text' value={boardName} ref={inputRef} onChange={handleBoardNameChange} />
         <div className={styles.buttonBox}>
-          <button type='button' onClick={handleAddBoardClick}>
-            추가
-          </button>
+          {isOpenAddBoardModal.type === 'add' ? (
+            <button type='button' onClick={handleAddBoardClick}>
+              추가
+            </button>
+          ) : (
+            <button type='button' onClick={handleEditBoardClick}>
+              수정
+            </button>
+          )}
           <button type='button' onClick={handleCancelClick}>
             취소
           </button>
