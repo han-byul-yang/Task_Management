@@ -1,23 +1,21 @@
-import { Dispatch, SetStateAction } from 'react'
+import { useRecoilState } from 'recoil'
+
+import { taskAtom } from 'store/atoms'
 
 import { ImageIcon } from 'assets/svgs'
 import styles from './picture.module.scss'
 
-interface IPictureProps {
-  setImage: Dispatch<SetStateAction<any>>
-}
+const Picture = () => {
+  const [task, setTask] = useRecoilState(taskAtom)
 
-const Picture = ({ setImage }: IPictureProps) => {
   const handleImageChange = (e: any) => {
-    const file = e.target.files[0]
+    const { files } = e.target
     const reader = new FileReader()
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(files[0])
 
-    return new Promise(() => {
-      reader.onload = () => {
-        setImage(reader.result)
-      }
-    })
+    reader.onload = () => {
+      setTask((prevTask) => ({ ...prevTask, image: { name: files[0].name, url: reader.result } }))
+    }
   }
 
   return (
@@ -27,8 +25,11 @@ const Picture = ({ setImage }: IPictureProps) => {
         Choose Your Image 👈
       </label>
       <input type='file' id='chooseFile' accept='img/*' onChange={handleImageChange} />
+      {task.image.name && <p>{task.image.name}</p>}
     </div>
   )
 }
 
 export default Picture
+
+// any type 설정

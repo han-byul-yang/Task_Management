@@ -26,9 +26,9 @@ export const taskAtom = atom<ITask>({
     id: new Date(),
     process: '',
     taskTitle: '',
-    categoryList: [''],
+    categoryList: [],
     date: [],
-    image: '', // type 수정
+    image: { name: '', url: '' }, // type 수정
     description: '',
   },
 })

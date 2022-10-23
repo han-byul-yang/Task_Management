@@ -24,7 +24,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
   const [task, setTask] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [date, setDate] = useState<(Date | null)[]>([])
-  const [image, setImage] = useState<Blob>()
+  const [image, setImage] = useState<string | ArrayBuffer | null | undefined>()
   const [description, setDescription] = useState<string>('')
   const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const [noTask, setNoTask] = useState(false)
@@ -36,7 +36,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
       setTask(todo.taskTitle)
       setCategoryList(todo.categoryList)
       setDate([new Date(), null])
-      setImage(todo?.image)
+      setImage(todo?.image.url)
       setDescription(todo?.description)
     }
   })
@@ -57,7 +57,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
           taskTitle: task,
           categoryList,
           date,
-          image,
+          image: { url: image, name: '' },
           description,
         })
         setboardsTasks((oldTodos) => {
@@ -78,7 +78,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
                 taskTitle: task,
                 categoryList,
                 date,
-                image,
+                image: { url: image, name: '' },
                 description,
               },
             ],
@@ -106,16 +106,16 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
       <div className={styles.background} />
       <div className={styles.modalBox}>
         <div className={styles.modalHead}>
-          <div>Create a new task</div>
+          <p>Create a new task</p>
           <XIcon className={styles.closeButton} onClick={handleCloseModal} />
         </div>
         <Title noTask={noTask} />
         <Category noCategory={noCategory} />
         <div className={styles.detail}>
-          <div>Task Detail</div>
+          <p>Task Detail</p>
           <Description />
           <Schedule setDate={setDate} />
-          <Picture setImage={setImage} />
+          <Picture />
         </div>
         <button className={styles.createButton} type='button' onClick={handleCreateTaskClick}>
           Create Task
