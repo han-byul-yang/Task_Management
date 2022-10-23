@@ -1,35 +1,44 @@
-import { ChangeEvent, Dispatch, FormEvent, SetStateAction, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
+import { useRecoilState } from 'recoil'
 import cx from 'classnames'
+
+import { taskAtom } from 'store/atoms'
 
 import { PlusIcon } from 'assets/svgs'
 import styles from './category.module.scss'
 
 interface ICategoryProps {
   noCategory: boolean
-  categoryList: string[]
-  setCategoryList: Dispatch<SetStateAction<string[]>>
 }
 
-const Category = ({ noCategory, categoryList, setCategoryList }: ICategoryProps) => {
+const Category = ({ noCategory }: ICategoryProps) => {
   const [category, setCategory] = useState('')
+  const [task, setTask] = useRecoilState(taskAtom)
   const [categoryShow, setCategoryShow] = useState(false)
 
   const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCategory(e.currentTarget.value)
   }
 
-  const handleCategoryShow = () => {
+  const handleCategoryShowClick = () => {
     setCategoryShow(true)
   }
 
   const handleCategorySubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setCategoryList((prevState) => [...prevState, category])
+    if (!task.categoryList.includes(category)) {
+      setTask((prevTask) => ({ ...prevTask, categoryList: [...prevTask.categoryList, category] }))
+    }
     setCategory('')
   }
 
-  const handleCategoryDelete = (index: number) => {
-    setCategoryList(categoryList.filter((selectItem) => categoryList.indexOf(selectItem) !== index))
+  const handleCategoryDeleteClick = () => {
+    setTask((prevTask) => {
+      return {
+        ...prevTask,
+        categoryList: prevTask.categoryList.filter((prevCategory) => prevCategory !== category),
+      }
+    })
   }
 
   return (
@@ -39,23 +48,19 @@ const Category = ({ noCategory, categoryList, setCategoryList }: ICategoryProps)
         {noCategory && <div className={styles.error}>카테고리를 입력해주세요</div>}
       </div>
       <form className={styles.categoryForm} onSubmit={handleCategorySubmit}>
-        <PlusIcon className={styles.categoryBtn} onClick={handleCategoryShow} />
+        <PlusIcon className={styles.plusIcon} onClick={handleCategoryShowClick} />
         <input
-          className={cx(styles.categoryInput, { [styles.show]: categoryShow })}
+          className={cx(styles.categoryInput, { [styles.categoryShow]: categoryShow })}
           type='text'
           placeholder='카테고리 입력해주세요'
           value={category}
           onChange={handleCategoryChange}
         />
       </form>
-      {categoryList.map((item, index) => {
+      {task.categoryList.map((item) => {
+        const categoryKey = `category-${item}`
         return (
-          <button
-            className={styles.categoryItem}
-            type='button'
-            key={`category-${item}`}
-            onClick={() => handleCategoryDelete(index)}
-          >
+          <button className={styles.categoryItem} type='button' key={categoryKey} onClick={handleCategoryDeleteClick}>
             {item}
           </button>
         )

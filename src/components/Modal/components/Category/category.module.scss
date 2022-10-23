@@ -1,32 +1,39 @@
 @use '../../../../styles/constants/colors';
 
-.error {
-  margin-left: 5px;
-  font-size: 13px;
-  color: colors.$ERROR;
-}
-
 .category {
   margin-top: 25px;
 
   .categoryHead {
     display: flex;
-    color: colors.$FONT;
+
+    .error {
+      margin-left: 5px;
+      font-size: 13px;
+      color: colors.$ERROR;
+    }
   }
 
   .categoryForm {
     display: flex;
     justify-content: baseline;
-    width: 100%;
+    // width: 100%;
     margin-top: 10px;
-    color: colors.$FONT;
-  }
 
-  .categoryBtn {
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-    cursor: pointer;
+    .plusIcon {
+      width: 30px;
+      height: 30px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .categoryInput {
+      display: none;
+      font-family: 'Nanum Gothic', sans-serif;
+    }
+
+    .categoryShow {
+      display: inline-block;
+    }
   }
 
   .categoryItem {
@@ -39,13 +46,4 @@
     background: colors.$KEY;
     border-radius: 10px;
   }
-}
-
-.categoryInput {
-  display: none;
-  font-family: 'Nanum Gothic', sans-serif;
-}
-
-.show {
-  display: inline-block;
 }
