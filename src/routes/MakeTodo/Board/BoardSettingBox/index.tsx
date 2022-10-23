@@ -21,7 +21,6 @@ interface IMenuBoxProps {
 const BoardSettingBox = ({ setIsBoardSettingBoxOpen, process: boardProcessName }: IMenuBoxProps) => {
   const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
   const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
-  const setOpenMessageModal = useSetRecoilState(isOpenNoticeModalAtom)
   const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const setBoardProcessList = useSetRecoilState(boardProcessAtom)
@@ -41,7 +40,7 @@ const BoardSettingBox = ({ setIsBoardSettingBoxOpen, process: boardProcessName }
   }
 
   const noticeMessageOkButtonHandle = () => {
-    setOpenMessageModal(false)
+    setIsOpenNoticeModal(false)
     setBoardProcessList((prevProcess) => prevProcess.filter((process) => process !== boardProcessName))
     setBoardsTasks((prevTasks) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -56,7 +55,7 @@ const BoardSettingBox = ({ setIsBoardSettingBoxOpen, process: boardProcessName }
   }
 
   return (
-    <div className={styles.menuBox} ref={containerRef}>
+    <div className={styles.settingBox} ref={containerRef}>
       <button type='button' onClick={handleEditBoardNameClick}>
         보드 수정
       </button>

@@ -2,8 +2,9 @@ import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
-import { isOpenAddTaskModalAtom, taskAtom, tasksAtom } from 'store/atoms'
+import { isOpenAddTaskModalAtom, isOpenNoticeModalAtom, noticeMessageAtom, taskAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
+import noticeMessage from 'utils/noticeMessage'
 
 import styles from './cardSettingBox.module.scss'
 
@@ -16,6 +17,8 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, cardTask }: ICardSettingBoxPr
   const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
   const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const setTask = useSetRecoilState(taskAtom)
+  const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
+  const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
@@ -32,7 +35,7 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, cardTask }: ICardSettingBoxPr
     setTask(cardTask)
   }
 
-  const handleDeleteClick = () => {
+  const noticeMessageOkButtonHandle = () => {
     const deletedTaskList = boardsTasks[cardTask.process].filter((task) => task.id !== cardTask.id)
     setboardsTasks((prevState) => {
       return {
@@ -40,6 +43,12 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, cardTask }: ICardSettingBoxPr
         [cardTask.process]: [...deletedTaskList],
       }
     })
+    setIsOpenNoticeModal(false)
+  }
+
+  const handleDeleteClick = () => {
+    setNoticeMessage({ message: noticeMessage().card.WILL_DELETE, noticeMessageOkButtonHandle })
+    setIsOpenNoticeModal(true)
   }
 
   return (
