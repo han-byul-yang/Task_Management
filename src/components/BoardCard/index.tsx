@@ -7,6 +7,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import { tasksAtom, searchKeyAtom, isOpenAddTaskModalAtom, taskAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import { highlightWords } from './utils/highlightWords'
+import CardSettingBox from './CardSettingBox'
 import AddTaskModal from 'components/Modal/AddTaskModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 
@@ -26,28 +27,13 @@ const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) =>
   const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
   const setTask = useSetRecoilState(taskAtom)
   const [settingOpen, setSettingOpen] = useState(false)
+  const [isCardSettingBoxOpen, setIsCardSettingBoxOpen] = useState(false)
 
   const { id, process, image, description, date } = cardTask
 
-  const handleSettingBtnClick = () => {
-    setSettingOpen((prevState) => !prevState)
+  const handleCardSettingClick = () => {
+    setIsCardSettingBoxOpen(true)
     setBoardProcessName(process)
-  }
-
-  const handleEditClick = () => {
-    setIsOpenAddTaskModal({ type: 'edit', isOpen: true })
-    setTask(cardTask)
-  }
-
-  const handleDeleteClick = () => {
-    const filterdTodo = boardsTasks[process].filter((todos) => todos.id !== id)
-
-    setboardsTasks((prevState) => {
-      return {
-        ...prevState,
-        [process]: [...filterdTodo],
-      }
-    })
   }
 
   const { highlightTask, highlightCategory } = highlightWords(searchKey, cardTask)
@@ -62,26 +48,13 @@ const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) =>
             {...handleDrag.draggableProps}
             {...handleDrag.dragHandleProps}
           >
-            {image.url ? <img src={`${image.url}`} alt='todo-img' className={styles.image} /> : null}
-            <div className={styles.titleBox}>
+            {image.url && <img src={`${image.url}`} alt={image.name} className={styles.image} />}
+            <div className={styles.boxHeader}>
               <div className={styles.title}>{parse(highlightTask)}</div>
-              <div className={styles.setting}>
-                <EditIcon className={styles.settingIcon} onClick={handleSettingBtnClick} />
-                {settingOpen ? (
-                  <>
-                    {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-                    <div className={styles.settingBackground} onClick={handleSettingBtnClick} />
-                    <div className={styles.settingBox}>
-                      <button className={styles.edit} type='button' onClick={handleEditClick}>
-                        EDIT
-                      </button>
-                      <button className={styles.delete} type='button' onClick={handleDeleteClick}>
-                        DELETE
-                      </button>
-                    </div>
-                  </>
-                ) : null}
-              </div>
+              <EditIcon className={styles.settingIcon} onClick={handleCardSettingClick} />
+              {isCardSettingBoxOpen && (
+                <CardSettingBox setIsCardSettingBoxOpen={setIsCardSettingBoxOpen} cardTask={cardTask} />
+              )}
             </div>
             <ul className={styles.category}>
               {highlightCategory.map((item: string) => {
