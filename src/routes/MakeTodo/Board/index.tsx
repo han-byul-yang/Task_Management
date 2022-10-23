@@ -1,8 +1,8 @@
 import { Dispatch, useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { tasksAtom } from 'store/atoms'
+import { isOpenAddTaskModalAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import BoardCard from 'components/BoardCard'
 import BoardSettingBox from './BoardSettingBox'
@@ -12,13 +12,13 @@ import { HamburgerIcon, Plus2Icon } from 'assets/svgs'
 
 interface IBoardsProps {
   process: string
-  setIsAddTaskModalOpen?: Dispatch<React.SetStateAction<boolean>>
   setBoardProcessName?: Dispatch<React.SetStateAction<string>>
 }
 
-const Board = ({ process, setIsAddTaskModalOpen, setBoardProcessName }: IBoardsProps) => {
+const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
   const [isBoardSettingBoxOpen, setIsBoardSettingBoxOpen] = useState(false)
   const boardsTasks = useRecoilValue(tasksAtom)
+  const setIsAddTaskModalOpen = useSetRecoilState(isOpenAddTaskModalAtom)
 
   const handleAddTodoClick = () => {
     setBoardProcessName!(process)

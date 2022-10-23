@@ -1,19 +1,17 @@
 import React, { Dispatch } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
-import { isOpenAddBoardModalAtom, boardProcessAtom, tasksAtom } from 'store/atoms'
+import { isOpenAddBoardModalAtom, boardProcessAtom, tasksAtom, isOpenAddTaskModalAtom } from 'store/atoms'
 import Board from '../Board'
 
 import styles from './boardsContainer.module.scss'
 
 interface IBoardsContainerProps {
-  setIsAddTaskModalOpen: Dispatch<React.SetStateAction<boolean>>
   setBoardProcessName: Dispatch<React.SetStateAction<string>>
 }
 
-const BoardsContainer = ({ setIsAddTaskModalOpen, setBoardProcessName }: IBoardsContainerProps) => {
+const BoardsContainer = ({ setBoardProcessName }: IBoardsContainerProps) => {
   const boardProcessList = useRecoilValue(boardProcessAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
@@ -60,14 +58,7 @@ const BoardsContainer = ({ setIsAddTaskModalOpen, setBoardProcessName }: IBoards
         <ul className={styles.boards}>
           {boardProcessList.map((process) => {
             const boardKey = `board-${process}`
-            return (
-              <Board
-                key={boardKey}
-                process={process}
-                setIsAddTaskModalOpen={setIsAddTaskModalOpen}
-                setBoardProcessName={setBoardProcessName}
-              />
-            )
+            return <Board key={boardKey} process={process} setBoardProcessName={setBoardProcessName} />
           })}
         </ul>
         <button className={styles.boardAddButton} type='button' onClick={handleOpenAddBoardModalClick}>

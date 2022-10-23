@@ -52,10 +52,10 @@ export const isOpenAddBoardModalAtom = atom({
   },
 }) // isOpenSettingBoardNameModal name은 어던가, type 설정
 
-/* export const isOpenAddTaskModalAtom = atom({
+export const isOpenAddTaskModalAtom = atom({
   key: 'isOpenAddTaskModal',
   default: false,
-}) */
+})
 
 export const isOpenNoticeModalAtom = atom<boolean>({
   key: 'isOpenNoticeModal',

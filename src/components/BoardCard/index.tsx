@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Draggable } from 'react-beautiful-dnd'
 
-import { tasksAtom, searchKeyAtom } from 'store/atoms'
+import { tasksAtom, searchKeyAtom, isOpenAddTaskModalAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import { highlightWords } from './utils/highlightWords'
 import AddTaskModal from 'components/Modal/AddTaskModal'
@@ -21,7 +21,8 @@ interface IBoardCardProps {
 const BoardCard = ({ task, index }: IBoardCardProps) => {
   const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const searchKey = useRecoilValue(searchKeyAtom)
-  const [modalOpen, setModalOpen] = useState(false)
+  // const [modalOpen, setModalOpen] = useState(false)
+  const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
   const [settingOpen, setSettingOpen] = useState(false)
 
   const { id, process, image, description, date } = task
@@ -31,7 +32,7 @@ const BoardCard = ({ task, index }: IBoardCardProps) => {
   }
 
   const handleEditClick = () => {
-    setModalOpen(true)
+    setIsOpenAddTaskModal(true)
   }
 
   const handleDeleteClick = () => {
@@ -92,11 +93,6 @@ const BoardCard = ({ task, index }: IBoardCardProps) => {
                   : `${dayjs(date[0]).format('YYYY.MM.DD')}-${dayjs(date[1]).format('YYYY.MM.DD')}`}
               </div>
             </div>
-            {modalOpen && (
-              <ModalPortal>
-                <AddTaskModal boardProcessName={process} todo={task} setIsAddTaskModalOpen={setModalOpen} />
-              </ModalPortal>
-            )}
           </div>
         )}
       </Draggable>

@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
-import { isOpenAddBoardModalAtom, isOpenNoticeModalAtom } from 'store/atoms'
+import { isOpenAddBoardModalAtom, isOpenAddTaskModalAtom, isOpenNoticeModalAtom } from 'store/atoms'
 import AddTaskModal from 'components/Modal/AddTaskModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 import SearchInput from './SearchInput'
@@ -18,7 +18,7 @@ const MakeTodo = () => {
   const [boardProcessName, setBoardProcessName] = useState('')
   const [createProcess, setCreateProcess] = useState(false)
   const [addProcessValue, setAddProcessValue] = useState('')
-  const [isAddTaskModalOpen, setIsAddTaskModalOpen] = useState(false)
+  const isOpenAddTaskModal = useRecoilValue(isOpenAddTaskModalAtom)
   const isOpenAddBoardModal = useRecoilValue(isOpenAddBoardModalAtom)
   const isOpenNoticeModal = useRecoilValue(isOpenNoticeModalAtom)
 
@@ -69,11 +69,11 @@ const MakeTodo = () => {
         <SearchInput />
       </header>
       <main className={styles.main}>
-        <BoardsContainer setIsAddTaskModalOpen={setIsAddTaskModalOpen} setBoardProcessName={setBoardProcessName} />
+        <BoardsContainer setBoardProcessName={setBoardProcessName} />
       </main>
-      {isAddTaskModalOpen && (
+      {isOpenAddTaskModal && (
         <ModalPortal>
-          <AddTaskModal boardProcessName={boardProcessName} setIsAddTaskModalOpen={setIsAddTaskModalOpen} />
+          <AddTaskModal boardProcessName={boardProcessName} />
         </ModalPortal>
       )}
       {isOpenAddBoardModal.isOpen && (

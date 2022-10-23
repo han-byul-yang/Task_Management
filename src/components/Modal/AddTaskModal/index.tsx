@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { useMount } from 'react-use'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 
-import { tasksAtom } from 'store/atoms'
+import { isOpenAddTaskModalAtom, taskAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import Title from '../components/Title'
 import Category from '../components/Category'
@@ -17,23 +17,24 @@ import styles from './addTaskModal.module.scss'
 interface IDashBoardModalProps {
   boardProcessName: string
   todo?: ITask
-  setIsAddTaskModalOpen: Dispatch<SetStateAction<boolean>>
 }
 
-const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBoardModalProps) => {
-  const [task, setTask] = useState('')
+const AddTaskModal = ({ boardProcessName, todo }: IDashBoardModalProps) => {
+  const [taskTitle, setTaskTitle] = useState('')
   const [categoryList, setCategoryList] = useState<string[]>([])
   const [date, setDate] = useState<(Date | null)[]>([])
   const [image, setImage] = useState<string | ArrayBuffer | null | undefined>()
   const [description, setDescription] = useState<string>('')
-  const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const [noTask, setNoTask] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
+  const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
+  const [task, setTask] = useRecoilState(taskAtom)
+  const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
 
   useMount(() => {
     if (!todo) return
     if (todo) {
-      setTask(todo.taskTitle)
+      setTaskTitle(todo.taskTitle)
       setCategoryList(todo.categoryList)
       setDate([new Date(), null])
       setImage(todo?.image.url)
@@ -42,10 +43,10 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
   })
 
   const handleCloseModal = () => {
-    setIsAddTaskModalOpen(false)
+    setIsOpenAddTaskModal(false)
   }
 
-  const handleCreateTaskClick = () => {
+  /* const handleCreateTaskClick = () => {
     if (task !== '' && categoryList.length !== 0) {
       if (todo) {
         const todoIdArray = boardsTasks[todo.process].map((todos) => todos.id)
@@ -99,6 +100,21 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
     } else {
       setNoCategory(false)
     }
+  } */
+  const handleCreateTaskClick = () => {
+    setboardsTasks((prevTasks) => ({
+      ...prevTasks,
+      [boardProcessName]: [...prevTasks[boardProcessName], { ...task, id: new Date() }],
+    }))
+    setTask({
+      id: new Date(),
+      process: '',
+      taskTitle: '',
+      categoryList: [],
+      date: [],
+      image: { name: '', url: '' },
+      description: '',
+    })
   }
 
   return (
