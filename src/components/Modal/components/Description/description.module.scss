@@ -1,19 +1,12 @@
 @use '../../../../styles/constants/colors';
 
-.detail {
-  margin-top: 25px;
-  color: colors.$FONT;
-}
-
 .description {
   display: flex;
   align-items: center;
   margin-top: 15px;
   font-family: 'Nanum Gothic', sans-serif;
-  color: colors.$FONT;
 
   input {
-    width: 100%;
     margin-left: 5px;
   }
 }

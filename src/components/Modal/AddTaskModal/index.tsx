@@ -111,9 +111,12 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
         </div>
         <Title noTask={noTask} />
         <Category noCategory={noCategory} />
-        <Description description={description} setDescription={setDescription} />
-        <Schedule setDate={setDate} />
-        <Picture setImage={setImage} />
+        <div className={styles.detail}>
+          <div>Task Detail</div>
+          <Description />
+          <Schedule setDate={setDate} />
+          <Picture setImage={setImage} />
+        </div>
         <button className={styles.createButton} type='button' onClick={handleCreateTaskClick}>
           Create Task
         </button>

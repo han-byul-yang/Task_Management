@@ -1,31 +1,27 @@
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { ChangeEvent } from 'react'
+import { useRecoilState } from 'recoil'
+
+import { taskAtom } from 'store/atoms'
 
 import { FileIcon } from 'assets/svgs'
 import styles from './description.module.scss'
 
-interface IDetailProps {
-  description: string
-  setDescription: Dispatch<SetStateAction<string>>
-}
+const Description = () => {
+  const [task, setTask] = useRecoilState(taskAtom)
 
-const Description = ({ description, setDescription }: IDetailProps) => {
   const handleDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDescription(e.currentTarget.value)
+    setTask((prevTask) => ({ ...prevTask, description: e.currentTarget.value }))
   }
 
   return (
-    <div className={styles.detail}>
-      <div>Task Detail</div>
-
-      <div className={styles.description}>
-        <FileIcon />
-        <input
-          type='text'
-          placeholder='상세한 내용을 입력하세요'
-          value={description}
-          onChange={handleDescriptionChange}
-        />
-      </div>
+    <div className={styles.description}>
+      <FileIcon />
+      <input
+        type='text'
+        placeholder='상세한 내용을 입력하세요'
+        value={task.description}
+        onChange={handleDescriptionChange}
+      />
     </div>
   )
 }

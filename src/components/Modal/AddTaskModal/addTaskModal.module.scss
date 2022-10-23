@@ -23,12 +23,16 @@
   font-size: 20px;
   color: colors.$FONT;
 
-  .xBtn {
+  .closeButton {
     cursor: pointer;
   }
 }
 
-.createBtn {
+.detail {
+  margin-top: 15px;
+}
+
+.createButton {
   position: absolute;
   bottom: 20px;
   width: 280px;
