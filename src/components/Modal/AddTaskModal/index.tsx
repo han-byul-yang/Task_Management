@@ -25,7 +25,7 @@ const AddTaskModal = ({ boardProcessName, todo }: IDashBoardModalProps) => {
   const [date, setDate] = useState<(Date | null)[]>([])
   const [image, setImage] = useState<string | ArrayBuffer | null | undefined>()
   const [description, setDescription] = useState<string>('')
-  const [noTask, setNoTask] = useState(false)
+  const [noTitle, setNoTitle] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
   const [boardsTasks, setBoardsTasks] = useRecoilState(tasksAtom)
   const [task, setTask] = useRecoilState(taskAtom)
@@ -102,33 +102,38 @@ const AddTaskModal = ({ boardProcessName, todo }: IDashBoardModalProps) => {
     }
   } */
   const handleSubmitTaskClick = () => {
-    if (isOpenAddTaskModal.type === 'add') {
-      setBoardsTasks((prevTasks) => ({
-        ...prevTasks,
-        [boardProcessName]: [...prevTasks[boardProcessName], { ...task, id: new Date(), process: boardProcessName }],
-      }))
-    }
-    if (isOpenAddTaskModal.type === 'edit') {
-      setBoardsTasks((prevTasks) => {
-        const tempPrevTasks = [...prevTasks[boardProcessName]]
-        const taskIdList = prevTasks[boardProcessName].map((prevTask) => prevTask.id)
-        tempPrevTasks.splice(taskIdList.indexOf(task.id), 1, task)
-        return {
+    if (!task.taskTitle || !task.categoryList.length) {
+      if (!task.taskTitle) setNoTitle(true)
+      if (!task.categoryList.length) setNoCategory(true)
+    } else {
+      if (isOpenAddTaskModal.type === 'add') {
+        setBoardsTasks((prevTasks) => ({
           ...prevTasks,
-          [boardProcessName]: tempPrevTasks,
-        }
+          [boardProcessName]: [...prevTasks[boardProcessName], { ...task, id: new Date(), process: boardProcessName }],
+        }))
+      }
+      if (isOpenAddTaskModal.type === 'edit') {
+        setBoardsTasks((prevTasks) => {
+          const tempPrevTasks = [...prevTasks[boardProcessName]]
+          const taskIdList = tempPrevTasks.map((prevTask) => prevTask.id)
+          tempPrevTasks.splice(taskIdList.indexOf(task.id), 1, task)
+          return {
+            ...prevTasks,
+            [boardProcessName]: tempPrevTasks,
+          }
+        })
+      }
+      setTask({
+        id: new Date(),
+        process: '',
+        taskTitle: '',
+        categoryList: [],
+        date: [],
+        image: { name: '', url: '' },
+        description: '',
       })
+      setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
     }
-    setTask({
-      id: new Date(),
-      process: '',
-      taskTitle: '',
-      categoryList: [],
-      date: [],
-      image: { name: '', url: '' },
-      description: '',
-    })
-    setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
   }
 
   return (
@@ -139,7 +144,7 @@ const AddTaskModal = ({ boardProcessName, todo }: IDashBoardModalProps) => {
           <p>{isOpenAddTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
           <XIcon className={styles.closeButton} onClick={handleCloseModal} />
         </div>
-        <Title noTask={noTask} />
+        <Title noTitle={noTitle} />
         <Category noCategory={noCategory} />
         <div className={styles.detail}>
           <p>Task Detail</p>
