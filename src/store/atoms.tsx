@@ -54,7 +54,10 @@ export const isOpenAddBoardModalAtom = atom({
 
 export const isOpenAddTaskModalAtom = atom({
   key: 'isOpenAddTaskModal',
-  default: false,
+  default: {
+    type: 'add',
+    isOpen: false,
+  },
 })
 
 export const isOpenNoticeModalAtom = atom<boolean>({
@@ -69,7 +72,7 @@ export const noticeMessageAtom = atom<INoticeMessage>({
     noticeMessageOkButtonHandle: () => {},
   },
 })
-
+/*
 export const boardsRoutesAtom = atom({
   key: 'boardsRoutes',
   default: [
@@ -87,3 +90,4 @@ export const boardsRoutesAtom = atom({
     },
   ],
 })
+*/

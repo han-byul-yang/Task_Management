@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Draggable } from 'react-beautiful-dnd'
 
-import { tasksAtom, searchKeyAtom, isOpenAddTaskModalAtom } from 'store/atoms'
+import { tasksAtom, searchKeyAtom, isOpenAddTaskModalAtom, taskAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import { highlightWords } from './utils/highlightWords'
 import AddTaskModal from 'components/Modal/AddTaskModal'
@@ -14,25 +14,29 @@ import { CalendarIcon, EditIcon } from 'assets/svgs'
 import styles from './boardCard.module.scss'
 
 interface IBoardCardProps {
-  task: ITask
+  cardTask: ITask
   index: number
+  setBoardProcessName: Dispatch<SetStateAction<string>>
 }
 
-const BoardCard = ({ task, index }: IBoardCardProps) => {
+const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) => {
   const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const searchKey = useRecoilValue(searchKeyAtom)
   // const [modalOpen, setModalOpen] = useState(false)
   const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
+  const setTask = useSetRecoilState(taskAtom)
   const [settingOpen, setSettingOpen] = useState(false)
 
-  const { id, process, image, description, date } = task
+  const { id, process, image, description, date } = cardTask
 
   const handleSettingBtnClick = () => {
     setSettingOpen((prevState) => !prevState)
+    setBoardProcessName(process)
   }
 
   const handleEditClick = () => {
-    setIsOpenAddTaskModal(true)
+    setIsOpenAddTaskModal({ type: 'edit', isOpen: true })
+    setTask(cardTask)
   }
 
   const handleDeleteClick = () => {
@@ -46,7 +50,7 @@ const BoardCard = ({ task, index }: IBoardCardProps) => {
     })
   }
 
-  const { highlightTask, highlightCategory } = highlightWords(searchKey, task)
+  const { highlightTask, highlightCategory } = highlightWords(searchKey, cardTask)
 
   return (
     <li>
@@ -58,7 +62,7 @@ const BoardCard = ({ task, index }: IBoardCardProps) => {
             {...handleDrag.draggableProps}
             {...handleDrag.dragHandleProps}
           >
-            {image ? <img src={`${image}`} alt='todo-img' className={styles.image} /> : null}
+            {image.url ? <img src={`${image.url}`} alt='todo-img' className={styles.image} /> : null}
             <div className={styles.titleBox}>
               <div className={styles.title}>{parse(highlightTask)}</div>
               <div className={styles.setting}>

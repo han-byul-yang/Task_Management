@@ -71,7 +71,7 @@ const MakeTodo = () => {
       <main className={styles.main}>
         <BoardsContainer setBoardProcessName={setBoardProcessName} />
       </main>
-      {isOpenAddTaskModal && (
+      {isOpenAddTaskModal.isOpen && (
         <ModalPortal>
           <AddTaskModal boardProcessName={boardProcessName} />
         </ModalPortal>

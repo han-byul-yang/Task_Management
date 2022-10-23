@@ -1,4 +1,4 @@
-import { Dispatch, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
@@ -12,7 +12,7 @@ import { HamburgerIcon, Plus2Icon } from 'assets/svgs'
 
 interface IBoardsProps {
   process: string
-  setBoardProcessName?: Dispatch<React.SetStateAction<string>>
+  setBoardProcessName: Dispatch<SetStateAction<string>>
 }
 
 const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
@@ -21,8 +21,8 @@ const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
   const setIsAddTaskModalOpen = useSetRecoilState(isOpenAddTaskModalAtom)
 
   const handleAddTodoClick = () => {
-    setBoardProcessName!(process)
-    setIsAddTaskModalOpen!(true)
+    setBoardProcessName(process)
+    setIsAddTaskModalOpen({ type: 'add', isOpen: true })
   }
 
   const handleBoardSettingClick = () => {
@@ -48,9 +48,16 @@ const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
                 <p className={styles.noTaskMessage}>할일이 없습니다</p>
               ) : (
                 <ul>
-                  {boardsTasks[process].map((task: ITask, iCard) => {
+                  {boardsTasks[process].map((cardTask: ITask, iCard) => {
                     const cardKey = `card=${iCard}`
-                    return <BoardCard key={cardKey} task={task} index={iCard} />
+                    return (
+                      <BoardCard
+                        key={cardKey}
+                        cardTask={cardTask}
+                        index={iCard}
+                        setBoardProcessName={setBoardProcessName}
+                      />
+                    )
                   })}
                 </ul>
               )}
@@ -68,3 +75,4 @@ export default Board
 // ?와 ! 삭제
 // process 이름 네이밍
 // setIsOpenAddModal 네이밍
+// setBoardProcessName props drilling 2번 이상
