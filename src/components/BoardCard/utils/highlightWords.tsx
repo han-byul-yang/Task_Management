@@ -1,20 +1,22 @@
 import { ITask } from 'types/taskType'
 
 export const highlightWords = (searchKey: string, todo: ITask) => {
-  const { taskTitle, category } = todo
+  // const { taskTitle, categoryList } = todo
+  const categoryList = ['']
 
   let highlightCategory
   let exp = new RegExp(searchKey, 'gi')
 
-  const highlightTask = taskTitle.replace(exp, `<mark>${searchKey}</mark>`)
+  // const highlightTask = taskTitle.replace(exp, `<mark>${searchKey}</mark>`)
+  const highlightTask = `<mark>${''}</mark>`
 
   if (searchKey.includes('#')) {
     exp = new RegExp(searchKey.substring(1), 'gi')
-    highlightCategory = category.map((item) => {
+    highlightCategory = categoryList.map((item) => {
       return item.replace(exp, `<mark>${searchKey.substring(1)}</mark>`)
     })
   } else {
-    highlightCategory = category.map((item) => {
+    highlightCategory = categoryList.map((item) => {
       return item.replace(exp, `<mark>${searchKey}</mark>`)
     })
   }

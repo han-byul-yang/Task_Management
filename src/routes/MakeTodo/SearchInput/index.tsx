@@ -13,12 +13,13 @@ const SearchInput = () => {
   const [openDropDown, setOpenDropDown] = useState(false)
 
   const allTasks = [...boardsTasks.TODO, ...boardsTasks.DOING, ...boardsTasks.DONE] // board 삭제하면 이거 오류남
-  const categoryWordsList = allTasks.reduce(
+  /* const categoryWordsList = allTasks.reduce(
     (acc, cur) => {
-      return [...acc, ...cur.category]
+      return [...acc, ...cur.categoryList]
     },
     ['']
-  )
+  ) */
+  const categoryWordsList = ['']
   const taskWordsList = allTasks.reduce(
     (acc, cur) => {
       return [...acc, cur.taskTitle]

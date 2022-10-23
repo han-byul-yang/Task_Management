@@ -34,7 +34,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
     if (!todo) return
     if (todo) {
       setTask(todo.taskTitle)
-      setCategoryList(todo.category)
+      setCategoryList(todo.categoryList)
       setDate([new Date(), null])
       setImage(todo?.image)
       setDescription(todo?.description)
@@ -55,7 +55,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
           id: todo.id,
           process: todo.process,
           taskTitle: task,
-          category: categoryList,
+          categoryList,
           date,
           image,
           description,
@@ -76,7 +76,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
                 id: new Date(),
                 process: boardProcessName,
                 taskTitle: task,
-                category: categoryList,
+                categoryList,
                 date,
                 image,
                 description,
@@ -110,7 +110,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
           <XIcon className={styles.closeButton} onClick={handleCloseModal} />
         </div>
         <Title noTask={noTask} />
-        <Category noCategory={noCategory} categoryList={categoryList} setCategoryList={setCategoryList} />
+        <Category noCategory={noCategory} />
         <Description description={description} setDescription={setDescription} />
         <Schedule setDate={setDate} />
         <Picture setImage={setImage} />
