@@ -1,16 +1,19 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { useRecoilState } from 'recoil'
+
+import { taskAtom } from 'store/atoms'
 
 import styles from './title.module.scss'
 
 interface ITitleProps {
   noTask: boolean
-  task: string
-  setTask: Dispatch<SetStateAction<string>>
 }
 
-const Title = ({ noTask, task, setTask }: ITitleProps) => {
+const Title = ({ noTask }: ITitleProps) => {
+  const [taskTitle, setTaskTitle] = useRecoilState(taskAtom)
+
   const handleTaskChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTask(e.currentTarget.value)
+    setTaskTitle((prevTask) => ({ ...prevTask, taskTitle: e.currentTarget.value }))
   }
 
   return (
@@ -19,7 +22,7 @@ const Title = ({ noTask, task, setTask }: ITitleProps) => {
         <div>Title</div>
         {noTask && <div className={styles.error}>제목을 입력해주세요</div>}
       </div>
-      <input type='text' placeholder='할 일을 입력해주세요' value={task} onChange={handleTaskChange} />
+      <input type='text' placeholder='할 일을 입력해주세요' value={taskTitle.taskTitle} onChange={handleTaskChange} />
     </div>
   )
 }

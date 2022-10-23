@@ -30,7 +30,7 @@ const TaskManageModal = ({ setModalOpen }: ITaskManageModalProps) => {
           <div>Create today&apos;s task</div>
           <XIcon className={styles.xBtn} onClick={handleCloseModal} />
         </div>
-        <Title noTask={noTask} task={task} setTask={setTask} />
+        <Title noTask={noTask} />
         <Description description={description} setDescription={setDescription} />
         <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
           Create Today&apos;s Task

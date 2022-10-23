@@ -1,20 +1,18 @@
 @use '../../../../styles/constants/colors';
 
-.error {
-  margin-left: 5px;
-  font-size: 13px;
-  color: colors.$ERROR;
-}
-
 .title {
   width: 260px;
   font-size: 17px;
-  color: colors.$FONT;
 
   .titleHead {
     display: flex;
     align-items: center;
-    color: colors.$FONT;
+
+    .error {
+      margin-left: 5px;
+      font-size: 13px;
+      color: colors.$ERROR;
+    }
   }
 
   input {
