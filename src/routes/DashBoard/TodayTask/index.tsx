@@ -57,9 +57,9 @@ const TodayTask = ({ startDate }: ITodayTaskProps) => {
         {todayTaskList.map((task) => {
           return (
             <li key={`${task.id}`} className={styles.taskItem}>
-              <input type='checkbox' value={task.task} checked={isChecked} onChange={handleCheckChange} />
+              <input type='checkbox' value={task.taskTitle} checked={isChecked} onChange={handleCheckChange} />
               <button type='button'>
-                <div>{task.task}</div>
+                <div>{task.taskTitle}</div>
                 <div>{task.process}</div>
               </button>
             </li>

@@ -1,12 +1,12 @@
-import { Task } from 'types/taskType'
+import { ITask } from 'types/taskType'
 
-export const highlightWords = (searchKey: string, todo: Task) => {
-  const { task, category } = todo
+export const highlightWords = (searchKey: string, todo: ITask) => {
+  const { taskTitle, category } = todo
 
   let highlightCategory
   let exp = new RegExp(searchKey, 'gi')
 
-  const highlightTask = task.replace(exp, `<mark>${searchKey}</mark>`)
+  const highlightTask = taskTitle.replace(exp, `<mark>${searchKey}</mark>`)
 
   if (searchKey.includes('#')) {
     exp = new RegExp(searchKey.substring(1), 'gi')

@@ -1,13 +1,13 @@
 export interface IBoardTaskList {
-  [key: string]: Task[]
+  [key: string]: ITask[]
 }
 
 export interface ITask {
   id: Date
   process: string
-  task: string
+  taskTitle: string
   category: string[]
   date: (Date | null)[]
-  image: any
+  image: any // type 수정
   description: string
 }

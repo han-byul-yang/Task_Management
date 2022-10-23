@@ -33,7 +33,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
   useMount(() => {
     if (!todo) return
     if (todo) {
-      setTask(todo.task)
+      setTask(todo.taskTitle)
       setCategoryList(todo.category)
       setDate([new Date(), null])
       setImage(todo?.image)
@@ -54,7 +54,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
         copyArray.splice(todoIdIndex, 1, {
           id: todo.id,
           process: todo.process,
-          task,
+          taskTitle: task,
           category: categoryList,
           date,
           image,
@@ -75,7 +75,7 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
               {
                 id: new Date(),
                 process: boardProcessName,
-                task,
+                taskTitle: task,
                 category: categoryList,
                 date,
                 image,
@@ -104,17 +104,17 @@ const AddTaskModal = ({ boardProcessName, todo, setIsAddTaskModalOpen }: IDashBo
   return (
     <>
       <div className={styles.background} />
-      <div className={styles.modalContainer}>
+      <div className={styles.modalBox}>
         <div className={styles.modalHead}>
           <div>Create a new task</div>
-          <XIcon className={styles.xBtn} onClick={handleCloseModal} />
+          <XIcon className={styles.closeButton} onClick={handleCloseModal} />
         </div>
-        <Title noTask={noTask} task={task} setTask={setTask} />
+        <Title noTask={noTask} />
         <Category noCategory={noCategory} categoryList={categoryList} setCategoryList={setCategoryList} />
         <Description description={description} setDescription={setDescription} />
         <Schedule setDate={setDate} />
         <Picture setImage={setImage} />
-        <button className={styles.createBtn} type='button' onClick={handleCreateTaskClick}>
+        <button className={styles.createButton} type='button' onClick={handleCreateTaskClick}>
           Create Task
         </button>
       </div>

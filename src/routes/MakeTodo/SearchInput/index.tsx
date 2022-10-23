@@ -12,7 +12,7 @@ const SearchInput = () => {
   const boardsTasks = useRecoilValue(tasksAtom)
   const [openDropDown, setOpenDropDown] = useState(false)
 
-  const allTasks = [...boardsTasks.TODO, ...boardsTasks.DOING, ...boardsTasks.DONE]
+  const allTasks = [...boardsTasks.TODO, ...boardsTasks.DOING, ...boardsTasks.DONE] // board 삭제하면 이거 오류남
   const categoryWordsList = allTasks.reduce(
     (acc, cur) => {
       return [...acc, ...cur.category]
@@ -21,7 +21,7 @@ const SearchInput = () => {
   )
   const taskWordsList = allTasks.reduce(
     (acc, cur) => {
-      return [...acc, cur.task]
+      return [...acc, cur.taskTitle]
     },
     ['']
   )
@@ -30,7 +30,8 @@ const SearchInput = () => {
   const categoryHashtagList = categoryWordList.map((categoryWord) => `#${categoryWord}`)
   const taskWordList = Array.from(new Set(taskWordsList))
 
-  const dropdownWordsList = categoryHashtagList.concat(taskWordList)
+  // const dropdownWordsList = categoryHashtagList.concat(taskWordList)
+  const dropdownWordsList = ['']
 
   const handleKeyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyInput(e.currentTarget.value)
