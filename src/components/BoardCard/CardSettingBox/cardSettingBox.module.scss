@@ -1,11 +1,11 @@
-@use '../../../../styles/constants/colors';
-@use '../../../../styles/mixins/settingBox';
+@use '../../../styles/constants/colors';
+@use '../../../styles/mixins/settingBox';
 
 .settingBox {
   @include settingBox.settingBox;
 
   button {
-    font-size: 14px;
+    font-size: 12px;
     transition: 0.2s;
 
     &:hover {

@@ -1,0 +1,17 @@
+@use '../constants/colors';
+
+@mixin settingBox {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  width: 80px;
+  height: 60px;
+  background: colors.$WHITE;
+  border: 1px solid colors.$GRAY_300;
+  border-radius: 8px;
+  box-shadow: 0 0 10px 2px colors.$GRAY_100;
+}
