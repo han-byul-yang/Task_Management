@@ -20,6 +20,23 @@ export const tasksAtom = atom<IBoardTaskList>({
   effects_UNSTABLE: [persistAtom],
 })
 
+export const filterTasksAtom = atom<IBoardTaskList>({
+  key: 'filterTasks',
+  default: {
+    TODO: [],
+    DOING: [],
+    DONE: [],
+  },
+})
+
+export const filteringAtom = atom({
+  key: 'filtering',
+  default: {
+    type: '',
+    filter: false,
+  },
+}) // type type 설정
+
 export const taskAtom = atom<ITask>({
   key: 'task',
   default: {
