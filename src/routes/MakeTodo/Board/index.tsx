@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { isOpenAddTaskModalAtom, tasksAtom } from 'store/atoms'
+import { filteringAtom, filterTasksAtom, isOpenAddTaskModalAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import BoardCard from 'components/BoardCard'
 import BoardSettingBox from './BoardSettingBox'
@@ -18,6 +18,8 @@ interface IBoardsProps {
 const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
   const [isBoardSettingBoxOpen, setIsBoardSettingBoxOpen] = useState(false)
   const boardsTasks = useRecoilValue(tasksAtom)
+  const filterTasks = useRecoilValue(filterTasksAtom)
+  const filtering = useRecoilValue(filteringAtom)
   const setIsAddTaskModalOpen = useSetRecoilState(isOpenAddTaskModalAtom)
 
   const handleAddTodoClick = () => {
@@ -26,9 +28,11 @@ const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
   }
 
   const handleBoardSettingClick = () => {
-    setBoardProcessName!(process)
+    setBoardProcessName(process)
     setIsBoardSettingBoxOpen(true)
   }
+
+  const processTasks = filtering.filter ? filterTasks[process] : boardsTasks[process]
 
   return (
     <li>
@@ -44,11 +48,11 @@ const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
               {isBoardSettingBoxOpen && (
                 <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} process={process} />
               )}
-              {boardsTasks[process].length === 0 ? (
+              {processTasks.length === 0 ? (
                 <p className={styles.noTaskMessage}>할일이 없습니다</p>
               ) : (
                 <ul>
-                  {boardsTasks[process].map((cardTask: ITask, iCard) => {
+                  {processTasks.map((cardTask: ITask, iCard) => {
                     const cardKey = `card=${iCard}`
                     return (
                       <BoardCard
