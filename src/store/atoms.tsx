@@ -44,7 +44,7 @@ export const taskAtom = atom<ITask>({
     process: '',
     taskTitle: '',
     categoryList: [],
-    date: [],
+    date: { startDate: new Date(), endDate: null },
     image: { name: '', url: '' }, // type 수정
     description: '',
   },

@@ -17,7 +17,6 @@ interface IDashBoardModalProps {
 }
 
 const AddTaskModal = ({ boardProcessName }: IDashBoardModalProps) => {
-  const [date, setDate] = useState<(Date | null)[]>([])
   const [noTitle, setNoTitle] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
@@ -30,7 +29,7 @@ const AddTaskModal = ({ boardProcessName }: IDashBoardModalProps) => {
       process: '',
       taskTitle: '',
       categoryList: [],
-      date: [],
+      date: { startDate: new Date(), endDate: null },
       image: { name: '', url: '' },
       description: '',
     })
@@ -57,9 +56,7 @@ const AddTaskModal = ({ boardProcessName }: IDashBoardModalProps) => {
 
   const handleCloseModal = () => {
     setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
-    if (isOpenAddTaskModal.type === 'edit') {
-      resetTask()
-    }
+    resetTask()
   }
 
   const handleSubmitTaskClick = () => {
@@ -91,7 +88,7 @@ const AddTaskModal = ({ boardProcessName }: IDashBoardModalProps) => {
         <div className={styles.detail}>
           <p>Task Detail</p>
           <Description />
-          <Schedule setDate={setDate} />
+          <Schedule />
           <Picture />
         </div>
         <button className={styles.submitButton} type='button' onClick={handleSubmitTaskClick}>

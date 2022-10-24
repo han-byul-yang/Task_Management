@@ -7,7 +7,7 @@ export interface ITask {
   process: string
   taskTitle: string
   categoryList: string[]
-  date: (Date | null)[]
+  date: { startDate: Date | null; endDate: Date | null }
   image: { name: string; url: string | ArrayBuffer | null | undefined } // type 수정
   description: string
 }

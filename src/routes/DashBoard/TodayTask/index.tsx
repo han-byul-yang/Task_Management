@@ -25,8 +25,8 @@ const TodayTask = ({ startDate }: ITodayTaskProps) => {
         .map((key) => boardsTasks[key])
         .reduce((acc, cur) => [...acc, ...cur], [])
         .filter((todo) => {
-          const todoStartDate = Number(dayjs(todo.date[0]).format('YYMMDD'))
-          const todoEndDate = Number(dayjs(todo.date[1]).format('YYMMDD'))
+          const todoStartDate = Number(dayjs(todo.date.startDate).format('YYMMDD'))
+          const todoEndDate = Number(dayjs(todo.date.endDate).format('YYMMDD'))
 
           if (!isNaN(todoStartDate) && !isNaN(todoEndDate)) {
             return todoStartDate <= selectedDate && todoEndDate >= selectedDate
