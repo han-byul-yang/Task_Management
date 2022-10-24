@@ -48,11 +48,11 @@ const Board = ({ process, setBoardProcessName }: IBoardsProps) => {
               {isBoardSettingBoxOpen && (
                 <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} process={process} />
               )}
-              {processTasks.length === 0 ? (
+              {processTasks?.length === 0 ? (
                 <p className={styles.noTaskMessage}>할일이 없습니다</p>
               ) : (
                 <ul>
-                  {processTasks.map((cardTask: ITask, iCard) => {
+                  {processTasks?.map((cardTask: ITask, iCard) => {
                     const cardKey = `card=${iCard}`
                     return (
                       <BoardCard

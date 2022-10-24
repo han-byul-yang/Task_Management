@@ -34,7 +34,8 @@ const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) =>
     filtering.type ? keyInput.substring(filtering.type.length + 2) : keyInput,
     cardTask
   )
-  const cardCategoryList = filtering.filter ? highlightCategory : categoryList
+  const cardCategoryList =
+    filtering.filter && (filtering.type === '카테고리' || !filtering.type) ? highlightCategory : categoryList
 
   return (
     <li>
@@ -48,7 +49,9 @@ const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) =>
           >
             {image.url && <img src={`${image.url}`} alt={image.name} className={styles.image} />}
             <div className={styles.boxHeader}>
-              <p className={styles.title}>{filtering.filter ? parse(highlightTitle) : taskTitle}</p>
+              <p className={styles.title}>
+                {filtering.filter && (filtering.type === '제목' || !filtering.type) ? parse(highlightTitle) : taskTitle}
+              </p>
               <EditIcon className={styles.settingIcon} onClick={handleCardSettingClick} />
               {isCardSettingBoxOpen && (
                 <CardSettingBox setIsCardSettingBoxOpen={setIsCardSettingBoxOpen} cardTask={cardTask} />
@@ -56,10 +59,18 @@ const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) =>
             </div>
             <ul className={styles.category}>
               {cardCategoryList.map((item: string) => {
-                return <li key={`category-${item}`}>{filtering.filter ? parse(item) : item}</li>
+                return (
+                  <li key={`category-${item}`}>
+                    {filtering.filter && (filtering.type === '카테고리' || !filtering.type) ? parse(item) : item}
+                  </li>
+                )
               })}
             </ul>
-            <p className={styles.description}>{filtering.filter ? parse(highlightDescription) : description}</p>
+            <p className={styles.description}>
+              {filtering.filter && (filtering.type === '내용' || !filtering.type)
+                ? parse(highlightDescription)
+                : description}
+            </p>
             <div className={styles.dates}>
               <CalendarIcon className={styles.dateIcon} />
               <div>
