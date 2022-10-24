@@ -103,5 +103,3 @@ const AddTaskModal = ({ boardProcessName }: IDashBoardModalProps) => {
 }
 
 export default AddTaskModal
-
-// todo -> task 로 변경

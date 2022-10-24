@@ -32,11 +32,11 @@ const Category = ({ noCategory }: ICategoryProps) => {
     setCategory('')
   }
 
-  const handleCategoryDeleteClick = () => {
+  const handleCategoryDeleteClick = (item: string) => {
     setTask((prevTask) => {
       return {
         ...prevTask,
-        categoryList: prevTask.categoryList.filter((prevCategory) => prevCategory !== category),
+        categoryList: prevTask.categoryList.filter((prevCategory) => prevCategory !== item),
       }
     })
   }
@@ -44,8 +44,8 @@ const Category = ({ noCategory }: ICategoryProps) => {
   return (
     <div className={styles.category}>
       <div className={styles.categoryHead}>
-        <div>Task Type</div>
-        {noCategory && <div className={styles.error}>카테고리를 입력해주세요</div>}
+        <p>Task Type</p>
+        {noCategory && <p className={styles.error}>카테고리를 입력해주세요</p>}
       </div>
       <form className={styles.categoryForm} onSubmit={handleCategorySubmit}>
         <PlusIcon className={styles.plusIcon} onClick={handleCategoryShowClick} />
@@ -60,7 +60,12 @@ const Category = ({ noCategory }: ICategoryProps) => {
       {task.categoryList.map((item) => {
         const categoryKey = `category-${item}`
         return (
-          <button className={styles.categoryItem} type='button' key={categoryKey} onClick={handleCategoryDeleteClick}>
+          <button
+            className={styles.categoryItem}
+            type='button'
+            key={categoryKey}
+            onClick={() => handleCategoryDeleteClick(item)}
+          >
             {item}
           </button>
         )

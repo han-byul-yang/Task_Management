@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { createRoot } from 'react-dom/client'
 import reportWebVitals from './reportWebVitals'
+import { RecoilRoot } from 'recoil'
 
 import App from 'routes'
 
@@ -13,7 +14,9 @@ const root = createRoot(container)
 root.render(
   /* <React.StrictMode> */
   <BrowserRouter basename={process.env.PUBLIC_URL}>
-    <App />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </BrowserRouter>
   /* </React.StrictMode> */
 )

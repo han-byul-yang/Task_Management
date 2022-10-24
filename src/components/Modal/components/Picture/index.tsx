@@ -21,7 +21,7 @@ const Picture = () => {
   return (
     <div className={styles.image}>
       <label className={styles.imageLabel} htmlFor='chooseFile'>
-        <ImageIcon className={styles.imageBtn} />
+        <ImageIcon className={styles.imageIcon} />
         Choose Your Image 👈
       </label>
       <input type='file' id='chooseFile' accept='img/*' onChange={handleImageChange} />

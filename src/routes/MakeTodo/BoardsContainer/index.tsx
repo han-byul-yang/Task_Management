@@ -2,7 +2,7 @@ import React, { Dispatch } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
-import { isOpenAddBoardModalAtom, boardProcessAtom, tasksAtom, isOpenAddTaskModalAtom } from 'store/atoms'
+import { isOpenAddBoardModalAtom, boardProcessAtom, tasksAtom } from 'store/atoms'
 import Board from '../Board'
 
 import styles from './boardsContainer.module.scss'
