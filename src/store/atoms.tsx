@@ -50,8 +50,8 @@ export const taskAtom = atom<ITask>({
   },
 })
 
-export const searchKeyAtom = atom<string>({
-  key: 'searchKey',
+export const keyInputAtom = atom<string>({
+  key: 'keyInput',
   default: '',
 })
 
