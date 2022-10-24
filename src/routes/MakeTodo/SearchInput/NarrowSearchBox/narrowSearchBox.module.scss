@@ -1,0 +1,32 @@
+@use '../../../../styles/mixins/settingBox';
+@use '../../../../styles/constants/colors';
+
+.settingBox {
+  @include settingBox.settingBox;
+  width: 340px;
+  height: 150px;
+  padding: 10px;
+  color: colors.$DARK_GRAY;
+
+  p {
+    padding-bottom: 10px;
+    border-bottom: 1px solid colors.$GRAY_300;
+  }
+
+  .narrowSearchList {
+    margin: 3px 0;
+
+    button {
+      width: 100%;
+      padding: 5px;
+      margin: 3px 0;
+      text-align: left;
+      border-radius: 3px;
+      transition: 0.2s;
+
+      &:hover {
+        background: colors.$LIGHTPINK;
+      }
+    }
+  }
+}
