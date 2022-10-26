@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { isOpenAddTaskModalAtom, taskAtom, tasksAtom } from 'store/atoms'
+import { isOpenAddTaskModalAtom, selectedBoardProcessNameAtom, taskAtom, tasksAtom } from 'store/atoms'
 import Title from '../components/Title'
 import Category from '../components/Category'
 import Description from '../components/Description'
@@ -12,15 +12,12 @@ import { XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
 import styles from './addTaskModal.module.scss'
 
-interface IDashBoardModalProps {
-  boardProcessName: string
-}
-
-const AddTaskModal = ({ boardProcessName }: IDashBoardModalProps) => {
+const AddTaskModal = () => {
   const [noTitle, setNoTitle] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const [task, setTask] = useRecoilState(taskAtom)
+  const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
   const [isOpenAddTaskModal, setIsOpenAddTaskModal] = useRecoilState(isOpenAddTaskModalAtom)
 
   const resetTask = () => {
@@ -38,18 +35,21 @@ const AddTaskModal = ({ boardProcessName }: IDashBoardModalProps) => {
   const addTaskToBoard = () => {
     setBoardsTasks((prevTasks) => ({
       ...prevTasks,
-      [boardProcessName]: [...prevTasks[boardProcessName], { ...task, id: new Date(), process: boardProcessName }],
+      [selectedBoardProcessName]: [
+        ...prevTasks[selectedBoardProcessName],
+        { ...task, id: new Date(), process: selectedBoardProcessName },
+      ],
     }))
   }
 
   const editTaskToBoard = () => {
     setBoardsTasks((prevTasks) => {
-      const tempPrevTasks = [...prevTasks[boardProcessName]]
+      const tempPrevTasks = [...prevTasks[selectedBoardProcessName]]
       const taskIdList = tempPrevTasks.map((prevTask) => prevTask.id)
       tempPrevTasks.splice(taskIdList.indexOf(task.id), 1, task)
       return {
         ...prevTasks,
-        [boardProcessName]: tempPrevTasks,
+        [selectedBoardProcessName]: tempPrevTasks,
       }
     })
   }

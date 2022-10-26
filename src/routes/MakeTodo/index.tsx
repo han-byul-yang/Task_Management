@@ -12,27 +12,26 @@ import NoticeModal from 'components/Modal/NoticeModal'
 import styles from './makeTodo.module.scss'
 
 const MakeTodo = () => {
-  const [boardProcessName, setBoardProcessName] = useState('')
   const isOpenAddTaskModal = useRecoilValue(isOpenAddTaskModalAtom)
   const isOpenAddBoardModal = useRecoilValue(isOpenAddBoardModalAtom)
   const isOpenNoticeModal = useRecoilValue(isOpenNoticeModalAtom)
 
   return (
-    <>
+    <div className={styles.taskDashboardPage}>
       <header>
         <SearchInput />
       </header>
       <main className={styles.main}>
-        <BoardsContainer setBoardProcessName={setBoardProcessName} />
+        <BoardsContainer />
       </main>
       {isOpenAddTaskModal.isOpen && (
         <ModalPortal>
-          <AddTaskModal boardProcessName={boardProcessName} />
+          <AddTaskModal />
         </ModalPortal>
       )}
       {isOpenAddBoardModal.isOpen && (
         <ModalPortal>
-          <AddBoardModal boardProcessName={boardProcessName} />
+          <AddBoardModal />
         </ModalPortal>
       )}
       {isOpenNoticeModal && (
@@ -40,7 +39,7 @@ const MakeTodo = () => {
           <NoticeModal />
         </ModalPortal>
       )}
-    </>
+    </div>
   )
 }
 

@@ -2,7 +2,6 @@ import { atom } from 'recoil'
 import { recoilPersist } from 'recoil-persist'
 
 import { IBoardTaskList, ITask } from 'types/taskType'
-import Board from 'routes/MakeTodo/Board'
 import { INoticeMessage } from 'types/noticeMessageType'
 
 const { persistAtom } = recoilPersist({
@@ -61,6 +60,11 @@ export const boardProcessAtom = atom<string[]>({
   effects_UNSTABLE: [persistAtom],
 })
 
+export const selectedBoardProcessNameAtom = atom<string>({
+  key: 'selectedBoardProcessName',
+  default: '',
+})
+
 export const isOpenAddBoardModalAtom = atom({
   key: 'isOpenAddBoardModal',
   default: {
@@ -89,22 +93,3 @@ export const noticeMessageAtom = atom<INoticeMessage>({
     noticeMessageOkButtonHandle: () => {},
   },
 })
-/*
-export const boardsRoutesAtom = atom({
-  key: 'boardsRoutes',
-  default: [
-    {
-      path: 'todo',
-      element: <Board process='todo' />,
-    },
-    {
-      path: 'doing',
-      element: <Board process='doing' />,
-    },
-    {
-      path: 'done',
-      element: <Board process='done' />,
-    },
-  ],
-})
-*/

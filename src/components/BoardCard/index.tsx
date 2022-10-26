@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useState } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Draggable } from 'react-beautiful-dnd'
 
-import { keyInputAtom, filteringAtom } from 'store/atoms'
+import { keyInputAtom, filteringAtom, selectedBoardProcessNameAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import { highlightWords } from '../../utils/highlightWords'
 import CardSettingBox from './CardSettingBox'
@@ -15,10 +15,10 @@ import styles from './boardCard.module.scss'
 interface IBoardCardProps {
   cardTask: ITask
   index: number
-  setBoardProcessName: Dispatch<SetStateAction<string>>
 }
 
-const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) => {
+const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
+  const selectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
   const keyInput = useRecoilValue(keyInputAtom)
   const filtering = useRecoilValue(filteringAtom)
   const [isCardSettingBoxOpen, setIsCardSettingBoxOpen] = useState(false)
@@ -27,7 +27,7 @@ const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) =>
 
   const handleCardSettingClick = () => {
     setIsCardSettingBoxOpen(true)
-    setBoardProcessName(process)
+    selectedBoardProcessName(process)
   }
 
   const { highlightTitle, highlightCategory, highlightDescription } = highlightWords(
@@ -74,9 +74,9 @@ const BoardCard = ({ cardTask, index, setBoardProcessName }: IBoardCardProps) =>
             <div className={styles.dates}>
               <CalendarIcon className={styles.dateIcon} />
               <div>
-                {!date[1]
-                  ? dayjs(date[0]).format('YYYY.MM.DD')
-                  : `${dayjs(date[0]).format('YYYY.MM.DD')}-${dayjs(date[1]).format('YYYY.MM.DD')}`}
+                {!date.endDate
+                  ? dayjs(date.startDate).format('YYYY.MM.DD')
+                  : `${dayjs(date.startDate).format('YYYY.MM.DD')}-${dayjs(date.endDate).format('YYYY.MM.DD')}`}
               </div>
             </div>
           </div>

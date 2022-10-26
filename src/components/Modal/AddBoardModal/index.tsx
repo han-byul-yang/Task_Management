@@ -1,19 +1,16 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { ChangeEvent, useRef, useState } from 'react'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { boardProcessAtom, isOpenAddBoardModalAtom, tasksAtom } from 'store/atoms'
+import { boardProcessAtom, isOpenAddBoardModalAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
 
 import styles from './addBoardModal.module.scss'
 
-interface IAddBoardModalProps {
-  boardProcessName: string
-}
-
-const AddBoardModal = ({ boardProcessName }: IAddBoardModalProps) => {
+const AddBoardModal = () => {
   const [isOpenAddBoardModal, setIsOpenAddBoardModal] = useRecoilState(isOpenAddBoardModalAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const setBoardProcessList = useSetRecoilState(boardProcessAtom)
-  const [boardName, setBoardName] = useState(isOpenAddBoardModal.type === 'add' ? '' : boardProcessName)
+  const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
+  const [boardName, setBoardName] = useState(isOpenAddBoardModal.type === 'add' ? '' : selectedBoardProcessName)
   const inputRef = useRef(null)
 
   /* useEffect(() => {
@@ -33,13 +30,13 @@ const AddBoardModal = ({ boardProcessName }: IAddBoardModalProps) => {
   const handleEditBoardClick = () => {
     setBoardProcessList((prevProcess) => {
       const tempBoardProcessList = [...prevProcess]
-      tempBoardProcessList.splice(tempBoardProcessList.indexOf(boardProcessName), 1, boardName)
+      tempBoardProcessList.splice(tempBoardProcessList.indexOf(selectedBoardProcessName), 1, boardName)
       return tempBoardProcessList
     })
     setBoardsTasks((prevTasks) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { [boardProcessName]: prevProcessName, ...otherProcessNames } = prevTasks
-      return { ...otherProcessNames, [boardName]: [...prevTasks[boardProcessName]] }
+      const { [selectedBoardProcessName]: prevProcessName, ...otherProcessNames } = prevTasks
+      return { ...otherProcessNames, [boardName]: [...prevTasks[selectedBoardProcessName]] }
     })
     setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
   }
