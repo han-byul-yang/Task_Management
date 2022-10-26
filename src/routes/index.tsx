@@ -1,21 +1,36 @@
+import { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import { RecoilRoot } from 'recoil'
+import { useRecoilValue } from 'recoil'
 
+import useResize from 'hooks/useResize'
+import { boardProcessAtom } from 'store/atoms'
 import MakeTodo from './MakeTodo'
-import DashBoard from './DashBoard'
-import Layout from 'components/Layout'
+import Board from './MakeTodo/Board'
+
+import styles from './routes.module.scss'
 
 const App = () => {
+  const boardProcessList = useRecoilValue(boardProcessAtom)
+  const { size, isSize: isTablet } = useResize()
+
+  useEffect(() => {
+    size.TABLET.RESIZE()
+    size.TABLET.SIZEEVENT()
+  }, [size.TABLET])
+
   return (
-    <RecoilRoot>
+    <div className={styles.page}>
       <Routes>
-        <Route element={<Layout />}>
-          <Route path='/' element={<MakeTodo />} />
-          <Route path='todo' element={<DashBoard />} />
-          <Route path='*' element={<div>404</div>} />
+        <Route path='/' element={<MakeTodo />}>
+          {isTablet && <Route index element={<Board process={boardProcessList[0]} />} />}
+          {isTablet &&
+            boardProcessList.map((process) => (
+              <Route key={process} path={`${process}`} element={<Board process={process} />} />
+            ))}
         </Route>
+        <Route path='*' element={<div>404</div>} />
       </Routes>
-    </RecoilRoot>
+    </div>
   )
 }
 
