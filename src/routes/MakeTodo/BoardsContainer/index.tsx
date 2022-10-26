@@ -1,20 +1,25 @@
-import React, { Dispatch } from 'react'
+import React, { useEffect } from 'react'
+import { Outlet } from 'react-router-dom'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 import { isOpenAddBoardModalAtom, boardProcessAtom, tasksAtom } from 'store/atoms'
+import useResize from 'hooks/useResize'
 import Board from '../Board'
+import LNB from 'components/LNB'
 
 import styles from './boardsContainer.module.scss'
 
-interface IBoardsContainerProps {
-  setBoardProcessName: Dispatch<React.SetStateAction<string>>
-}
-
-const BoardsContainer = ({ setBoardProcessName }: IBoardsContainerProps) => {
+const BoardsContainer = () => {
   const boardProcessList = useRecoilValue(boardProcessAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
+  const { size, isSize: isTablet } = useResize()
+
+  useEffect(() => {
+    size.TABLET.RESIZE()
+    size.TABLET.SIZEEVENT()
+  }, [size.TABLET])
 
   const handleDragEnd = (dragInformation: DropResult) => {
     const { destination, source } = dragInformation
@@ -55,15 +60,28 @@ const BoardsContainer = ({ setBoardProcessName }: IBoardsContainerProps) => {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className={styles.boardsContainer}>
+        {isTablet && <LNB />}
         <ul className={styles.boards}>
-          {boardProcessList.map((process) => {
-            const boardKey = `board-${process}`
-            return <Board key={boardKey} process={process} setBoardProcessName={setBoardProcessName} />
-          })}
+          {isTablet ? (
+            <Outlet />
+          ) : (
+            boardProcessList.map((process) => {
+              const boardKey = `board-${process}`
+              return <Board key={boardKey} process={process} />
+            })
+          )}
         </ul>
-        <button className={styles.boardAddButton} type='button' onClick={handleOpenAddBoardModalClick}>
-          <p>보드 추가</p>
-        </button>
+        {isTablet ? (
+          <div className={styles.containerSettingBox}>
+            <button type='button' className={styles.containerSettingButton}>
+              프로젝트 메뉴
+            </button>
+          </div>
+        ) : (
+          <button className={styles.boardAddButton} type='button' onClick={handleOpenAddBoardModalClick}>
+            보드 추가
+          </button>
+        )}
       </div>
     </DragDropContext>
   )
