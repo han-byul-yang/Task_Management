@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
+import { moveCardToDifferentBoard } from 'utils/moveCard'
 import { boardProcessAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
 
 import styles from './moveCardModal.module.scss'
@@ -16,19 +17,9 @@ const MoveCardModal = ({ cardIndex, setIsOpenMoveCardModal }: IMoveCardModal) =>
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
 
   const handleMoveCardClick = (process: string) => {
-    setBoardsTasks((allTaskBoards) => {
-      const sourceTaskList = [...allTaskBoards[selectedBoardProcessName]]
-      const sourceTask = sourceTaskList[cardIndex]
-      const changeTaskInformation = { ...sourceTask, process }
-      const destinationTaskList = [...allTaskBoards[process]]
-      sourceTaskList.splice(cardIndex, 1)
-      destinationTaskList.splice(0, 0, changeTaskInformation)
-      return {
-        ...allTaskBoards,
-        [selectedBoardProcessName]: sourceTaskList,
-        [process]: destinationTaskList,
-      }
-    })
+    setBoardsTasks((allTaskBoards) =>
+      moveCardToDifferentBoard(allTaskBoards, selectedBoardProcessName, cardIndex, process, 0)
+    )
     setIsOpenMoveCardModal(false)
   }
 
