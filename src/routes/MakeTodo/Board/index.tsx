@@ -56,38 +56,34 @@ const Board = ({ process }: IBoardsProps) => {
           <HamburgerIcon className={styles.hamburgerIcon} onClick={handleBoardSettingClick} />
         </div>
       )}
+      {!isTablet && isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
       <Droppable droppableId={`${process}`} key={`${process}`}>
         {(handleDrop) => (
-          <div className={styles.board} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
-            <div className={styles.cardList}>
-              {!isTablet && isBoardSettingBoxOpen && (
-                <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />
-              )}
-              {processTasks?.length === 0 ? (
-                <p className={styles.noTaskMessage}>할일이 없습니다</p>
-              ) : (
-                <ul>
-                  {processTasks?.map((cardTask: ITask, iCard) => {
-                    const cardKey = `card=${iCard}`
-                    return <BoardCard key={cardKey} cardTask={cardTask} index={iCard} />
-                  })}
-                </ul>
-              )}
-            </div>
+          <div className={styles.cardList} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
+            {processTasks?.length === 0 ? (
+              <p className={styles.noTaskMessage}>할일이 없습니다</p>
+            ) : (
+              <ul>
+                {processTasks?.map((cardTask: ITask, iCard) => {
+                  const cardKey = `card=${iCard}`
+                  return <BoardCard key={cardKey} cardTask={cardTask} index={iCard} />
+                })}
+              </ul>
+            )}
             {handleDrop.placeholder}
           </div>
         )}
       </Droppable>
-      {isTablet && (
-        <>
-          {isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
-          <div className={styles.containerSettingBox}>
-            <button className={styles.containerSettingButton} type='button' onClick={handleBoardSettingClick}>
+      <div className={styles.boardBottom}>
+        {isTablet && (
+          <>
+            {isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
+            <button className={styles.boardSettingButton} type='button' onClick={handleBoardSettingClick}>
               프로젝트 메뉴
             </button>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </li>
   )
 }

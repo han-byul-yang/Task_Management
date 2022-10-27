@@ -4,10 +4,8 @@
 .boardsContainer {
   position: relative;
   display: flex;
-  width: inherit;
+  width: auto;
   height: inherit;
-  overflow-x: auto;
-  overflow-y: hidden; // 나중에 지울 수 있게
 
   &::-webkit-scrollbar {
     display: block;
@@ -28,7 +26,6 @@
     display: flex;
     width: auto;
     height: inherit;
-    margin: 0 0 0 5px;
   }
 
   .boardAddButton {
@@ -41,24 +38,3 @@
     border-radius: 8px;
   }
 }
-
-/*
-.containerSettingBox {
-  position: fixed;
-  bottom: 0;
-  z-index: 5;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 10px 0;
-  background: colors.$WHITE;
-  border-top: 1px solid colors.$GRAY_100;
-}
-
-.containerSettingButton {
-  padding: 10px 70px;
-  font-size: 14px;
-  background: colors.$GRAY_100;
-  border-radius: 8px;
-}
-*/

@@ -1,7 +1,6 @@
 @use '../../../styles/constants/colors';
 
 @mixin icon {
-  justify-self: end;
   width: 18px;
   height: 18px;
   cursor: pointer;
@@ -12,52 +11,85 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 340px;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  height: inherit;
   border-right: 1px solid colors.$GRAY_100;
 
-  &::-webkit-scrollbar {
-    display: block;
-    width: 7px;
-    height: 9px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: colors.$GRAY_100;
-    border-radius: 8px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    border-right: none;
   }
 }
 
 .boardTop {
+  position: relative;
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
-  align-items: center;
-  width: 300px;
+  grid-template-columns: 2fr 2fr 1fr 1fr;
+  align-content: center;
+  justify-items: center;
+  width: 100%;
   height: 40px;
-  margin-top: 10px;
+  padding: 10px 0;
   font-size: 20px;
   font-weight: 500;
   color: colors.$FONT;
 
   .plus2Icon {
-    grid-column: 2 / 3;
+    grid-column: 3 / 4;
     @include icon;
   }
 
   .hamburgerIcon {
-    grid-column: 3 / 4;
+    grid-column: 4 / 5;
     @include icon;
   }
 }
 
 .cardList {
   position: relative;
-  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: block;
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$GRAY_100;
+    border-radius: 8px;
+  }
 
   .noTaskMessage {
     line-height: 100px;
   }
+}
+
+.boardBottom {
+  position: relative;
+  width: 100%;
+  height: 30px;
+  padding: 10px 0;
+  background: colors.$WHITE;
+
+  @media screen and (max-width: 768px) {
+    bottom: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    height: 60px;
+    border-top: 1px solid colors.$GRAY_100;
+  }
+}
+
+.boardSettingButton {
+  padding: 10px 70px;
+  font-size: 14px;
+  background: colors.$GRAY_100;
+  border-radius: 8px;
 }

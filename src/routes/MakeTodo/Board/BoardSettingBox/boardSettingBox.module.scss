@@ -3,10 +3,30 @@
 
 .settingBox {
   @include settingBox.settingBox;
+  top: 40px;
+  right: 10px;
+  justify-items: center;
+  width: 100px;
+  height: 80px;
+  border: 1px solid colors.$GRAY_300;
+
+  @media screen and (max-width: 768px) {
+    top: auto;
+    right: auto;
+    bottom: 60px;
+    width: 100%;
+    height: auto;
+    border: none;
+    box-shadow: 0 0 10px 2px colors.$GRAY_100;
+  }
 
   button {
     font-size: 14px;
     transition: 0.2s;
+
+    @media screen and (max-width: 768px) {
+      padding: 5px 0;
+    }
 
     &:hover {
       color: colors.$KEY;
