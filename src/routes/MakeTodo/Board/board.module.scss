@@ -47,13 +47,14 @@
 
 .cardList {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 15px;
+  }
 
   &::-webkit-scrollbar {
     display: block;
@@ -65,8 +66,14 @@
     border-radius: 8px;
   }
 
+  ul {
+    position: relative;
+    width: inherit;
+  }
+
   .noTaskMessage {
     line-height: 100px;
+    text-align: center;
   }
 }
 

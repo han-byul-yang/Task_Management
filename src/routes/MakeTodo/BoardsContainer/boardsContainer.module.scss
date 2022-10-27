@@ -6,6 +6,7 @@
   display: flex;
   width: auto;
   height: inherit;
+  overflow-y: auto; // 나중에 지울 수 있게
 
   &::-webkit-scrollbar {
     display: block;
