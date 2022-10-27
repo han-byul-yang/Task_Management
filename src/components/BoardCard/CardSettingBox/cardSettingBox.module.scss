@@ -3,6 +3,8 @@
 
 .settingBox {
   @include settingBox.settingBox;
+  top: 0;
+  right: 0;
   grid-template-rows: 1fr 1fr;
   justify-items: center;
   width: 80px;
