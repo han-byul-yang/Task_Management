@@ -8,6 +8,8 @@ import { keyInputAtom, filteringAtom, selectedBoardProcessNameAtom } from 'store
 import { ITask } from 'types/taskType'
 import { highlightWords } from '../../utils/highlightWords'
 import CardSettingBox from './CardSettingBox'
+import ModalPortal from 'components/Modal/ModalPortal'
+import MoveCardModal from 'components/Modal/MoveCardModal'
 
 import { CalendarIcon, EditIcon } from 'assets/svgs'
 import styles from './boardCard.module.scss'
@@ -18,16 +20,17 @@ interface IBoardCardProps {
 }
 
 const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
-  const selectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
+  const [isCardSettingBoxOpen, setIsCardSettingBoxOpen] = useState(false)
+  const [isOpenMoveCardModal, setIsOpenMoveCardModal] = useState(false)
+  const setSelectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
   const keyInput = useRecoilValue(keyInputAtom)
   const filtering = useRecoilValue(filteringAtom)
-  const [isCardSettingBoxOpen, setIsCardSettingBoxOpen] = useState(false)
 
   const { id, taskTitle, categoryList, process, image, description, date } = cardTask
 
   const handleCardSettingClick = () => {
     setIsCardSettingBoxOpen(true)
-    selectedBoardProcessName(process)
+    setSelectedBoardProcessName(process)
   }
 
   const { highlightTitle, highlightCategory, highlightDescription } = highlightWords(
@@ -38,51 +41,64 @@ const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
     filtering.filter && (filtering.type === '카테고리' || !filtering.type) ? highlightCategory : categoryList
 
   return (
-    <li>
-      <Draggable draggableId={`drag-${id}`} key={`drag-${id}`} index={index}>
-        {(handleDrag) => (
-          <div
-            className={styles.boardCard}
-            ref={handleDrag.innerRef}
-            {...handleDrag.draggableProps}
-            {...handleDrag.dragHandleProps}
-          >
-            {image.url && <img src={`${image.url}`} alt={image.name} className={styles.image} />}
-            <div className={styles.boxHeader}>
-              <p className={styles.title}>
-                {filtering.filter && (filtering.type === '제목' || !filtering.type) ? parse(highlightTitle) : taskTitle}
+    <>
+      <li>
+        <Draggable draggableId={`drag-${id}`} key={`drag-${id}`} index={index}>
+          {(handleDrag) => (
+            <div
+              className={styles.boardCard}
+              ref={handleDrag.innerRef}
+              {...handleDrag.draggableProps}
+              {...handleDrag.dragHandleProps}
+            >
+              {image.url && <img src={`${image.url}`} alt={image.name} className={styles.image} />}
+              <div className={styles.boxHeader}>
+                <p className={styles.title}>
+                  {filtering.filter && (filtering.type === '제목' || !filtering.type)
+                    ? parse(highlightTitle)
+                    : taskTitle}
+                </p>
+                <EditIcon className={styles.settingIcon} onClick={handleCardSettingClick} />
+                {isCardSettingBoxOpen && (
+                  <CardSettingBox
+                    setIsCardSettingBoxOpen={setIsCardSettingBoxOpen}
+                    setIsOpenMoveCardModal={setIsOpenMoveCardModal}
+                    cardTask={cardTask}
+                  />
+                )}
+              </div>
+              <ul className={styles.category}>
+                {cardCategoryList.map((item: string) => {
+                  return (
+                    <li key={`category-${item}`}>
+                      {filtering.filter && (filtering.type === '카테고리' || !filtering.type) ? parse(item) : item}
+                    </li>
+                  )
+                })}
+              </ul>
+              <p className={styles.description}>
+                {filtering.filter && (filtering.type === '내용' || !filtering.type)
+                  ? parse(highlightDescription)
+                  : description}
               </p>
-              <EditIcon className={styles.settingIcon} onClick={handleCardSettingClick} />
-              {isCardSettingBoxOpen && (
-                <CardSettingBox setIsCardSettingBoxOpen={setIsCardSettingBoxOpen} cardTask={cardTask} />
-              )}
-            </div>
-            <ul className={styles.category}>
-              {cardCategoryList.map((item: string) => {
-                return (
-                  <li key={`category-${item}`}>
-                    {filtering.filter && (filtering.type === '카테고리' || !filtering.type) ? parse(item) : item}
-                  </li>
-                )
-              })}
-            </ul>
-            <p className={styles.description}>
-              {filtering.filter && (filtering.type === '내용' || !filtering.type)
-                ? parse(highlightDescription)
-                : description}
-            </p>
-            <div className={styles.dates}>
-              <CalendarIcon className={styles.dateIcon} />
-              <div>
-                {!date.endDate
-                  ? dayjs(date.startDate).format('YYYY.MM.DD')
-                  : `${dayjs(date.startDate).format('YYYY.MM.DD')}-${dayjs(date.endDate).format('YYYY.MM.DD')}`}
+              <div className={styles.dates}>
+                <CalendarIcon className={styles.dateIcon} />
+                <div>
+                  {!date.endDate
+                    ? dayjs(date.startDate).format('YYYY.MM.DD')
+                    : `${dayjs(date.startDate).format('YYYY.MM.DD')}-${dayjs(date.endDate).format('YYYY.MM.DD')}`}
+                </div>
               </div>
             </div>
-          </div>
-        )}
-      </Draggable>
-    </li>
+          )}
+        </Draggable>
+      </li>
+      {isOpenMoveCardModal && (
+        <ModalPortal>
+          <MoveCardModal cardIndex={index} setIsOpenMoveCardModal={setIsOpenMoveCardModal} />
+        </ModalPortal>
+      )}
+    </>
   )
 }
 
