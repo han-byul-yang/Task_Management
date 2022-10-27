@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil'
 import useClickOutside from 'hooks/useClickOutside'
 import { filteringAtom } from 'store/atoms'
 
-import styles from './narrowSearchBox.module.scss'
+import styles from './filterChooseBox.module.scss'
 
 const filteringList = ['제목', '카테고리', '내용']
 

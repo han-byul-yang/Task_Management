@@ -3,6 +3,9 @@
 
 .settingBox {
   @include settingBox.settingBox;
+  top: 0;
+  right: 0;
+  grid-template-rows: 1fr 1fr 1fr;
   width: 340px;
   height: 150px;
   padding: 10px;
@@ -13,7 +16,7 @@
     border-bottom: 1px solid colors.$GRAY_300;
   }
 
-  .narrowSearchList {
+  .filterChooseList {
     margin: 3px 0;
 
     button {
