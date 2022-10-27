@@ -42,11 +42,11 @@ const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
 
   return (
     <>
-      <li>
+      <li className={styles.boardCard}>
         <Draggable draggableId={`drag-${id}`} key={`drag-${id}`} index={index}>
           {(handleDrag) => (
             <div
-              className={styles.boardCard}
+              className={styles.movableCard}
               ref={handleDrag.innerRef}
               {...handleDrag.draggableProps}
               {...handleDrag.dragHandleProps}

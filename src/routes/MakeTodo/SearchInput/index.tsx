@@ -3,7 +3,7 @@ import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 
 import { filteringAtom, filterTasksAtom, keyInputAtom, tasksAtom } from 'store/atoms'
 import filterContents from 'utils/filterContents'
-import NarrowSearchBox from './NarrowSearchBox'
+import FilterChooseBox from './FilterChooseBox'
 
 import { SearchIcon, XIcon } from 'assets/svgs'
 import styles from './searchInput.module.scss'
@@ -57,7 +57,7 @@ const SearchInput = () => {
       </form>
       <div className={styles.inputDownBox}>
         {isFilterChooseBoxOpen && (
-          <NarrowSearchBox setKeyInput={setKeyInput} setIsFilterChooseBoxOpen={setIsFilterChooseBoxOpen} />
+          <FilterChooseBox setKeyInput={setKeyInput} setIsFilterChooseBoxOpen={setIsFilterChooseBoxOpen} />
         )}
       </div>
     </div>

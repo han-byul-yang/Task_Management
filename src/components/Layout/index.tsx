@@ -1,43 +1,32 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
-import NavBar from 'components/NavBar'
+import useResize from 'hooks/useResize'
+import SearchInput from 'routes/MakeTodo/SearchInput'
 
 import styles from './layout.module.scss'
 
 const Layout = () => {
-  const [isMobile, setIsMobile] = useState(false)
-
-  const handleResize = () => {
-    setIsMobile(window.innerWidth <= 768)
-  }
+  const { size, isSize: isMobile } = useResize()
 
   useEffect(() => {
-    setIsMobile(window.innerWidth <= 768)
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
+    size.MOBILE.RESIZE()
+    size.MOBILE.SIZEEVENT()
+  }, [size.MOBILE])
 
   return (
     <div className={styles.container}>
+      <header>
+        <SearchInput />
+      </header>
       {isMobile ? (
-        <>
-          <main>
-            <Outlet />
-          </main>
-          <NavBar />
-        </>
+        <main>
+          <Outlet />
+        </main>
       ) : (
-        <>
-          <NavBar />
-          <main>
-            <Outlet />
-          </main>
-        </>
+        <main>
+          <Outlet />
+        </main>
       )}
     </div>
   )

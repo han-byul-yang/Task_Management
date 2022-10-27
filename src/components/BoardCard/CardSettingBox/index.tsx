@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'

@@ -54,7 +54,7 @@ const AddTaskModal = () => {
     })
   }
 
-  const handleCloseModal = () => {
+  const handleCloseModalClick = () => {
     setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
     resetTask()
   }
@@ -81,7 +81,7 @@ const AddTaskModal = () => {
       <div className={styles.modalBox}>
         <div className={styles.modalHead}>
           <p>{isOpenAddTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
-          <XIcon className={styles.closeButton} onClick={handleCloseModal} />
+          <XIcon className={styles.closeButton} onClick={handleCloseModalClick} />
         </div>
         <Title noTitle={noTitle} />
         <Category noCategory={noCategory} />

@@ -1,8 +1,6 @@
-import { IBoardTaskList } from 'types/taskType'
-
-interface IFilterTarget {
+/* interface IFilterTarget {
   [key: string]: { [taskKey: string]: string | string[] }[]
-}
+} */
 
 const filterContents = (filterType: string, filterKeyword: string, filterTarget: any) => {
   const filteredTasksObject: any = {}

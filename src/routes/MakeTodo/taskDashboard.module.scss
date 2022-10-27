@@ -10,6 +10,8 @@
 }
 
 .main {
-  width: 100%;
+  position: relative;
+  width: inherit;
   height: 100%;
+  overflow-x: auto;
 }
