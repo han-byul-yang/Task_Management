@@ -1,11 +1,6 @@
 @use '../styles/constants/levels';
 
 .page {
-  position: relative;
-  z-index: levels.$BASIC;
-  display: flex;
-
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-  }
+  width: 100vw;
+  height: 100vh;
 }

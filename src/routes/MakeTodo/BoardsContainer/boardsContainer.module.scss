@@ -4,14 +4,14 @@
 .boardsContainer {
   position: relative;
   display: flex;
-  width: 100%;
-  height: 100%;
-  overflow-x: scroll;
+  width: inherit;
+  height: inherit;
+  overflow-x: auto;
+  overflow-y: hidden; // 나중에 지울 수 있게
 
   &::-webkit-scrollbar {
     display: block;
-    width: 10px;
-    height: 9px;
+    height: 10px;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -24,33 +24,15 @@
   }
 
   .boards {
-    z-index: levels.$BASIC; // 필요 확인
+    position: relative;
     display: flex;
     width: auto;
-    height: 100%;
+    height: inherit;
     margin: 0 0 0 5px;
   }
 
-  .containerSettingBox {
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 10px 0;
-    background: colors.$WHITE;
-    border-top: 1px solid colors.$GRAY_100;
-  }
-
-  .containerSettingButton {
-    padding: 10px 50px;
-    font-size: 14px;
-    background: colors.$GRAY_100;
-    border-radius: 8px;
-  }
-
   .boardAddButton {
-    width: 200px;
+    min-width: 200px;
     height: 100px;
     padding: 5px;
     margin: 0 30px;
@@ -59,3 +41,24 @@
     border-radius: 8px;
   }
 }
+
+/*
+.containerSettingBox {
+  position: fixed;
+  bottom: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 0;
+  background: colors.$WHITE;
+  border-top: 1px solid colors.$GRAY_100;
+}
+
+.containerSettingButton {
+  padding: 10px 70px;
+  font-size: 14px;
+  background: colors.$GRAY_100;
+  border-radius: 8px;
+}
+*/
