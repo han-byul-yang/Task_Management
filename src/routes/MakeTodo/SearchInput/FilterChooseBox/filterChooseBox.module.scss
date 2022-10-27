@@ -4,12 +4,15 @@
 .settingBox {
   @include settingBox.settingBox;
   top: 0;
-  right: 0;
-  grid-template-rows: 1fr 1fr 1fr;
+  left: 0;
   width: 340px;
-  height: 150px;
+  height: auto;
   padding: 10px;
   color: colors.$DARK_GRAY;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 
   p {
     padding-bottom: 10px;

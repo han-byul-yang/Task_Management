@@ -3,8 +3,6 @@
 
 @mixin settingBox {
   position: absolute;
-  top: 0;
-  right: 0;
   z-index: levels.$MODAL;
   display: grid;
   align-items: center;
