@@ -13,11 +13,11 @@ const SearchInput = () => {
   const boardsTasks = useRecoilValue(tasksAtom)
   const setFilterTasks = useSetRecoilState(filterTasksAtom)
   const [filtering, setFiltering] = useRecoilState(filteringAtom)
-  const [isNarrowSearchBoxOpen, setIsNarrowSearchBoxOpen] = useState(false)
+  const [isFilterChooseBoxOpen, setIsFilterChooseBoxOpen] = useState(false)
 
   const handleKeyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyInput(e.currentTarget.value)
-    setIsNarrowSearchBoxOpen(false)
+    setIsFilterChooseBoxOpen(false)
     if (keyInput) setFiltering((prevFiltering) => ({ ...prevFiltering, filter: true }))
   }
 
@@ -34,7 +34,7 @@ const SearchInput = () => {
   }
 
   const handleSearchInputFocus = () => {
-    setIsNarrowSearchBoxOpen(true)
+    setIsFilterChooseBoxOpen(true)
   }
 
   const handleDeleteKeyInputClick = () => {
@@ -56,8 +56,8 @@ const SearchInput = () => {
         {keyInput !== '' && <XIcon className={styles.xIcon} onClick={handleDeleteKeyInputClick} />}
       </form>
       <div className={styles.inputDownBox}>
-        {isNarrowSearchBoxOpen && (
-          <NarrowSearchBox setKeyInput={setKeyInput} setIsNarrowSearchBoxOpen={setIsNarrowSearchBoxOpen} />
+        {isFilterChooseBoxOpen && (
+          <NarrowSearchBox setKeyInput={setKeyInput} setIsFilterChooseBoxOpen={setIsFilterChooseBoxOpen} />
         )}
       </div>
     </div>

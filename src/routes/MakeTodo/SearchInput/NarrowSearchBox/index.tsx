@@ -8,17 +8,17 @@ import styles from './narrowSearchBox.module.scss'
 
 const filteringList = ['제목', '카테고리', '내용']
 
-interface INarrowSearchBox {
-  setIsNarrowSearchBoxOpen: Dispatch<SetStateAction<boolean>>
+interface IFilterChooseBoxProps {
+  setIsFilterChooseBoxOpen: Dispatch<SetStateAction<boolean>>
   setKeyInput: Dispatch<SetStateAction<string>>
 }
 
-const NarrowSearchBox = ({ setKeyInput, setIsNarrowSearchBoxOpen }: INarrowSearchBox) => {
+const FilterChooseBox = ({ setKeyInput, setIsFilterChooseBoxOpen }: IFilterChooseBoxProps) => {
   const setFiltering = useSetRecoilState(filteringAtom)
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
-    setIsNarrowSearchBoxOpen(false)
+    setIsFilterChooseBoxOpen(false)
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -26,21 +26,21 @@ const NarrowSearchBox = ({ setKeyInput, setIsNarrowSearchBoxOpen }: INarrowSearc
     clickOutsideEvent()
   }, [clickOutsideEvent])
 
-  const handleNarrowSearchClick = (filtering: string) => {
+  const handleFilterChooseClick = (filtering: string) => {
     setKeyInput(`${filtering}: `) // 클릭 훈 onFocus
     setFiltering((prevFiltering) => ({ ...prevFiltering, type: filtering }))
-    setIsNarrowSearchBoxOpen(false)
+    setIsFilterChooseBoxOpen(false)
   }
 
   return (
     <div className={styles.settingBox} ref={containerRef}>
       <p>검색 필터링</p>
-      <ul className={styles.narrowSearchList}>
+      <ul className={styles.filterChooseList}>
         {filteringList.map((filtering) => {
           const filterKey = `filter-${filtering}`
           return (
             <li key={filterKey}>
-              <button type='button' onClick={() => handleNarrowSearchClick(filtering)}>
+              <button type='button' onClick={() => handleFilterChooseClick(filtering)}>
                 {filtering}
               </button>
             </li>
@@ -51,4 +51,4 @@ const NarrowSearchBox = ({ setKeyInput, setIsNarrowSearchBoxOpen }: INarrowSearc
   )
 }
 
-export default NarrowSearchBox
+export default FilterChooseBox
