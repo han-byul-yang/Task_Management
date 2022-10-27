@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import { isOpenAddBoardModalAtom, isOpenAddTaskModalAtom, isOpenNoticeModalAtom } from 'store/atoms'
@@ -9,9 +8,9 @@ import BoardsContainer from './BoardsContainer'
 import AddBoardModal from 'components/Modal/AddBoardModal'
 import NoticeModal from 'components/Modal/NoticeModal'
 
-import styles from './makeTodo.module.scss'
+import styles from './taskDashboard.module.scss'
 
-const MakeTodo = () => {
+const TaskDashboard = () => {
   const isOpenAddTaskModal = useRecoilValue(isOpenAddTaskModalAtom)
   const isOpenAddBoardModal = useRecoilValue(isOpenAddBoardModalAtom)
   const isOpenNoticeModal = useRecoilValue(isOpenNoticeModalAtom)
@@ -43,4 +42,4 @@ const MakeTodo = () => {
   )
 }
 
-export default MakeTodo
+export default TaskDashboard
