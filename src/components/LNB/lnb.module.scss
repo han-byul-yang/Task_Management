@@ -1,0 +1,35 @@
+@use '../../styles/constants/colors';
+
+.lnb {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    display: block;
+    height: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: colors.$GRAY_100;
+    border-radius: 8px;
+  }
+}
+
+.navList {
+  display: flex;
+  justify-content: space-around;
+
+  li {
+    margin: 0 25px 10px;
+  }
+}
+
+.activatedLink {
+  color: colors.$FONT;
+}
+
+.unActivatedLink {
+  color: colors.$GRAY_300;
+}

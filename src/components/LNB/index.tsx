@@ -17,9 +17,9 @@ const LNB = () => {
             <NavLink
               key={navigationKey}
               to={`${process}`}
-              className={({ isActive }) => (isActive ? `${styles.activatedLink}` : `${styles.nonActivatedLink}`)}
+              className={({ isActive }) => (isActive ? `${styles.activatedLink}` : `${styles.unActivatedLink}`)}
             >
-              <li className={styles.navItem}>{process}</li>
+              <li>{process}</li>
             </NavLink>
           )
         })}
