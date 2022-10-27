@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
+import useResize from 'hooks/useResize'
 import { isOpenAddTaskModalAtom, isOpenNoticeModalAtom, noticeMessageAtom, taskAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import noticeMessage from 'utils/noticeMessage'
@@ -10,15 +11,17 @@ import styles from './cardSettingBox.module.scss'
 
 interface ICardSettingBoxProps {
   setIsCardSettingBoxOpen: Dispatch<SetStateAction<boolean>>
+  setIsOpenMoveCardModal: Dispatch<SetStateAction<boolean>>
   cardTask: ITask
 }
 
-const CardSettingBox = ({ setIsCardSettingBoxOpen, cardTask }: ICardSettingBoxProps) => {
+const CardSettingBox = ({ setIsCardSettingBoxOpen, setIsOpenMoveCardModal, cardTask }: ICardSettingBoxProps) => {
   const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
   const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const setTask = useSetRecoilState(taskAtom)
   const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
   const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
+  const { size, isSize: isTablet } = useResize()
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
@@ -30,9 +33,18 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, cardTask }: ICardSettingBoxPr
     clickOutsideEvent()
   }, [clickOutsideEvent])
 
+  useEffect(() => {
+    size.TABLET.RESIZE()
+    size.TABLET.SIZEEVENT()
+  }, [size.TABLET])
+
   const handleEditClick = () => {
     setIsOpenAddTaskModal({ type: 'edit', isOpen: true })
     setTask(cardTask)
+  }
+
+  const handleMoveClick = () => {
+    setIsOpenMoveCardModal(true)
   }
 
   const noticeMessageOkButtonHandle = () => {
@@ -56,6 +68,11 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, cardTask }: ICardSettingBoxPr
       <button type='button' onClick={handleEditClick}>
         카드 수정
       </button>
+      {isTablet && (
+        <button type='button' onClick={handleMoveClick}>
+          카드 이동
+        </button>
+      )}
       <button type='button' onClick={handleDeleteClick}>
         카드 삭제
       </button>

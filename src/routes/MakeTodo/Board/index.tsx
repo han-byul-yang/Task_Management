@@ -48,20 +48,20 @@ const Board = ({ process }: IBoardsProps) => {
   const processTasks = filtering.filter ? filterTasks[process] : boardsTasks[process]
 
   return (
-    <li className={styles.boardList}>
+    <li className={styles.boardBox}>
+      {!isTablet && (
+        <div className={styles.boardTop}>
+          <div>{process}</div>
+          <Plus2Icon className={styles.plus2Icon} onClick={handleAddTodoClick} />
+          <HamburgerIcon className={styles.hamburgerIcon} onClick={handleBoardSettingClick} />
+        </div>
+      )}
       <Droppable droppableId={`${process}`} key={`${process}`}>
         {(handleDrop) => (
-          <div className={styles.boardBox} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
-            {!isTablet && (
-              <div className={styles.boardTop}>
-                <div>{process}</div>
-                <Plus2Icon className={styles.plus2Icon} onClick={handleAddTodoClick} />
-                <HamburgerIcon className={styles.hamburgerIcon} onClick={handleBoardSettingClick} />
-              </div>
-            )}
+          <div className={styles.board} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
             <div className={styles.cardList}>
-              {isBoardSettingBoxOpen && (
-                <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} process={process} />
+              {!isTablet && isBoardSettingBoxOpen && (
+                <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />
               )}
               {processTasks?.length === 0 ? (
                 <p className={styles.noTaskMessage}>할일이 없습니다</p>
@@ -78,6 +78,16 @@ const Board = ({ process }: IBoardsProps) => {
           </div>
         )}
       </Droppable>
+      {isTablet && (
+        <>
+          {isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
+          <div className={styles.containerSettingBox}>
+            <button className={styles.containerSettingButton} type='button' onClick={handleBoardSettingClick}>
+              프로젝트 메뉴
+            </button>
+          </div>
+        </>
+      )}
     </li>
   )
 }
