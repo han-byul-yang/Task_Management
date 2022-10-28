@@ -19,12 +19,12 @@
   font-size: 13px;
   border-radius: 8px;
 
-  .noticeBox {
+  .typeBox {
     display: flex;
     align-items: center;
     font-size: 17px;
 
-    .noticeIcon {
+    .typeIcon {
       width: 35px;
       height: 35px;
     }
@@ -34,13 +34,13 @@
     display: flex;
     justify-content: space-evenly;
     width: inherit;
+  }
 
-    button {
-      padding: 10px 20px;
-      color: colors.$WHITE;
-      background: colors.$LIGHTORANGE;
-      border-radius: 8px;
-      transition: 0.1s linear;
-    }
+  button {
+    padding: 10px 20px;
+    color: colors.$WHITE;
+    background: colors.$LIGHTORANGE;
+    border-radius: 8px;
+    transition: 0.1s linear;
   }
 }

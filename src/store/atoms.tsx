@@ -89,7 +89,7 @@ export const isOpenNoticeModalAtom = atom<boolean>({
 export const noticeMessageAtom = atom<INoticeMessage>({
   key: 'noticeMessage',
   default: {
-    message: '',
+    messageInformation: { kind: '', message: '' },
     noticeMessageOkButtonHandle: () => {},
   },
 })

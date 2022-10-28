@@ -72,7 +72,7 @@ const BoardSettingBox = ({ setIsBoardSettingBoxOpen }: IMenuBoxProps) => {
   }
 
   const handleDeleteBoardClick = () => {
-    setNoticeMessage({ message: noticeMessage().board.WILL_DELETE, noticeMessageOkButtonHandle })
+    setNoticeMessage({ messageInformation: noticeMessage().board.WILL_DELETE, noticeMessageOkButtonHandle })
     setIsOpenNoticeModal(true)
   }
 

@@ -1,4 +1,4 @@
 export interface INoticeMessage {
-  message: string
-  noticeMessageOkButtonHandle: MouseEventHandler<HTMLButtonElement>
+  messageInformation: { kind: string; message: string }
+  noticeMessageOkButtonHandle?: MouseEventHandler<HTMLButtonElement>
 }

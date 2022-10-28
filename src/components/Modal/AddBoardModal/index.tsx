@@ -3,15 +3,25 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
-import { boardProcessAtom, isOpenAddBoardModalAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
+import noticeMessage from 'utils/noticeMessage'
+import {
+  boardProcessAtom,
+  isOpenAddBoardModalAtom,
+  isOpenNoticeModalAtom,
+  noticeMessageAtom,
+  selectedBoardProcessNameAtom,
+  tasksAtom,
+} from 'store/atoms'
 
 import styles from './addBoardModal.module.scss'
 
 const AddBoardModal = () => {
   const [isOpenAddBoardModal, setIsOpenAddBoardModal] = useRecoilState(isOpenAddBoardModalAtom)
+  const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
-  const setBoardProcessList = useSetRecoilState(boardProcessAtom)
+  const [boardProcessList, setBoardProcessList] = useRecoilState(boardProcessAtom)
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
+  const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
   const [boardName, setBoardName] = useState(isOpenAddBoardModal.type === 'add' ? '' : selectedBoardProcessName)
   const inputRef = useRef(null)
   const containerRef = useRef(null)
@@ -34,25 +44,38 @@ const AddBoardModal = () => {
     setBoardName(e.currentTarget.value)
   }
 
+  const sameBoardNameOpenMessage = () => {
+    setNoticeMessage({ messageInformation: noticeMessage().board.SAME_NAME_BOARD })
+    setIsOpenNoticeModal(true)
+  }
+
   const handleAddBoardClick = () => {
-    setBoardProcessList((prevProcess) => [...prevProcess, boardName])
-    setBoardsTasks((prevTasks) => ({ ...prevTasks, [boardName]: [] }))
-    setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+    if (boardProcessList.includes(boardName)) {
+      sameBoardNameOpenMessage()
+    } else {
+      setBoardProcessList((prevProcess) => [...prevProcess, boardName])
+      setBoardsTasks((prevTasks) => ({ ...prevTasks, [boardName]: [] }))
+      setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+    }
   }
 
   const handleEditBoardClick = () => {
-    setBoardProcessList((prevProcess) => {
-      const tempBoardProcessList = [...prevProcess]
-      tempBoardProcessList.splice(tempBoardProcessList.indexOf(selectedBoardProcessName), 1, boardName)
-      return tempBoardProcessList
-    })
-    setBoardsTasks((prevTasks) => {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { [selectedBoardProcessName]: prevProcessName, ...otherProcessNames } = prevTasks
-      return { ...otherProcessNames, [boardName]: [...prevTasks[selectedBoardProcessName]] }
-    })
-    setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
-    navigate(`/${boardName}`)
+    if (boardProcessList.includes(boardName)) {
+      sameBoardNameOpenMessage()
+    } else {
+      setBoardProcessList((prevProcess) => {
+        const tempBoardProcessList = [...prevProcess]
+        tempBoardProcessList.splice(tempBoardProcessList.indexOf(selectedBoardProcessName), 1, boardName)
+        return tempBoardProcessList
+      })
+      setBoardsTasks((prevTasks) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { [selectedBoardProcessName]: prevProcessName, ...otherProcessNames } = prevTasks
+        return { ...otherProcessNames, [boardName]: [...prevTasks[selectedBoardProcessName]] }
+      })
+      setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+      navigate(`/${boardName}`)
+    }
   }
 
   const handleCancelClick = () => {

@@ -59,7 +59,7 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, setIsOpenMoveCardModal, cardT
   }
 
   const handleDeleteClick = () => {
-    setNoticeMessage({ message: noticeMessage().card.WILL_DELETE, noticeMessageOkButtonHandle })
+    setNoticeMessage({ messageInformation: noticeMessage().card.WILL_DELETE, noticeMessageOkButtonHandle })
     setIsOpenNoticeModal(true)
   }
 
