@@ -92,7 +92,7 @@ const AddTaskModal = () => {
       <div className={styles.modalBox} ref={containerRef}>
         <div className={styles.modalHead}>
           <p>{isOpenAddTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
-          <XIcon className={styles.closeButton} onClick={handleCloseModalClick} />
+          <XIcon className={styles.xIcon} onClick={handleCloseModalClick} />
         </div>
         <Title noTitle={noTitle} />
         <Category noCategory={noCategory} />

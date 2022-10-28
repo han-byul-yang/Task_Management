@@ -5,6 +5,7 @@ import { moveCardToDifferentBoard } from 'utils/moveCard'
 import useClickOutside from 'hooks/useClickOutside'
 import { boardProcessAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
 
+import { XIcon } from 'assets/svgs'
 import styles from './moveCardModal.module.scss'
 
 interface IMoveCardModal {
@@ -34,10 +35,15 @@ const MoveCardModal = ({ cardIndex, setIsOpenMoveCardModal }: IMoveCardModal) =>
     setIsOpenMoveCardModal(false)
   }
 
+  const handleCloseModalClick = () => {
+    setIsOpenMoveCardModal(false)
+  }
+
   return (
     <>
       <div className={styles.background} />
       <div className={styles.modalBox} ref={containerRef}>
+        <XIcon className={styles.xIcon} onClick={handleCloseModalClick} />
         <p>카드를 옮길 보드를 선택하세요.</p>
         <ul>
           {boardProcessList.map((process) => {
