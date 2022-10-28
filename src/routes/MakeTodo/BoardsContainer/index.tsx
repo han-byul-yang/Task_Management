@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 import { moveCardInSameBoard, moveCardToDifferentBoard } from 'utils/moveCard'
-import { isOpenAddBoardModalAtom, boardProcessAtom, tasksAtom } from 'store/atoms'
+import { isOpenWriteBoardModalAtom, boardProcessAtom, tasksAtom } from 'store/atoms'
 import useResize from 'hooks/useResize'
 import Board from '../Board'
 import LNB from 'components/LNB'
@@ -14,7 +14,7 @@ import styles from './boardsContainer.module.scss'
 const BoardsContainer = () => {
   const boardProcessList = useRecoilValue(boardProcessAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
-  const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
+  const setIsOpenWriteBoardModal = useSetRecoilState(isOpenWriteBoardModalAtom)
   const { size, isSize: isTablet } = useResize()
 
   useEffect(() => {
@@ -43,8 +43,8 @@ const BoardsContainer = () => {
     }
   }
 
-  const handleOpenAddBoardModalClick = () => {
-    setIsOpenAddBoardModal({ type: 'add', isOpen: true })
+  const handleOpenWriteBoardModalClick = () => {
+    setIsOpenWriteBoardModal({ type: 'add', isOpen: true })
   }
 
   return (
@@ -62,7 +62,7 @@ const BoardsContainer = () => {
           )}
         </ul>
         {!isTablet && (
-          <button className={styles.boardAddButton} type='button' onClick={handleOpenAddBoardModalClick}>
+          <button className={styles.boardAddButton} type='button' onClick={handleOpenWriteBoardModalClick}>
             보드 추가
           </button>
         )}

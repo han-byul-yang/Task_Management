@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import {
   filteringAtom,
   filterTasksAtom,
-  isOpenAddTaskModalAtom,
+  isOpenWriteTaskModalAtom,
   selectedBoardProcessNameAtom,
   tasksAtom,
 } from 'store/atoms'
@@ -27,7 +27,7 @@ const Board = ({ process }: IBoardsProps) => {
   const boardsTasks = useRecoilValue(tasksAtom)
   const filterTasks = useRecoilValue(filterTasksAtom)
   const filtering = useRecoilValue(filteringAtom)
-  const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
+  const setIsOpenWriteTaskModal = useSetRecoilState(isOpenWriteTaskModalAtom)
   const { size, isSize: isTablet } = useResize()
 
   useEffect(() => {
@@ -35,9 +35,9 @@ const Board = ({ process }: IBoardsProps) => {
     size.TABLET.SIZEEVENT()
   }, [size.TABLET])
 
-  const handleAddTodoClick = () => {
+  const handleAddTaskClick = () => {
     setSelectedBoardProcessName(process)
-    setIsOpenAddTaskModal({ type: 'add', isOpen: true })
+    setIsOpenWriteTaskModal({ type: 'add', isOpen: true })
   }
 
   const handleBoardSettingClick = () => {
@@ -52,7 +52,7 @@ const Board = ({ process }: IBoardsProps) => {
       {!isTablet && (
         <div className={styles.boardTop}>
           <div>{process}</div>
-          <Plus2Icon className={styles.plus2Icon} onClick={handleAddTodoClick} />
+          <Plus2Icon className={styles.plus2Icon} onClick={handleAddTaskClick} />
           <HamburgerIcon className={styles.hamburgerIcon} onClick={handleBoardSettingClick} />
         </div>
       )}
@@ -92,5 +92,5 @@ export default Board
 
 // ?와 ! 삭제
 // process 이름 네이밍
-// setIsOpenAddModal 네이밍
+// setIsOpenWriteModal 네이밍
 // setSelectedBoardProcessName props drilling 2번 이상

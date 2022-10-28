@@ -1,18 +1,18 @@
 import { useRecoilValue } from 'recoil'
 
-import { isOpenAddBoardModalAtom, isOpenAddTaskModalAtom, isOpenNoticeModalAtom } from 'store/atoms'
-import AddTaskModal from 'components/Modal/AddTaskModal'
+import { isOpenWriteBoardModalAtom, isOpenWriteTaskModalAtom, isOpenNoticeModalAtom } from 'store/atoms'
+import WriteTaskModal from 'components/Modal/WriteTaskModal'
 import ModalPortal from 'components/Modal/ModalPortal'
 import SearchInput from './SearchInput'
 import BoardsContainer from './BoardsContainer'
-import AddBoardModal from 'components/Modal/AddBoardModal'
+import WriteBoardModal from 'components/Modal/WriteBoardModal'
 import NoticeModal from 'components/Modal/NoticeModal'
 
 import styles from './taskDashboard.module.scss'
 
 const TaskDashboard = () => {
-  const isOpenAddTaskModal = useRecoilValue(isOpenAddTaskModalAtom)
-  const isOpenAddBoardModal = useRecoilValue(isOpenAddBoardModalAtom)
+  const isOpenWriteTaskModal = useRecoilValue(isOpenWriteTaskModalAtom)
+  const isOpenWriteBoardModal = useRecoilValue(isOpenWriteBoardModalAtom)
   const isOpenNoticeModal = useRecoilValue(isOpenNoticeModalAtom)
 
   return (
@@ -23,14 +23,14 @@ const TaskDashboard = () => {
       <main className={styles.main}>
         <BoardsContainer />
       </main>
-      {isOpenAddTaskModal.isOpen && (
+      {isOpenWriteTaskModal.isOpen && (
         <ModalPortal>
-          <AddTaskModal />
+          <WriteTaskModal />
         </ModalPortal>
       )}
-      {isOpenAddBoardModal.isOpen && (
+      {isOpenWriteBoardModal.isOpen && (
         <ModalPortal>
-          <AddBoardModal />
+          <WriteBoardModal />
         </ModalPortal>
       )}
       {isOpenNoticeModal && (

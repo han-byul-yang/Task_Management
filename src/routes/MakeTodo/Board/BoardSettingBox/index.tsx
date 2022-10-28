@@ -7,8 +7,8 @@ import useResize from 'hooks/useResize'
 import noticeMessage from 'utils/noticeMessage'
 import {
   boardProcessAtom,
-  isOpenAddBoardModalAtom,
-  isOpenAddTaskModalAtom,
+  isOpenWriteBoardModalAtom,
+  isOpenWriteTaskModalAtom,
   isOpenNoticeModalAtom,
   noticeMessageAtom,
   selectedBoardProcessNameAtom,
@@ -22,9 +22,9 @@ interface IMenuBoxProps {
 }
 
 const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
-  const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
+  const setIsOpenWriteBoardModal = useSetRecoilState(isOpenWriteBoardModalAtom)
   const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
-  const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
+  const setIsOpenWriteTaskModal = useSetRecoilState(isOpenWriteTaskModalAtom)
   const [selectedBoardProcessName, setSelectedBoardProcessName] = useRecoilState(selectedBoardProcessNameAtom)
   const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
@@ -47,17 +47,17 @@ const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
     size.TABLET.SIZEEVENT()
   }, [size.TABLET])
 
-  const handleAddTodoClick = () => {
+  const handleAddTaskClick = () => {
     setSelectedBoardProcessName(selectedBoardProcessName)
-    setIsOpenAddTaskModal({ type: 'add', isOpen: true })
+    setIsOpenWriteTaskModal({ type: 'add', isOpen: true })
   }
 
-  const handleOpenAddBoardModalClick = () => {
-    setIsOpenAddBoardModal({ type: 'add', isOpen: true })
+  const handleOpenWriteBoardModalClick = () => {
+    setIsOpenWriteBoardModal({ type: 'add', isOpen: true })
   }
 
   const handleEditBoardNameClick = () => {
-    setIsOpenAddBoardModal({ type: 'edit', isOpen: true })
+    setIsOpenWriteBoardModal({ type: 'edit', isOpen: true })
   }
 
   const noticeMessageOkButtonHandle = () => {
@@ -80,10 +80,10 @@ const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
     <div className={styles.settingBox} ref={containerRef}>
       {isTablet && (
         <>
-          <button type='button' onClick={handleAddTodoClick}>
+          <button type='button' onClick={handleAddTaskClick}>
             카드 추가
           </button>
-          <button type='button' onClick={handleOpenAddBoardModalClick}>
+          <button type='button' onClick={handleOpenWriteBoardModalClick}>
             보드 생성
           </button>
         </>

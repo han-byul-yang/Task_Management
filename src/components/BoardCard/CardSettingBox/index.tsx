@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
 import useResize from 'hooks/useResize'
-import { isOpenAddTaskModalAtom, isOpenNoticeModalAtom, noticeMessageAtom, taskAtom, tasksAtom } from 'store/atoms'
+import { isOpenWriteTaskModalAtom, isOpenNoticeModalAtom, noticeMessageAtom, taskAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import noticeMessage from 'utils/noticeMessage'
 
@@ -16,7 +16,7 @@ interface ICardSettingBoxProps {
 }
 
 const CardSettingBox = ({ setIsCardSettingBoxOpen, setIsOpenMoveCardModal, cardTask }: ICardSettingBoxProps) => {
-  const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
+  const setIsOpenWriteTaskModal = useSetRecoilState(isOpenWriteTaskModalAtom)
   const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const setTask = useSetRecoilState(taskAtom)
   const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
@@ -39,7 +39,7 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, setIsOpenMoveCardModal, cardT
   }, [size.TABLET])
 
   const handleEditClick = () => {
-    setIsOpenAddTaskModal({ type: 'edit', isOpen: true })
+    setIsOpenWriteTaskModal({ type: 'edit', isOpen: true })
     setTask(cardTask)
   }
 

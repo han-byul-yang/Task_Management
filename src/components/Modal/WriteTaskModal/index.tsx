@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
-import { isOpenAddTaskModalAtom, selectedBoardProcessNameAtom, taskAtom, tasksAtom } from 'store/atoms'
+import { isOpenWriteTaskModalAtom, selectedBoardProcessNameAtom, taskAtom, tasksAtom } from 'store/atoms'
 import Title from '../components/Title'
 import Category from '../components/Category'
 import Description from '../components/Description'
@@ -11,19 +11,19 @@ import Schedule from '../components/Schedule'
 
 import { XIcon } from 'assets/svgs'
 import 'react-datepicker/dist/react-datepicker.css'
-import styles from './addTaskModal.module.scss'
+import styles from './writeTaskModal.module.scss'
 
-const AddTaskModal = () => {
+const WriteTaskModal = () => {
   const [noTitle, setNoTitle] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const [task, setTask] = useRecoilState(taskAtom)
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
-  const [isOpenAddTaskModal, setIsOpenAddTaskModal] = useRecoilState(isOpenAddTaskModalAtom)
+  const [isOpenWriteTaskModal, setIsOpenWriteTaskModal] = useRecoilState(isOpenWriteTaskModalAtom)
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
-    setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
+    setIsOpenWriteTaskModal((prevState) => ({ ...prevState, isOpen: false }))
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -66,7 +66,7 @@ const AddTaskModal = () => {
   }
 
   const handleCloseModalClick = () => {
-    setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
+    setIsOpenWriteTaskModal((prevState) => ({ ...prevState, isOpen: false }))
     resetTask()
   }
 
@@ -75,14 +75,14 @@ const AddTaskModal = () => {
       if (!task.taskTitle) setNoTitle(true)
       if (!task.categoryList.length) setNoCategory(true)
     } else {
-      if (isOpenAddTaskModal.type === 'add') {
+      if (isOpenWriteTaskModal.type === 'add') {
         addTaskToBoard()
       }
-      if (isOpenAddTaskModal.type === 'edit') {
+      if (isOpenWriteTaskModal.type === 'edit') {
         editTaskToBoard()
       }
       resetTask()
-      setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
+      setIsOpenWriteTaskModal((prevState) => ({ ...prevState, isOpen: false }))
     }
   }
 
@@ -91,7 +91,7 @@ const AddTaskModal = () => {
       <div className={styles.background} />
       <div className={styles.modalBox} ref={containerRef}>
         <div className={styles.modalHead}>
-          <p>{isOpenAddTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
+          <p>{isOpenWriteTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
           <XIcon className={styles.xIcon} onClick={handleCloseModalClick} />
         </div>
         <Title noTitle={noTitle} />
@@ -103,11 +103,11 @@ const AddTaskModal = () => {
           <Picture />
         </div>
         <button className={styles.submitButton} type='button' onClick={handleSubmitTaskClick}>
-          {isOpenAddTaskModal.type === 'add' ? 'Create Task' : 'Edit Task'}
+          {isOpenWriteTaskModal.type === 'add' ? 'Create Task' : 'Edit Task'}
         </button>
       </div>
     </>
   )
 }
 
-export default AddTaskModal
+export default WriteTaskModal
