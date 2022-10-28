@@ -4,8 +4,8 @@ import { useRecoilValue } from 'recoil'
 
 import useResize from 'hooks/useResize'
 import { boardProcessAtom } from 'store/atoms'
-import MakeTodo from './MakeTodo'
-import Board from './MakeTodo/Board'
+import MakeTodo from './TaskDashBoard'
+import Board from './TaskDashBoard/BoardsContainer/Board'
 
 import styles from './routes.module.scss'
 

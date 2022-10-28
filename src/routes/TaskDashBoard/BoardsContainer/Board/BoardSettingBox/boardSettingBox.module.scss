@@ -1,5 +1,5 @@
-@use '../../../../styles/constants/colors';
-@use '../../../../styles/mixins/settingBox';
+@use '../../../../../styles/constants/colors';
+@use '../../../../../styles/mixins/settingBox';
 
 .settingBox {
   @include settingBox.settingBox;

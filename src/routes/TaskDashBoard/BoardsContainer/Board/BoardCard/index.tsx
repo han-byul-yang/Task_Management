@@ -6,7 +6,7 @@ import { Draggable } from 'react-beautiful-dnd'
 
 import { keyInputAtom, filteringAtom, selectedBoardProcessNameAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
-import { highlightWords } from '../../utils/highlightWords'
+import { highlightWords } from '../../../../../utils/highlightWords'
 import CardSettingBox from './CardSettingBox'
 import ModalPortal from 'components/Modal/ModalPortal'
 import MoveCardModal from 'components/Modal/MoveCardModal'

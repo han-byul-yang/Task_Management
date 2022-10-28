@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { filteringAtom, filterTasksAtom, isOpenModalAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
 import useResize from 'hooks/useResize'
 import { ITask } from 'types/taskType'
-import BoardCard from 'components/BoardCard'
+import BoardCard from 'routes/TaskDashBoard/BoardsContainer/Board/BoardCard'
 import BoardSettingBox from './BoardSettingBox'
 
 import styles from './board.module.scss'

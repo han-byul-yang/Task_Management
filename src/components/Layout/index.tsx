@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
 import useResize from 'hooks/useResize'
-import SearchInput from 'routes/MakeTodo/SearchInput'
+import SearchInput from 'routes/TaskDashBoard/SearchInput'
 
 import styles from './layout.module.scss'
 

@@ -6,7 +6,7 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 import { moveCardInSameBoard, moveCardToDifferentBoard } from 'utils/moveCard'
 import { boardProcessAtom, tasksAtom, isOpenModalAtom } from 'store/atoms'
 import useResize from 'hooks/useResize'
-import Board from '../Board'
+import Board from './Board'
 import LNB from 'components/LNB'
 
 import styles from './boardsContainer.module.scss'
