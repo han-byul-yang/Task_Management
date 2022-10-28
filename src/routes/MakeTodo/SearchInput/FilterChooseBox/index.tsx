@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
+import { Dispatch, MutableRefObject, SetStateAction, useEffect, useRef } from 'react'
 import { useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
@@ -11,9 +11,10 @@ const filteringList = ['제목', '카테고리', '내용']
 interface IFilterChooseBoxProps {
   setIsFilterChooseBoxOpen: Dispatch<SetStateAction<boolean>>
   setKeyInput: Dispatch<SetStateAction<string>>
+  inputRef: MutableRefObject<HTMLInputElement | null>
 }
 
-const FilterChooseBox = ({ setKeyInput, setIsFilterChooseBoxOpen }: IFilterChooseBoxProps) => {
+const FilterChooseBox = ({ setKeyInput, setIsFilterChooseBoxOpen, inputRef }: IFilterChooseBoxProps) => {
   const setFiltering = useSetRecoilState(filteringAtom)
   const containerRef = useRef(null)
 
@@ -27,7 +28,8 @@ const FilterChooseBox = ({ setKeyInput, setIsFilterChooseBoxOpen }: IFilterChoos
   }, [clickOutsideEvent])
 
   const handleFilterChooseClick = (filtering: string) => {
-    setKeyInput(`${filtering}: `) // 클릭 훈 onFocus
+    if (inputRef && inputRef.current) inputRef.current.focus()
+    setKeyInput(`${filtering}: `)
     setFiltering((prevFiltering) => ({ ...prevFiltering, type: filtering }))
     setIsFilterChooseBoxOpen(false)
   }

@@ -36,10 +36,6 @@ const AddBoardModal = () => {
     clickOutsideEvent()
   }, [clickOutsideEvent])
 
-  /* useEffect(() => {
-    if (inputRef && inputRef.current) inputRef.current.focus()
-  }, []) */
-
   const handleBoardNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setBoardName(e.currentTarget.value)
   }

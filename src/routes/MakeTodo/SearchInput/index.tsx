@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 
 import { filteringAtom, filterTasksAtom, keyInputAtom, tasksAtom } from 'store/atoms'
@@ -14,6 +14,7 @@ const SearchInput = () => {
   const setFilterTasks = useSetRecoilState(filterTasksAtom)
   const [filtering, setFiltering] = useRecoilState(filteringAtom)
   const [isFilterChooseBoxOpen, setIsFilterChooseBoxOpen] = useState(false)
+  const inputRef = useRef(null)
 
   const handleKeyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyInput(e.currentTarget.value)
@@ -52,12 +53,17 @@ const SearchInput = () => {
           value={keyInput}
           onChange={handleKeyInputChange}
           onFocus={handleSearchInputFocus}
+          ref={inputRef}
         />
         {keyInput !== '' && <XIcon className={styles.xIcon} onClick={handleDeleteKeyInputClick} />}
       </form>
       <div className={styles.inputDownBox}>
         {isFilterChooseBoxOpen && (
-          <FilterChooseBox setKeyInput={setKeyInput} setIsFilterChooseBoxOpen={setIsFilterChooseBoxOpen} />
+          <FilterChooseBox
+            setKeyInput={setKeyInput}
+            setIsFilterChooseBoxOpen={setIsFilterChooseBoxOpen}
+            inputRef={inputRef}
+          />
         )}
       </div>
     </div>
