@@ -13,12 +13,12 @@ const SearchInput = () => {
   const boardsTasks = useRecoilValue(tasksAtom)
   const setFilterTasks = useSetRecoilState(filterTasksAtom)
   const [filtering, setFiltering] = useRecoilState(filteringAtom)
-  const [isFilterChooseBoxOpen, setIsFilterChooseBoxOpen] = useState(false)
+  const [isOpenFilterChooseBox, setIsOpenFilterChooseBox] = useState(false)
   const inputRef = useRef(null)
 
   const handleKeyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyInput(e.currentTarget.value)
-    setIsFilterChooseBoxOpen(false)
+    setIsOpenFilterChooseBox(false)
     if (keyInput) setFiltering((prevFiltering) => ({ ...prevFiltering, filter: true }))
   }
 
@@ -35,7 +35,7 @@ const SearchInput = () => {
   }
 
   const handleSearchInputFocus = () => {
-    setIsFilterChooseBoxOpen(true)
+    setIsOpenFilterChooseBox(true)
   }
 
   const handleDeleteKeyInputClick = () => {
@@ -58,10 +58,10 @@ const SearchInput = () => {
         {keyInput !== '' && <XIcon className={styles.xIcon} onClick={handleDeleteKeyInputClick} />}
       </form>
       <div className={styles.inputDownBox}>
-        {isFilterChooseBoxOpen && (
+        {isOpenFilterChooseBox && (
           <FilterChooseBox
             setKeyInput={setKeyInput}
-            setIsFilterChooseBoxOpen={setIsFilterChooseBoxOpen}
+            setIsOpenFilterChooseBox={setIsOpenFilterChooseBox}
             inputRef={inputRef}
           />
         )}

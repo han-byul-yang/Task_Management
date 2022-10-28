@@ -8,12 +8,12 @@ import { ErrorIcon, NoticeIcon } from 'assets/svgs'
 import styles from './noticeModal.module.scss'
 
 const NoticeModal = () => {
-  const setOpenMessageModal = useSetRecoilState(isOpenNoticeModalAtom)
+  const setIsOpenMessageModal = useSetRecoilState(isOpenNoticeModalAtom)
   const noticeMessage = useRecoilValue(noticeMessageAtom)
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
-    setOpenMessageModal(false)
+    setIsOpenMessageModal(false)
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -27,7 +27,7 @@ const NoticeModal = () => {
   }[noticeMessage.messageInformation.kind.toUpperCase()]
 
   const handleCancelButtonClick = () => {
-    setOpenMessageModal(false)
+    setIsOpenMessageModal(false)
   }
 
   const messageModalButton = {

@@ -18,13 +18,13 @@ import {
 import styles from './boardSettingBox.module.scss'
 
 interface IMenuBoxProps {
-  setIsBoardSettingBoxOpen: Dispatch<SetStateAction<boolean>>
+  setIsOpenBoardSettingBox: Dispatch<SetStateAction<boolean>>
 }
 
-const BoardSettingBox = ({ setIsBoardSettingBoxOpen }: IMenuBoxProps) => {
+const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
   const setIsOpenAddBoardModal = useSetRecoilState(isOpenAddBoardModalAtom)
   const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
-  const setIsAddTaskModalOpen = useSetRecoilState(isOpenAddTaskModalAtom)
+  const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
   const [selectedBoardProcessName, setSelectedBoardProcessName] = useRecoilState(selectedBoardProcessNameAtom)
   const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
@@ -34,7 +34,7 @@ const BoardSettingBox = ({ setIsBoardSettingBoxOpen }: IMenuBoxProps) => {
   const { size, isSize: isTablet } = useResize()
 
   const clickOutsideHandle = () => {
-    setIsBoardSettingBoxOpen(false)
+    setIsOpenBoardSettingBox(false)
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -49,7 +49,7 @@ const BoardSettingBox = ({ setIsBoardSettingBoxOpen }: IMenuBoxProps) => {
 
   const handleAddTodoClick = () => {
     setSelectedBoardProcessName(selectedBoardProcessName)
-    setIsAddTaskModalOpen({ type: 'add', isOpen: true })
+    setIsOpenAddTaskModal({ type: 'add', isOpen: true })
   }
 
   const handleOpenAddBoardModalClick = () => {

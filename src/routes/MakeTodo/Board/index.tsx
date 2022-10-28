@@ -22,12 +22,12 @@ interface IBoardsProps {
 }
 
 const Board = ({ process }: IBoardsProps) => {
-  const [isBoardSettingBoxOpen, setIsBoardSettingBoxOpen] = useState(false)
+  const [isOpenBoardSettingBox, setIsOpenBoardSettingBox] = useState(false)
   const setSelectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
   const boardsTasks = useRecoilValue(tasksAtom)
   const filterTasks = useRecoilValue(filterTasksAtom)
   const filtering = useRecoilValue(filteringAtom)
-  const setIsAddTaskModalOpen = useSetRecoilState(isOpenAddTaskModalAtom)
+  const setIsOpenAddTaskModal = useSetRecoilState(isOpenAddTaskModalAtom)
   const { size, isSize: isTablet } = useResize()
 
   useEffect(() => {
@@ -37,12 +37,12 @@ const Board = ({ process }: IBoardsProps) => {
 
   const handleAddTodoClick = () => {
     setSelectedBoardProcessName(process)
-    setIsAddTaskModalOpen({ type: 'add', isOpen: true })
+    setIsOpenAddTaskModal({ type: 'add', isOpen: true })
   }
 
   const handleBoardSettingClick = () => {
     setSelectedBoardProcessName(process)
-    setIsBoardSettingBoxOpen(true)
+    setIsOpenBoardSettingBox(true)
   }
 
   const processTasks = filtering.filter ? filterTasks[process] : boardsTasks[process]
@@ -56,7 +56,7 @@ const Board = ({ process }: IBoardsProps) => {
           <HamburgerIcon className={styles.hamburgerIcon} onClick={handleBoardSettingClick} />
         </div>
       )}
-      {!isTablet && isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
+      {!isTablet && isOpenBoardSettingBox && <BoardSettingBox setIsOpenBoardSettingBox={setIsOpenBoardSettingBox} />}
       <Droppable droppableId={`${process}`} key={`${process}`}>
         {(handleDrop) => (
           <div className={styles.cardList} ref={handleDrop.innerRef} {...handleDrop.droppableProps}>
@@ -77,7 +77,7 @@ const Board = ({ process }: IBoardsProps) => {
       <div className={styles.boardBottom}>
         {isTablet && (
           <>
-            {isBoardSettingBoxOpen && <BoardSettingBox setIsBoardSettingBoxOpen={setIsBoardSettingBoxOpen} />}
+            {isOpenBoardSettingBox && <BoardSettingBox setIsOpenBoardSettingBox={setIsOpenBoardSettingBox} />}
             <button className={styles.boardSettingButton} type='button' onClick={handleBoardSettingClick}>
               프로젝트 메뉴
             </button>

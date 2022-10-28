@@ -9,17 +9,17 @@ import styles from './filterChooseBox.module.scss'
 const filteringList = ['제목', '카테고리', '내용']
 
 interface IFilterChooseBoxProps {
-  setIsFilterChooseBoxOpen: Dispatch<SetStateAction<boolean>>
+  setIsOpenFilterChooseBox: Dispatch<SetStateAction<boolean>>
   setKeyInput: Dispatch<SetStateAction<string>>
   inputRef: MutableRefObject<HTMLInputElement | null>
 }
 
-const FilterChooseBox = ({ setKeyInput, setIsFilterChooseBoxOpen, inputRef }: IFilterChooseBoxProps) => {
+const FilterChooseBox = ({ setKeyInput, setIsOpenFilterChooseBox, inputRef }: IFilterChooseBoxProps) => {
   const setFiltering = useSetRecoilState(filteringAtom)
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
-    setIsFilterChooseBoxOpen(false)
+    setIsOpenFilterChooseBox(false)
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -31,7 +31,7 @@ const FilterChooseBox = ({ setKeyInput, setIsFilterChooseBoxOpen, inputRef }: IF
     if (inputRef && inputRef.current) inputRef.current.focus()
     setKeyInput(`${filtering}: `)
     setFiltering((prevFiltering) => ({ ...prevFiltering, type: filtering }))
-    setIsFilterChooseBoxOpen(false)
+    setIsOpenFilterChooseBox(false)
   }
 
   return (

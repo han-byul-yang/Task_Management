@@ -20,7 +20,7 @@ interface IBoardCardProps {
 }
 
 const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
-  const [isCardSettingBoxOpen, setIsCardSettingBoxOpen] = useState(false)
+  const [isOpenCardSettingBox, setIsCardSettingBoxOpen] = useState(false)
   const [isOpenMoveCardModal, setIsOpenMoveCardModal] = useState(false)
   const setSelectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
   const keyInput = useRecoilValue(keyInputAtom)
@@ -59,7 +59,7 @@ const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
                     : taskTitle}
                 </p>
                 <EditIcon className={styles.settingIcon} onClick={handleCardSettingClick} />
-                {isCardSettingBoxOpen && (
+                {isOpenCardSettingBox && (
                   <CardSettingBox
                     setIsCardSettingBoxOpen={setIsCardSettingBoxOpen}
                     setIsOpenMoveCardModal={setIsOpenMoveCardModal}
