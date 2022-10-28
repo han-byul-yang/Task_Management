@@ -3,7 +3,7 @@
 
 @mixin settingBox {
   position: absolute;
-  z-index: levels.$MODAL;
+  z-index: levels.$BOX;
   display: grid;
   align-items: center;
   background: colors.$WHITE;
