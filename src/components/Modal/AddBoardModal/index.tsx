@@ -1,6 +1,7 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
+import useClickOutside from 'hooks/useClickOutside'
 import { boardProcessAtom, isOpenAddBoardModalAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
 
 import styles from './addBoardModal.module.scss'
@@ -12,6 +13,16 @@ const AddBoardModal = () => {
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
   const [boardName, setBoardName] = useState(isOpenAddBoardModal.type === 'add' ? '' : selectedBoardProcessName)
   const inputRef = useRef(null)
+  const containerRef = useRef(null)
+
+  const clickOutsideHandle = () => {
+    setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+  }
+  const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
+
+  useEffect(() => {
+    clickOutsideEvent()
+  }, [clickOutsideEvent])
 
   /* useEffect(() => {
     if (inputRef && inputRef.current) inputRef.current.focus()
@@ -48,7 +59,7 @@ const AddBoardModal = () => {
   return (
     <>
       <div className={styles.background} />
-      <div className={styles.modalBox}>
+      <div className={styles.modalBox} ref={containerRef}>
         <p>
           {isOpenAddBoardModal.type === 'add'
             ? '추가 하려는 보드 이름을 입력하세요'

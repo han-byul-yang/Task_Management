@@ -1,7 +1,8 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { moveCardToDifferentBoard } from 'utils/moveCard'
+import useClickOutside from 'hooks/useClickOutside'
 import { boardProcessAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
 
 import styles from './moveCardModal.module.scss'
@@ -15,6 +16,16 @@ const MoveCardModal = ({ cardIndex, setIsOpenMoveCardModal }: IMoveCardModal) =>
   const boardProcessList = useRecoilValue(boardProcessAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
+  const containerRef = useRef(null)
+
+  const clickOutsideHandle = () => {
+    setIsOpenMoveCardModal(false)
+  }
+  const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
+
+  useEffect(() => {
+    clickOutsideEvent()
+  }, [clickOutsideEvent])
 
   const handleMoveCardClick = (process: string) => {
     setBoardsTasks((allTaskBoards) =>
@@ -26,7 +37,7 @@ const MoveCardModal = ({ cardIndex, setIsOpenMoveCardModal }: IMoveCardModal) =>
   return (
     <>
       <div className={styles.background} />
-      <div className={styles.modalBox}>
+      <div className={styles.modalBox} ref={containerRef}>
         <p>카드를 옮길 보드를 선택하세요.</p>
         <ul>
           {boardProcessList.map((process) => {

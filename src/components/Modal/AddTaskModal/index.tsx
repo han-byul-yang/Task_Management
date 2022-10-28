@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
+import useClickOutside from 'hooks/useClickOutside'
 import { isOpenAddTaskModalAtom, selectedBoardProcessNameAtom, taskAtom, tasksAtom } from 'store/atoms'
 import Title from '../components/Title'
 import Category from '../components/Category'
@@ -19,6 +20,16 @@ const AddTaskModal = () => {
   const [task, setTask] = useRecoilState(taskAtom)
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
   const [isOpenAddTaskModal, setIsOpenAddTaskModal] = useRecoilState(isOpenAddTaskModalAtom)
+  const containerRef = useRef(null)
+
+  const clickOutsideHandle = () => {
+    setIsOpenAddTaskModal((prevState) => ({ ...prevState, isOpen: false }))
+  }
+  const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
+
+  useEffect(() => {
+    clickOutsideEvent()
+  }, [clickOutsideEvent])
 
   const resetTask = () => {
     setTask({
@@ -78,7 +89,7 @@ const AddTaskModal = () => {
   return (
     <>
       <div className={styles.background} />
-      <div className={styles.modalBox}>
+      <div className={styles.modalBox} ref={containerRef}>
         <div className={styles.modalHead}>
           <p>{isOpenAddTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
           <XIcon className={styles.closeButton} onClick={handleCloseModalClick} />
