@@ -9,7 +9,8 @@
 .modalBox {
   @include modal.modalBox;
   width: 320px;
-  height: 500px;
+  height: auto;
+  min-height: 510px;
   padding: 10px 20px;
   font-weight: 500;
   border-radius: 10px;
@@ -38,7 +39,6 @@
   width: 280px;
   height: 50px;
   font-size: 17px;
-  color: colors.$FONT;
   color: colors.$WHITE;
   background: colors.$GRAY_100;
   border-radius: 20px;
