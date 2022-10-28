@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
@@ -14,6 +15,7 @@ const AddBoardModal = () => {
   const [boardName, setBoardName] = useState(isOpenAddBoardModal.type === 'add' ? '' : selectedBoardProcessName)
   const inputRef = useRef(null)
   const containerRef = useRef(null)
+  const navigate = useNavigate()
 
   const clickOutsideHandle = () => {
     setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
@@ -50,6 +52,7 @@ const AddBoardModal = () => {
       return { ...otherProcessNames, [boardName]: [...prevTasks[selectedBoardProcessName]] }
     })
     setIsOpenAddBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+    navigate(`/${boardName}`)
   }
 
   const handleCancelClick = () => {
