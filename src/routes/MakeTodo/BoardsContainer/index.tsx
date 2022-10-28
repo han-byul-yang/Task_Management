@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
 
 import { moveCardInSameBoard, moveCardToDifferentBoard } from 'utils/moveCard'
-import { isOpenWriteBoardModalAtom, boardProcessAtom, tasksAtom } from 'store/atoms'
+import { boardProcessAtom, tasksAtom, isOpenModalAtom } from 'store/atoms'
 import useResize from 'hooks/useResize'
 import Board from '../Board'
 import LNB from 'components/LNB'
@@ -14,7 +14,7 @@ import styles from './boardsContainer.module.scss'
 const BoardsContainer = () => {
   const boardProcessList = useRecoilValue(boardProcessAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
-  const setIsOpenWriteBoardModal = useSetRecoilState(isOpenWriteBoardModalAtom)
+  const setIsOpenModal = useSetRecoilState(isOpenModalAtom)
   const { size, isSize: isTablet } = useResize()
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const BoardsContainer = () => {
   }
 
   const handleOpenWriteBoardModalClick = () => {
-    setIsOpenWriteBoardModal({ type: 'add', isOpen: true })
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeBoardModal: { type: 'add', isOpen: true } }))
   }
 
   return (

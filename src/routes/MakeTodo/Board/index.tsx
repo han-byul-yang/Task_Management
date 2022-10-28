@@ -2,13 +2,7 @@ import { useEffect, useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import {
-  filteringAtom,
-  filterTasksAtom,
-  isOpenWriteTaskModalAtom,
-  selectedBoardProcessNameAtom,
-  tasksAtom,
-} from 'store/atoms'
+import { filteringAtom, filterTasksAtom, isOpenModalAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
 import useResize from 'hooks/useResize'
 import { ITask } from 'types/taskType'
 import BoardCard from 'components/BoardCard'
@@ -27,7 +21,7 @@ const Board = ({ process }: IBoardsProps) => {
   const boardsTasks = useRecoilValue(tasksAtom)
   const filterTasks = useRecoilValue(filterTasksAtom)
   const filtering = useRecoilValue(filteringAtom)
-  const setIsOpenWriteTaskModal = useSetRecoilState(isOpenWriteTaskModalAtom)
+  const setIsOpenModal = useSetRecoilState(isOpenModalAtom)
   const { size, isSize: isTablet } = useResize()
 
   useEffect(() => {
@@ -37,7 +31,7 @@ const Board = ({ process }: IBoardsProps) => {
 
   const handleAddTaskClick = () => {
     setSelectedBoardProcessName(process)
-    setIsOpenWriteTaskModal({ type: 'add', isOpen: true })
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeTask: { type: 'add', isOpen: true } }))
   }
 
   const handleBoardSettingClick = () => {
@@ -89,8 +83,3 @@ const Board = ({ process }: IBoardsProps) => {
 }
 
 export default Board
-
-// ?와 ! 삭제
-// process 이름 네이밍
-// setIsOpenWriteModal 네이밍
-// setSelectedBoardProcessName props drilling 2번 이상

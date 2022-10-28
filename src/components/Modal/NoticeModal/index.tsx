@@ -2,18 +2,18 @@ import { useEffect, useRef } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
-import { isOpenNoticeModalAtom, noticeMessageAtom } from 'store/atoms'
+import { isOpenModalAtom, noticeMessageAtom } from 'store/atoms'
 
 import { ErrorIcon, NoticeIcon } from 'assets/svgs'
 import styles from './noticeModal.module.scss'
 
 const NoticeModal = () => {
-  const setIsOpenMessageModal = useSetRecoilState(isOpenNoticeModalAtom)
+  const setIsOpenModal = useSetRecoilState(isOpenModalAtom)
   const noticeMessage = useRecoilValue(noticeMessageAtom)
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
-    setIsOpenMessageModal(false)
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: false }))
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -27,7 +27,7 @@ const NoticeModal = () => {
   }[noticeMessage.messageInformation.kind.toUpperCase()]
 
   const handleCancelButtonClick = () => {
-    setIsOpenMessageModal(false)
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: false }))
   }
 
   const messageModalButton = {

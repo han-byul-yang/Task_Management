@@ -6,8 +6,7 @@ import useClickOutside from 'hooks/useClickOutside'
 import noticeMessage from 'utils/noticeMessage'
 import {
   boardProcessAtom,
-  isOpenWriteBoardModalAtom,
-  isOpenNoticeModalAtom,
+  isOpenModalAtom,
   noticeMessageAtom,
   selectedBoardProcessNameAtom,
   tasksAtom,
@@ -16,19 +15,21 @@ import {
 import styles from './writeBoardModal.module.scss'
 
 const WriteBoardModal = () => {
-  const [isOpenWriteBoardModal, setIsOpenWriteBoardModal] = useRecoilState(isOpenWriteBoardModalAtom)
-  const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
+  const [isOpenModal, setIsOpenModal] = useRecoilState(isOpenModalAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const [boardProcessList, setBoardProcessList] = useRecoilState(boardProcessAtom)
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
   const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
-  const [boardName, setBoardName] = useState(isOpenWriteBoardModal.type === 'add' ? '' : selectedBoardProcessName)
+  const [boardName, setBoardName] = useState(isOpenModal.writeBoardModal.type === 'add' ? '' : selectedBoardProcessName)
   const inputRef = useRef(null)
   const containerRef = useRef(null)
   const navigate = useNavigate()
 
   const clickOutsideHandle = () => {
-    setIsOpenWriteBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+    setIsOpenModal((isOpenState) => ({
+      ...isOpenState,
+      writeBoardModal: { type: isOpenState.writeBoardModal.type, isOpen: false },
+    }))
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -42,7 +43,7 @@ const WriteBoardModal = () => {
 
   const sameBoardNameOpenMessage = () => {
     setNoticeMessage({ messageInformation: noticeMessage().board.SAME_NAME_BOARD })
-    setIsOpenNoticeModal(true)
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: true }))
   }
 
   const handleAddBoardClick = () => {
@@ -51,7 +52,10 @@ const WriteBoardModal = () => {
     } else {
       setBoardProcessList((prevProcess) => [...prevProcess, boardName])
       setBoardsTasks((prevTasks) => ({ ...prevTasks, [boardName]: [] }))
-      setIsOpenWriteBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+      setIsOpenModal((isOpenState) => ({
+        ...isOpenState,
+        writeBoardModal: { type: isOpenState.writeBoardModal.type, isOpen: false },
+      }))
     }
   }
 
@@ -69,13 +73,19 @@ const WriteBoardModal = () => {
         const { [selectedBoardProcessName]: prevProcessName, ...otherProcessNames } = prevTasks
         return { ...otherProcessNames, [boardName]: [...prevTasks[selectedBoardProcessName]] }
       })
-      setIsOpenWriteBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+      setIsOpenModal((isOpenState) => ({
+        ...isOpenState,
+        writeBoardModal: { type: isOpenState.writeBoardModal.type, isOpen: false },
+      }))
       navigate(`/${boardName}`)
     }
   }
 
   const handleCancelClick = () => {
-    setIsOpenWriteBoardModal((prevState) => ({ ...prevState, isOpen: false }))
+    setIsOpenModal((isOpenState) => ({
+      ...isOpenState,
+      writeBoardModal: { type: isOpenState.writeBoardModal.type, isOpen: false },
+    }))
   }
 
   return (
@@ -83,13 +93,13 @@ const WriteBoardModal = () => {
       <div className={styles.background} />
       <div className={styles.modalBox} ref={containerRef}>
         <p>
-          {isOpenWriteBoardModal.type === 'add'
+          {isOpenModal.writeBoardModal.type === 'add'
             ? '추가 하려는 보드 이름을 입력하세요'
             : '수정하려는 보드 이름을 입력하세요'}
         </p>
         <input type='text' value={boardName} ref={inputRef} onChange={handleBoardNameChange} />
         <div className={styles.buttonBox}>
-          {isOpenWriteBoardModal.type === 'add' ? (
+          {isOpenModal.writeBoardModal.type === 'add' ? (
             <button type='button' onClick={handleAddBoardClick}>
               추가
             </button>

@@ -44,7 +44,7 @@ export const taskAtom = atom<ITask>({
     taskTitle: '',
     categoryList: [],
     date: { startDate: new Date(), endDate: null },
-    image: { name: '', url: '' }, // type 수정
+    image: { name: '', url: '' },
     description: '',
   },
 })
@@ -65,25 +65,13 @@ export const selectedBoardProcessNameAtom = atom<string>({
   default: '',
 })
 
-export const isOpenAddBoardModalAtom = atom({
-  key: 'isOpenAddBoardModal',
+export const isOpenModalAtom = atom({
+  key: 'isOpenModal',
   default: {
-    type: 'add',
-    isOpen: false,
+    writeBoardModal: { type: 'add', isOpen: false },
+    writeTaskModal: { type: 'add', isOpen: false },
+    noticeModal: false,
   },
-}) // isOpenSettingBoardNameModal name은 어던가, type 설정
-
-export const isOpenAddTaskModalAtom = atom({
-  key: 'isOpenAddTaskModal',
-  default: {
-    type: 'add',
-    isOpen: false,
-  },
-})
-
-export const isOpenNoticeModalAtom = atom<boolean>({
-  key: 'isOpenNoticeModal',
-  default: false,
 })
 
 export const noticeMessageAtom = atom<INoticeMessage>({

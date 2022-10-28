@@ -3,29 +3,28 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
 import useResize from 'hooks/useResize'
-import { isOpenWriteTaskModalAtom, isOpenNoticeModalAtom, noticeMessageAtom, taskAtom, tasksAtom } from 'store/atoms'
+import { isOpenModalAtom, noticeMessageAtom, taskAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import noticeMessage from 'utils/noticeMessage'
 
 import styles from './cardSettingBox.module.scss'
 
 interface ICardSettingBoxProps {
-  setIsCardSettingBoxOpen: Dispatch<SetStateAction<boolean>>
+  setIsOpenCardSettingBox: Dispatch<SetStateAction<boolean>>
   setIsOpenMoveCardModal: Dispatch<SetStateAction<boolean>>
   cardTask: ITask
 }
 
-const CardSettingBox = ({ setIsCardSettingBoxOpen, setIsOpenMoveCardModal, cardTask }: ICardSettingBoxProps) => {
-  const setIsOpenWriteTaskModal = useSetRecoilState(isOpenWriteTaskModalAtom)
+const CardSettingBox = ({ setIsOpenCardSettingBox, setIsOpenMoveCardModal, cardTask }: ICardSettingBoxProps) => {
+  const setIsOpenModal = useSetRecoilState(isOpenModalAtom)
   const [boardsTasks, setboardsTasks] = useRecoilState(tasksAtom)
   const setTask = useSetRecoilState(taskAtom)
-  const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
   const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
   const { size, isSize: isTablet } = useResize()
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
-    setIsCardSettingBoxOpen(false)
+    setIsOpenCardSettingBox(false)
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -39,7 +38,7 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, setIsOpenMoveCardModal, cardT
   }, [size.TABLET])
 
   const handleEditClick = () => {
-    setIsOpenWriteTaskModal({ type: 'edit', isOpen: true })
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeTaskModal: { type: 'edit', isOpen: true } }))
     setTask(cardTask)
   }
 
@@ -55,12 +54,12 @@ const CardSettingBox = ({ setIsCardSettingBoxOpen, setIsOpenMoveCardModal, cardT
         [cardTask.process]: [...deletedTaskList],
       }
     })
-    setIsOpenNoticeModal(false)
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: false }))
   }
 
   const handleDeleteClick = () => {
     setNoticeMessage({ messageInformation: noticeMessage().card.WILL_DELETE, noticeMessageOkButtonHandle })
-    setIsOpenNoticeModal(true)
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: true }))
   }
 
   return (

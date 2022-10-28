@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
-import { isOpenWriteTaskModalAtom, selectedBoardProcessNameAtom, taskAtom, tasksAtom } from 'store/atoms'
+import { isOpenModalAtom, selectedBoardProcessNameAtom, taskAtom, tasksAtom } from 'store/atoms'
 import Title from '../components/Title'
 import Category from '../components/Category'
 import Description from '../components/Description'
@@ -19,11 +19,14 @@ const WriteTaskModal = () => {
   const setBoardsTasks = useSetRecoilState(tasksAtom)
   const [task, setTask] = useRecoilState(taskAtom)
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
-  const [isOpenWriteTaskModal, setIsOpenWriteTaskModal] = useRecoilState(isOpenWriteTaskModalAtom)
+  const [isOpenModal, setIsOpenModal] = useRecoilState(isOpenModalAtom)
   const containerRef = useRef(null)
 
   const clickOutsideHandle = () => {
-    setIsOpenWriteTaskModal((prevState) => ({ ...prevState, isOpen: false }))
+    setIsOpenModal((isOpenState) => ({
+      ...isOpenState,
+      writeTaskModal: { type: isOpenState.writeTaskModal.type, isOpen: false },
+    }))
   }
   const { clickOutsideEvent } = useClickOutside(containerRef, clickOutsideHandle)
 
@@ -66,7 +69,10 @@ const WriteTaskModal = () => {
   }
 
   const handleCloseModalClick = () => {
-    setIsOpenWriteTaskModal((prevState) => ({ ...prevState, isOpen: false }))
+    setIsOpenModal((isOpenState) => ({
+      ...isOpenState,
+      writeTaskModal: { type: isOpenState.writeTaskModal.type, isOpen: false },
+    }))
     resetTask()
   }
 
@@ -75,14 +81,17 @@ const WriteTaskModal = () => {
       if (!task.taskTitle) setNoTitle(true)
       if (!task.categoryList.length) setNoCategory(true)
     } else {
-      if (isOpenWriteTaskModal.type === 'add') {
+      if (isOpenModal.writeTaskModal.type === 'add') {
         addTaskToBoard()
       }
-      if (isOpenWriteTaskModal.type === 'edit') {
+      if (isOpenModal.writeTaskModal.type === 'edit') {
         editTaskToBoard()
       }
       resetTask()
-      setIsOpenWriteTaskModal((prevState) => ({ ...prevState, isOpen: false }))
+      setIsOpenModal((isOpenState) => ({
+        ...isOpenState,
+        writeTaskModal: { type: isOpenState.writeTaskModal.type, isOpen: false },
+      }))
     }
   }
 
@@ -91,7 +100,7 @@ const WriteTaskModal = () => {
       <div className={styles.background} />
       <div className={styles.modalBox} ref={containerRef}>
         <div className={styles.modalHead}>
-          <p>{isOpenWriteTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
+          <p>{isOpenModal.writeTaskModal.type === 'add' ? 'Create a new task' : 'Edit the Task'}</p>
           <XIcon className={styles.xIcon} onClick={handleCloseModalClick} />
         </div>
         <Title noTitle={noTitle} />
@@ -103,7 +112,7 @@ const WriteTaskModal = () => {
           <Picture />
         </div>
         <button className={styles.submitButton} type='button' onClick={handleSubmitTaskClick}>
-          {isOpenWriteTaskModal.type === 'add' ? 'Create Task' : 'Edit Task'}
+          {isOpenModal.writeTaskModal.type === 'add' ? 'Create Task' : 'Edit Task'}
         </button>
       </div>
     </>

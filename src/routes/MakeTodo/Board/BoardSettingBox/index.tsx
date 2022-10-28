@@ -7,9 +7,7 @@ import useResize from 'hooks/useResize'
 import noticeMessage from 'utils/noticeMessage'
 import {
   boardProcessAtom,
-  isOpenWriteBoardModalAtom,
-  isOpenWriteTaskModalAtom,
-  isOpenNoticeModalAtom,
+  isOpenModalAtom,
   noticeMessageAtom,
   selectedBoardProcessNameAtom,
   tasksAtom,
@@ -22,9 +20,7 @@ interface IMenuBoxProps {
 }
 
 const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
-  const setIsOpenWriteBoardModal = useSetRecoilState(isOpenWriteBoardModalAtom)
-  const setIsOpenNoticeModal = useSetRecoilState(isOpenNoticeModalAtom)
-  const setIsOpenWriteTaskModal = useSetRecoilState(isOpenWriteTaskModalAtom)
+  const setIsOpenModal = useSetRecoilState(isOpenModalAtom)
   const [selectedBoardProcessName, setSelectedBoardProcessName] = useRecoilState(selectedBoardProcessNameAtom)
   const setNoticeMessage = useSetRecoilState(noticeMessageAtom)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
@@ -49,19 +45,19 @@ const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
 
   const handleAddTaskClick = () => {
     setSelectedBoardProcessName(selectedBoardProcessName)
-    setIsOpenWriteTaskModal({ type: 'add', isOpen: true })
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeTaskModal: { type: 'add', isOpen: true } }))
   }
 
   const handleOpenWriteBoardModalClick = () => {
-    setIsOpenWriteBoardModal({ type: 'add', isOpen: true })
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeBoardModal: { type: 'add', isOpen: true } }))
   }
 
   const handleEditBoardNameClick = () => {
-    setIsOpenWriteBoardModal({ type: 'edit', isOpen: true })
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeBoardModal: { type: 'edit', isOpen: true } }))
   }
 
   const noticeMessageOkButtonHandle = () => {
-    setIsOpenNoticeModal(false)
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: false }))
     setBoardProcessList((prevProcess) => prevProcess.filter((process) => process !== selectedBoardProcessName))
     setBoardsTasks((prevTasks) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -73,7 +69,7 @@ const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
 
   const handleDeleteBoardClick = () => {
     setNoticeMessage({ messageInformation: noticeMessage().board.WILL_DELETE, noticeMessageOkButtonHandle })
-    setIsOpenNoticeModal(true)
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: true }))
   }
 
   return (
