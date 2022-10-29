@@ -8,6 +8,6 @@ export interface ITask {
   taskTitle: string
   categoryList: string[]
   date: { startDate: Date | null; endDate: Date | null }
-  image: { name: string; url: string | ArrayBuffer | null | undefined } // type 수정
+  image: { name: string; url: string | ArrayBuffer | null | undefined }
   description: string
 }

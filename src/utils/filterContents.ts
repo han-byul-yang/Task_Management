@@ -34,5 +34,3 @@ const filterContents = (filterType: string, filterKeyword: string, filterTarget:
 }
 
 export default filterContents
-
-// any type
