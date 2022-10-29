@@ -9,12 +9,14 @@ const Picture = () => {
   const [task, setTask] = useRecoilState(taskAtom)
 
   const handleImageChange = (e: any) => {
-    const { files } = e.target
-    const reader = new FileReader()
-    reader.readAsDataURL(files[0])
+    if (!e.target) {
+      const { files } = e.target
+      const reader = new FileReader()
+      reader.readAsDataURL(files[0])
 
-    reader.onload = () => {
-      setTask((prevTask) => ({ ...prevTask, image: { name: files[0].name, url: reader.result } }))
+      reader.onload = () => {
+        setTask((prevTask) => ({ ...prevTask, image: { name: files[0].name, url: reader.result } }))
+      }
     }
   }
 
@@ -31,5 +33,3 @@ const Picture = () => {
 }
 
 export default Picture
-
-// any type 설정

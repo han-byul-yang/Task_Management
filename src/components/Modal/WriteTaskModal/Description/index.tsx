@@ -27,5 +27,3 @@ const Description = () => {
 }
 
 export default Description
-
-// task detail title을 어디로 보낼지 생각

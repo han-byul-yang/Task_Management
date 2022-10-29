@@ -31,7 +31,7 @@ const Board = ({ process }: IBoardsProps) => {
 
   const handleAddTaskClick = () => {
     setSelectedBoardProcessName(process)
-    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeTask: { type: 'add', isOpen: true } }))
+    setIsOpenModal((isOpenState) => ({ ...isOpenState, writeTaskModal: { type: 'add', isOpen: true } }))
   }
 
   const handleBoardSettingClick = () => {

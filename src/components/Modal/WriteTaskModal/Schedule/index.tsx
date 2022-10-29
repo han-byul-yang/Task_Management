@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import ReactDatePicker from 'react-datepicker'
 
@@ -10,7 +9,7 @@ import styles from './schedule.module.scss'
 const Schedule = () => {
   const [task, setTask] = useRecoilState(taskAtom)
 
-  const handleDateChange = (dates: any) => {
+  const handleDateChange = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates
     setTask((prevTask) => ({ ...prevTask, date: { startDate: start, endDate: end } }))
   }
