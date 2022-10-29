@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useRef, useState, useTransition } from 'react'
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 
 import { filteringAtom, filterTasksAtom, keyInputAtom, tasksAtom } from 'store/atoms'
@@ -15,6 +15,7 @@ const SearchInput = () => {
   const [filtering, setFiltering] = useRecoilState(filteringAtom)
   const [isOpenFilterChooseBox, setIsOpenFilterChooseBox] = useState(false)
   const inputRef = useRef(null)
+  const [, startTransition] = useTransition()
 
   const handleKeyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyInput(e.currentTarget.value)
@@ -26,7 +27,7 @@ const SearchInput = () => {
     if (!keyInput) setFiltering((prevFiltering) => ({ ...prevFiltering, filter: false }))
     if (filtering.type && !keyInput.includes(`${filtering.type}:`)) setFiltering({ type: '', filter: false })
     if (filtering.filter) {
-      setFilterTasks(filterContents(filtering.type, keyInput, boardsTasks))
+      startTransition(() => setFilterTasks(filterContents(filtering.type, keyInput, boardsTasks)))
     }
   }, [boardsTasks, filtering.filter, filtering.type, keyInput, setFilterTasks, setFiltering])
 
