@@ -21,7 +21,8 @@
   @media screen and (max-width: 768px) {
     position: relative;
     width: 100%;
-    max-width: 300px;
+    margin: 5px;
+    border-radius: 3px;
   }
 }
 
@@ -60,6 +61,11 @@
     color: colors.$WHITE;
     background: colors.$KEY;
     border-radius: 5px;
+
+    @media screen and (max-width: 768px) {
+      padding: 5px 8px;
+      border-radius: 3px;
+    }
   }
 }
 
