@@ -4,7 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
 import useResize from 'hooks/useResize'
-import noticeMessage from 'utils/noticeMessage'
+import noticeMessage from 'constants/noticeMessage'
 import {
   boardProcessAtom,
   isOpenModalAtom,
@@ -68,7 +68,7 @@ const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
   }
 
   const handleDeleteBoardClick = () => {
-    setNoticeMessage({ messageInformation: noticeMessage().board.WILL_DELETE, noticeMessageOkButtonHandle })
+    setNoticeMessage({ messageInformation: noticeMessage.board.WILL_DELETE, noticeMessageOkButtonHandle })
     setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: true }))
   }
 

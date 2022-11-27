@@ -5,7 +5,7 @@ import useClickOutside from 'hooks/useClickOutside'
 import useResize from 'hooks/useResize'
 import { isOpenModalAtom, noticeMessageAtom, taskAtom, tasksAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
-import noticeMessage from 'utils/noticeMessage'
+import noticeMessage from 'constants/noticeMessage'
 
 import styles from './cardSettingBox.module.scss'
 
@@ -58,7 +58,7 @@ const CardSettingBox = ({ setIsOpenCardSettingBox, setIsOpenMoveCardModal, cardT
   }
 
   const handleDeleteClick = () => {
-    setNoticeMessage({ messageInformation: noticeMessage().card.WILL_DELETE, noticeMessageOkButtonHandle })
+    setNoticeMessage({ messageInformation: noticeMessage.card.WILL_DELETE, noticeMessageOkButtonHandle })
     setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: true }))
   }
 

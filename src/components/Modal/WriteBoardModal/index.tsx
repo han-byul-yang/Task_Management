@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
-import noticeMessage from 'utils/noticeMessage'
+import noticeMessage from 'constants/noticeMessage'
 import {
   boardProcessAtom,
   isOpenModalAtom,
@@ -42,7 +42,7 @@ const WriteBoardModal = () => {
   }
 
   const sameBoardNameOpenMessage = () => {
-    setNoticeMessage({ messageInformation: noticeMessage().board.SAME_NAME_BOARD })
+    setNoticeMessage({ messageInformation: noticeMessage.board.SAME_NAME_BOARD })
     setIsOpenModal((isOpenState) => ({ ...isOpenState, noticeModal: true }))
   }
 

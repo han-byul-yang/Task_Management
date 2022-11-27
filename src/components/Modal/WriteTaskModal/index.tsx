@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
+import { addTaskToBoard, editTaskToBoard } from 'utils/writeTaskToBoard'
 import { isOpenModalAtom, selectedBoardProcessNameAtom, taskAtom, tasksAtom } from 'store/atoms'
 import Title from './Title'
 import Category from './Category'
@@ -17,7 +18,8 @@ const WriteTaskModal = () => {
   const [noTitle, setNoTitle] = useState(false)
   const [noCategory, setNoCategory] = useState(false)
   const setBoardsTasks = useSetRecoilState(tasksAtom)
-  const [task, setTask] = useRecoilState(taskAtom)
+  const task = useRecoilValue(taskAtom)
+  const resetTask = useResetRecoilState(taskAtom)
   const selectedBoardProcessName = useRecoilValue(selectedBoardProcessNameAtom)
   const [isOpenModal, setIsOpenModal] = useRecoilState(isOpenModalAtom)
   const containerRef = useRef(null)
@@ -34,40 +36,6 @@ const WriteTaskModal = () => {
     clickOutsideEvent()
   }, [clickOutsideEvent])
 
-  const resetTask = () => {
-    setTask({
-      id: new Date(),
-      process: '',
-      taskTitle: '',
-      categoryList: [],
-      date: { startDate: new Date(), endDate: null },
-      image: { name: '', url: '' },
-      description: '',
-    })
-  }
-
-  const addTaskToBoard = () => {
-    setBoardsTasks((prevTasks) => ({
-      ...prevTasks,
-      [selectedBoardProcessName]: [
-        ...prevTasks[selectedBoardProcessName],
-        { ...task, id: new Date(), process: selectedBoardProcessName },
-      ],
-    }))
-  }
-
-  const editTaskToBoard = () => {
-    setBoardsTasks((prevTasks) => {
-      const tempPrevTasks = [...prevTasks[selectedBoardProcessName]]
-      const taskIdList = tempPrevTasks.map((prevTask) => prevTask.id)
-      tempPrevTasks.splice(taskIdList.indexOf(task.id), 1, task)
-      return {
-        ...prevTasks,
-        [selectedBoardProcessName]: tempPrevTasks,
-      }
-    })
-  }
-
   const handleCloseModalClick = () => {
     setIsOpenModal((isOpenState) => ({
       ...isOpenState,
@@ -82,10 +50,10 @@ const WriteTaskModal = () => {
       if (!task.categoryList.length) setNoCategory(true)
     } else {
       if (isOpenModal.writeTaskModal.type === 'add') {
-        addTaskToBoard()
+        setBoardsTasks(addTaskToBoard(task, selectedBoardProcessName))
       }
       if (isOpenModal.writeTaskModal.type === 'edit') {
-        editTaskToBoard()
+        setBoardsTasks(editTaskToBoard(task, selectedBoardProcessName))
       }
       resetTask()
       setIsOpenModal((isOpenState) => ({
