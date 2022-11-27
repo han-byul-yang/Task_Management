@@ -2,11 +2,11 @@
 @use '../../../styles/constants/levels';
 
 .boardsContainer {
-  position: relative;
+  // position: relative;
   display: flex;
   width: auto;
-  height: inherit;
-  overflow-y: auto; // 나중에 지울 수 있게
+  height: 100%;
+  overflow-y: auto;
 
   &::-webkit-scrollbar {
     display: block;
@@ -20,6 +20,11 @@
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
+  }
+
+  .lnb {
+    position: fixed;
+    top: 160px;
   }
 
   .boards {

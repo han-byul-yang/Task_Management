@@ -6,12 +6,12 @@
   display: flex;
   flex-direction: column;
   width: inherit;
-  height: inherit;
-}
-
-.main {
-  position: relative;
-  width: inherit;
   height: 100%;
-  overflow-x: auto;
+
+  main {
+    // position: relative;
+    width: inherit;
+    height: 100%;
+    overflow-x: auto;
+  }
 }

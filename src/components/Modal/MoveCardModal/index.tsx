@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import { moveCardToDifferentBoard } from 'utils/moveCard'
 import useClickOutside from 'hooks/useClickOutside'

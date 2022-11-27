@@ -50,7 +50,7 @@ const BoardsContainer = () => {
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
       <div className={styles.boardsContainer}>
-        {isTablet && <LNB />}
+        <div className='lnb'>{isTablet && <LNB />}</div>
         <ul className={styles.boards}>
           {isTablet ? (
             <Outlet />

@@ -18,7 +18,7 @@ const TaskDashboard = () => {
       <header>
         <SearchInput />
       </header>
-      <main className={styles.main}>
+      <main>
         <BoardsContainer />
       </main>
       {isOpenModal.writeTaskModal.isOpen && (
