@@ -14,7 +14,7 @@ const TaskDashboard = () => {
   const isOpenModal = useRecoilValue(isOpenModalAtom)
 
   return (
-    <>
+    <div className={styles.taskDashboardPage}>
       <header>
         <SearchInput />
       </header>
@@ -36,7 +36,7 @@ const TaskDashboard = () => {
           <NoticeModal />
         </ModalPortal>
       )}
-    </>
+    </div>
   )
 }
 
