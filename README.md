@@ -78,10 +78,10 @@ https://yourtaskdashboard.netlify.app
  ┗ 📜reportWebVitals.ts
 ```
 
-## 화면 기능 예시
+# 화면 기능 예시
 **확대를 위해 화면 일부만 찍어서 영상에서는 테스크 및 확인 모달이 한 쪽으로 치우쳐 보입니다.**
 
-### 보드 생성
+## 보드 생성
 
 보드 추가 네모 버튼 클릭 -> 생성 모달 -> 보드 이름  -> 추가 버튼 클릭 -> 새 보드 
 
@@ -90,19 +90,19 @@ https://yourtaskdashboard.netlify.app
 - 5개 이상의 보드 생성 시 `가로 스크롤`이 생깁니다. 
 
 
-### 보드 수정
+## 보드 수정
 
 - 보드 햄버거 아이콘 클릭 -> 보드 수정 클릭 -> 수정 모달 -> 보드 이름 수정 -> 수정 버튼 클릭 -> 보드 수정 
 
 
-### 보드 삭제
+## 보드 삭제
 
 - 보드 햄버거 아이콘 클릭 -> 보드 삭제 클릭 -> 보드 삭제
 
 ![ezgif com-gif-maker (27)](https://user-images.githubusercontent.com/67466789/206704993-f816c8f0-a618-4030-8222-a82970e0f062.gif)
 
 
-### 테스크 생성
+## 테스크 생성
 
 플러스 버튼 클릭 -> 모달 -> title, 태그, 내용, 날짜, 사진 선택 후 Create Task -> 카드 생성
 
@@ -117,7 +117,7 @@ https://yourtaskdashboard.netlify.app
 - 테스크가 보드 크기를 넘을 시 `스크롤`이 생깁니다. 
 
 
-### 테스크 Drag & Drop
+## 테스크 Drag & Drop
 
 같은 보드 내 카드 위치 이동 & 다른 보드로의 카드 이동
 
@@ -128,21 +128,21 @@ https://yourtaskdashboard.netlify.app
 - Drag & Drop을 통해 다른 보드로의 이동이 가능하여 `테스크 process 상태`를 바꿔줄 수 있다. 
 
 
-### 테스크 수정
+## 테스크 수정
 
 연필 아이콘 클릭 -> 수정 버튼 클릭 -> 모달 -> title, 태그, 내용, 날짜, 사진 수정 후 Edit Task -> 카드 수정
 
 ![ezgif com-gif-maker (30)](https://user-images.githubusercontent.com/67466789/206709827-c30bd913-e85a-4366-93e9-4de6e569ff7e.gif)
 
 
-### 테스크 삭제
+## 테스크 삭제
 
 연필 아이콘 클릭 -> 삭제 버튼 클릭 -> 모달 -> 확인 버튼 클릭 -> 카드 삭제
 
 ![ezgif com-gif-maker (31)](https://user-images.githubusercontent.com/67466789/206710133-492ab880-cd74-4eaf-8133-ce3c97a7e8aa.gif)
 
 
-### 테스크 카드 필터링
+## 테스크 카드 필터링
 
 **제목, 카테고리, 내용 필터링**: 검색 필터링 드롭다운 제목, 카테고리, 내용 클릭 후 단어 또는 문장 입력 
 
