@@ -165,7 +165,7 @@ https://yourtaskdashboard.netlify.app
 
 프로젝트 메뉴 클릭 -> 보드 생성 클릭 -> 생성 모달 -> 보드 이름 입력 -> 추가 버튼 클릭 -> 새 보드 생성
 
-
+![ezgif com-gif-maker (41)](https://user-images.githubusercontent.com/67466789/206856184-079ab5bf-e3cc-4f86-ad39-6071e2f0efa4.gif)
 
 - 4개 이상의 보드 생성 시 스크롤이 생깁니다. 
 
@@ -173,33 +173,57 @@ https://yourtaskdashboard.netlify.app
 
 프로젝트 메뉴 클릭 -> 보드 수정 클릭 -> 수정 모달 -> 보드 이름 수정 -> 수정 버튼 클릭 -> 보드 수정 
 
-
+![ezgif com-gif-maker (42)](https://user-images.githubusercontent.com/67466789/206856237-ee6b55bc-c28b-4cb0-b721-695f30ab10bb.gif)
 
 ### 보드 삭제
 
 프로젝트 메뉴 클릭 -> 보드 삭제 클릭 -> 보드 삭제
 
+![ezgif com-gif-maker (43)](https://user-images.githubusercontent.com/67466789/206856285-f8f1ca99-5e4b-4e79-8138-90cdb0bd8e80.gif)
 
 
 ### 테스크 생성
 
 프로젝트 메뉴 클릭 -> 모달 -> title, 태그, 내용, 날짜, 사진 선택 후 Create Task -> 카드 생성
 
+![ezgif com-gif-maker (46)](https://user-images.githubusercontent.com/67466789/206857135-339d86ff-5b0e-493c-b090-73023bf422db.gif)
+
+
 ### 테스크 Drag & Drop
 
-드래그를 통해 같은 보드 내 카드 위치 이동이 가능합니다. 
+![ezgif com-gif-maker (39)](https://user-images.githubusercontent.com/67466789/206856004-127c0802-220a-4010-a269-98bc585d0fc8.gif)
+
+- 드래그를 통해 같은 보드 내 카드 위치 이동이 가능합니다. 
 
 ### 테스크 수정
 
 연필 아이콘 클릭 -> 수정 버튼 클릭 -> 모달 -> title, 태그, 내용, 날짜, 사진 수정 후 Edit Task -> 카드 수정
 
+![ezgif com-gif-maker (37)](https://user-images.githubusercontent.com/67466789/206855848-24aa350f-2790-4f3e-be28-d7d92727c797.gif)
+
 ### 테스크 삭제
 
 연필 아이콘 클릭 -> 삭제 버튼 클릭 -> 모달 -> 확인 버튼 클릭 -> 카드 삭제
 
+![ezgif com-gif-maker (38)](https://user-images.githubusercontent.com/67466789/206855894-686eefdf-4d02-41e4-a412-1aa3cbf32d66.gif)
+
 ### 테스크 보드 이동
 
 연필 아이콘 클릭 -> 카드 이동 버튼 클릭 -> 보드 선택 -> 카드 이동
+
+![ezgif com-gif-maker (40)](https://user-images.githubusercontent.com/67466789/206856107-0318a809-eb56-4b71-87f1-156b8f6eadce.gif)
+
+## 테스크 카드 필터링
+
+**제목, 카테고리, 내용 필터링**: 검색 필터링 드롭다운 제목, 카테고리, 내용 클릭 후 단어 또는 문장 입력 
+
+![ezgif com-gif-maker (45)](https://user-images.githubusercontent.com/67466789/206857041-917ac4f9-a895-4e62-9e95-0a9c35bdf52c.gif)
+
+
+**전체 필터링**: 검색 필터링 클릭 x -> 단어 또는 문장 입력
+
+![ezgif com-gif-maker (44)](https://user-images.githubusercontent.com/67466789/206857005-8a08edbb-25d7-4d56-bf95-aac3b42597ad.gif)
+
 
 ## 구현한 방법과 이유, 어려웠던 점
 
