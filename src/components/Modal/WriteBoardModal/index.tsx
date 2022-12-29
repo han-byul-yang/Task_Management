@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 
 import useClickOutside from 'hooks/useClickOutside'
-import noticeMessage from 'constants/noticeMessage'
 import {
   boardProcessAtom,
   isOpenModalAtom,
@@ -11,6 +10,7 @@ import {
   selectedBoardProcessNameAtom,
   tasksAtom,
 } from 'store/atoms'
+import noticeMessage from 'constants/noticeMessage'
 
 import styles from './writeBoardModal.module.scss'
 

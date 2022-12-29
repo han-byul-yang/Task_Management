@@ -80,7 +80,7 @@ const BoardSettingBox = ({ setIsOpenBoardSettingBox }: IMenuBoxProps) => {
             카드 추가
           </button>
           <button type='button' onClick={handleOpenWriteBoardModalClick}>
-            보드 생성
+            보드 추가
           </button>
         </>
       )}

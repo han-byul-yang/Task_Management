@@ -8,8 +8,8 @@ import { ITask } from 'types/taskType'
 import BoardCard from 'routes/TaskDashBoard/BoardsContainer/Board/BoardCard'
 import BoardSettingBox from './BoardSettingBox'
 
-import styles from './board.module.scss'
 import { HamburgerIcon, Plus2Icon } from 'assets/svgs'
+import styles from './board.module.scss'
 
 interface IBoardsProps {
   process: string

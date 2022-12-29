@@ -1,9 +1,7 @@
-/* interface IFilterTarget {
-  [key: string]: { [taskKey: string]: string | string[] }[]
-} */
+import { IBoardTaskList } from 'types/taskType'
 
-const filterContents = (filterType: string, filterKeyword: string, filterTarget: any) => {
-  const filteredTasksObject: any = {}
+const filterContents = (filterType: string, filterKeyword: string, filterTarget: IBoardTaskList) => {
+  const filteredTasksObject: IBoardTaskList = {}
 
   const taskType = {
     제목: 'taskTitle',
@@ -22,7 +20,7 @@ const filterContents = (filterType: string, filterKeyword: string, filterTarget:
   if (!filterType) {
     Object.keys(filterTarget).forEach((key: string) => {
       filteredTasksObject[key] = filterTarget[key].filter(
-        (task: any) =>
+        (task) =>
           task.taskTitle.includes(filterKeyword) ||
           task.categoryList.includes(filterKeyword) ||
           task.description.includes(filterKeyword)

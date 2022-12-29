@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Draggable } from 'react-beautiful-dnd'
 
-import { keyInputAtom, filteringAtom, selectedBoardProcessNameAtom } from 'store/atoms'
+import { transitionKeywordAtom, filteringAtom, selectedBoardProcessNameAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
-import { highlightWords } from '../../../../../utils/highlightWords'
+import { highlightWords } from 'utils/highlightWords'
 import CardSettingBox from './CardSettingBox'
 import ModalPortal from 'components/Modal/ModalPortal'
 import MoveCardModal from 'components/Modal/MoveCardModal'
@@ -23,7 +23,7 @@ const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
   const [isOpenCardSettingBox, setIsOpenCardSettingBox] = useState(false)
   const [isOpenMoveCardModal, setIsOpenMoveCardModal] = useState(false)
   const setSelectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
-  const keyInput = useRecoilValue(keyInputAtom)
+  const keyInput = useRecoilValue(transitionKeywordAtom)
   const filtering = useRecoilValue(filteringAtom)
 
   const { id, taskTitle, categoryList, process, image, description, date } = cardTask
@@ -37,8 +37,10 @@ const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
     filtering.type ? keyInput.substring(filtering.type.length + 2) : keyInput,
     cardTask
   )
-  const cardCategoryList =
-    filtering.filter && (filtering.type === '카테고리' || !filtering.type) ? highlightCategory : categoryList
+  const cardCategoryList = useMemo(
+    () => (filtering.filter && (filtering.type === '카테고리' || !filtering.type) ? highlightCategory : categoryList),
+    [categoryList, filtering.filter, filtering.type, highlightCategory]
+  )
 
   return (
     <>
