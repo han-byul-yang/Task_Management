@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState, useTransition } from 'react'
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil'
 
-import { filteringAtom, filterTasksAtom, keyInputAtom, tasksAtom } from 'store/atoms'
+import { filteringAtom, filterTasksAtom, transitionKeywordAtom, tasksAtom } from 'store/atoms'
 import filterContents from 'utils/filterContents'
 import FilterChooseBox from './FilterChooseBox'
 
@@ -9,7 +9,8 @@ import { SearchIcon, XIcon } from 'assets/svgs'
 import styles from './searchInput.module.scss'
 
 const SearchInput = () => {
-  const [keyInput, setKeyInput] = useRecoilState(keyInputAtom)
+  const [keyInput, setKeyInput] = useState('')
+  const [transitionKeyword, setTransitionKeyword] = useRecoilState(transitionKeywordAtom)
   const boardsTasks = useRecoilValue(tasksAtom)
   const setFilterTasks = useSetRecoilState(filterTasksAtom)
   const [filtering, setFiltering] = useRecoilState(filteringAtom)
@@ -19,17 +20,18 @@ const SearchInput = () => {
 
   const handleKeyInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeyInput(e.currentTarget.value)
+    startTransition(() => setTransitionKeyword(e.currentTarget.value))
     setIsOpenFilterChooseBox(false)
-    if (keyInput) setFiltering((prevFiltering) => ({ ...prevFiltering, filter: true }))
   }
 
   useEffect(() => {
-    if (!keyInput) setFiltering((prevFiltering) => ({ ...prevFiltering, filter: false }))
-    if (filtering.type && !keyInput.includes(`${filtering.type}:`)) setFiltering({ type: '', filter: false })
+    if (transitionKeyword) setFiltering((prevFiltering) => ({ ...prevFiltering, filter: true }))
+    if (!transitionKeyword) setFiltering((prevFiltering) => ({ ...prevFiltering, filter: false }))
+    if (filtering.type && !transitionKeyword.includes(`${filtering.type}:`)) setFiltering({ type: '', filter: false })
     if (filtering.filter) {
-      startTransition(() => setFilterTasks(filterContents(filtering.type, keyInput, boardsTasks)))
+      setFilterTasks(filterContents(filtering.type, transitionKeyword, boardsTasks))
     }
-  }, [boardsTasks, filtering.filter, filtering.type, keyInput, setFilterTasks, setFiltering])
+  }, [boardsTasks, filtering.filter, filtering.type, transitionKeyword, setFilterTasks, setFiltering])
 
   const handleKeyInputSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()

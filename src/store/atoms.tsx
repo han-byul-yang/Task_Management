@@ -34,7 +34,7 @@ export const filteringAtom = atom({
     type: '',
     filter: false,
   },
-}) // type type 설정
+})
 
 export const taskAtom = atom<ITask>({
   key: 'task',
@@ -49,8 +49,8 @@ export const taskAtom = atom<ITask>({
   },
 })
 
-export const keyInputAtom = atom<string>({
-  key: 'keyInput',
+export const transitionKeywordAtom = atom<string>({
+  key: 'transitionKeyword',
   default: '',
 })
 
