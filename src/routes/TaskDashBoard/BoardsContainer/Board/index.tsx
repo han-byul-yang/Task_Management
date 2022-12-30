@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useDeferredValue, useEffect, useState } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 
-import { filteringAtom, filterTasksAtom, isOpenModalAtom, selectedBoardProcessNameAtom, tasksAtom } from 'store/atoms'
+import filterContents from 'utils/filterContents'
+import { filteringAtom, isOpenModalAtom, selectedBoardProcessNameAtom, tasksAtom, keyInputAtom } from 'store/atoms'
 import useResize from 'hooks/useResize'
 import { ITask } from 'types/taskType'
 import BoardCard from 'routes/TaskDashBoard/BoardsContainer/Board/BoardCard'
@@ -17,11 +18,12 @@ interface IBoardsProps {
 
 const Board = ({ process }: IBoardsProps) => {
   const [isOpenBoardSettingBox, setIsOpenBoardSettingBox] = useState(false)
+  const keyInput = useRecoilValue(keyInputAtom)
   const setSelectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
   const boardsTasks = useRecoilValue(tasksAtom)
-  const filterTasks = useRecoilValue(filterTasksAtom)
   const filtering = useRecoilValue(filteringAtom)
   const setIsOpenModal = useSetRecoilState(isOpenModalAtom)
+  const deferredKeyword = useDeferredValue(keyInput)
   const { size, isSize: isTablet } = useResize()
 
   useEffect(() => {
@@ -39,7 +41,9 @@ const Board = ({ process }: IBoardsProps) => {
     setIsOpenBoardSettingBox(true)
   }
 
-  const processTasks = filtering.filter ? filterTasks[process] : boardsTasks[process]
+  const processTasks = filtering.filter
+    ? filterContents(filtering.type, deferredKeyword, boardsTasks)[process]
+    : boardsTasks[process]
 
   return (
     <li className={styles.boardBox}>

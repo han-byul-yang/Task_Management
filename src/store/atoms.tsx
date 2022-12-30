@@ -19,15 +19,6 @@ export const tasksAtom = atom<IBoardTaskList>({
   effects_UNSTABLE: [persistAtom],
 })
 
-export const filterTasksAtom = atom<IBoardTaskList>({
-  key: 'filterTasks',
-  default: {
-    TODO: [],
-    DOING: [],
-    DONE: [],
-  },
-})
-
 export const filteringAtom = atom({
   key: 'filtering',
   default: {
@@ -49,8 +40,8 @@ export const taskAtom = atom<ITask>({
   },
 })
 
-export const transitionKeywordAtom = atom<string>({
-  key: 'transitionKeyword',
+export const keyInputAtom = atom<string>({
+  key: 'keyInput',
   default: '',
 })
 

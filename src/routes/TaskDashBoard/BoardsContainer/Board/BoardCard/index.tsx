@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react'
+import { useDeferredValue, useMemo, useState } from 'react'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import dayjs from 'dayjs'
 import parse from 'html-react-parser'
 import { Draggable } from 'react-beautiful-dnd'
 
-import { transitionKeywordAtom, filteringAtom, selectedBoardProcessNameAtom } from 'store/atoms'
+import { keyInputAtom, filteringAtom, selectedBoardProcessNameAtom } from 'store/atoms'
 import { ITask } from 'types/taskType'
 import { highlightWords } from 'utils/highlightWords'
 import CardSettingBox from './CardSettingBox'
@@ -23,7 +23,8 @@ const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
   const [isOpenCardSettingBox, setIsOpenCardSettingBox] = useState(false)
   const [isOpenMoveCardModal, setIsOpenMoveCardModal] = useState(false)
   const setSelectedBoardProcessName = useSetRecoilState(selectedBoardProcessNameAtom)
-  const keyInput = useRecoilValue(transitionKeywordAtom)
+  const keyInput = useRecoilValue(keyInputAtom)
+  const deferredKeyword = useDeferredValue(keyInput)
   const filtering = useRecoilValue(filteringAtom)
 
   const { id, taskTitle, categoryList, process, image, description, date } = cardTask
@@ -34,7 +35,7 @@ const BoardCard = ({ cardTask, index }: IBoardCardProps) => {
   }
 
   const { highlightTitle, highlightCategory, highlightDescription } = highlightWords(
-    filtering.type ? keyInput.substring(filtering.type.length + 2) : keyInput,
+    filtering.type ? deferredKeyword.substring(filtering.type.length + 2) : deferredKeyword,
     cardTask
   )
   const cardCategoryList = useMemo(
