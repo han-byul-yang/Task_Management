@@ -31,9 +31,6 @@ https://yourtaskdashboard.netlify.app
   - dayjs: 날짜 포맷팅
 
 ## 4. 화면 기능 예시
-<details>
-<summary>화면 예시 펼치기</summary>
-<div markdown="2">
 
 **확대를 위해 화면 일부만 찍어서 영상에서는 테스크 및 확인 모달이 한 쪽으로 치우쳐 보입니다.**
 
@@ -186,8 +183,6 @@ https://yourtaskdashboard.netlify.app
 
 ![ezgif com-gif-maker (44)](https://user-images.githubusercontent.com/67466789/206857005-8a08edbb-25d7-4d56-bf95-aac3b42597ad.gif)
 
-</div>
-</details>
 
 ## 5. 트러블 슈팅
 ### 5.1. input 입력 끊김 현상 해결 :bookmark_tabs:[블로그 글](https://velog.io/@han-byul-yang/world-map-note-%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B81)
