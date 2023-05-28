@@ -26,11 +26,14 @@ https://yourtaskdashboard.netlify.app
   - stylelint
 - **기타**
   - html-react-parser: `dangerouslySetInnerHTML`의 안전한 대체제
-  - react-beautiful-dnd: 드래그 앤 드롭 구현
-  - react-datepicker: 날짜 선택 가능 달력 모달 라이브러리
-  - dayjs: 날짜 포맷팅
+  - react-beautiful-dnd
+  - react-datepicker
+  - dayjs
 
-## 4. 화면 기능 예시
+## 4. 화면 예시
+
+<details markdown="1">
+<summary>🎈내용 펼치기🎈</summary>
 
 **확대를 위해 화면 일부만 찍어서 영상에서는 테스크 및 확인 모달이 한 쪽으로 치우쳐 보입니다.**
 
@@ -39,8 +42,6 @@ https://yourtaskdashboard.netlify.app
 보드 추가 네모 버튼 클릭 -> 추가 모달 -> 보드 이름 입력 -> 새 보드 생성
 
 ![ezgif com-gif-maker (32)](https://user-images.githubusercontent.com/67466789/206710785-ffc84f3b-f6f6-44b2-9bb7-6f82f3f08209.gif)
-
-- 5개 이상의 보드 생성 시 `가로 스크롤`이 생깁니다. 
 
 
 ### 4.2. 보드 수정
@@ -97,7 +98,6 @@ https://yourtaskdashboard.netlify.app
 
 
 ### 4.8. 테스크 카드 필터링
-> 사용자가 일정을 관리하면서 여러 테스크 카드에서 `원하는 키워드 또는 문장`이 포함된 카드만 보고 싶어할 것이라 생각하였습니다. 또한 제목나 카테고리 또는 내용에 `한정한 세부적인 필터링`을 할 수 있도록 하는 것이 테스크를 `유연하게 관리`하는 데 좋을 것이라고 판단하였습니다. 따라서 필터링 종류를 선택하고, 글자를 인풋에 입력하면 즉각적으로 키워드가 포함된 카드들만 보드에 띄워주도록 하였습니다. 
 
 **제목, 카테고리, 내용 필터링**: 검색 필터링 드롭다운 제목, 카테고리, 내용 클릭 후 단어 또는 문장 입력 
 
@@ -112,10 +112,6 @@ https://yourtaskdashboard.netlify.app
 - 키워드는 `노란색으로 하이라이트` 되어 보여집니다. 
 
 - input 창의 x 버튼을 누르면 input 내의 키워드 값이 지워지며, 필터링이 초기화 됩니다.
-
-***
-- 필터링 하이라이트 로직 :round_pushpin: [코드 보기](https://github.com/han-byul-yang/Task_Management/blob/36affca96f38c1b631d891b63948ec1f64e56d22/src/utils/highlightWords.tsx#L3)
-***
 
 ### 4.9. 모바일 화면
 > 스크롤을 이용해서 다른 보드를 쉽게 확인할 수 있는 데스크톱 화면과는 달리, 화면이 작은 모바일 화면에서는 그러기가 쉽지 않다고 생각했습니다. 또한 보드에서 보드로의 자유로운 드래그 앤 드롭이 힘들 것이라고 판단하였습니다. 따라서 모바일 반응형 화면에서는 `보드마다 다른 route 를 적용`하여, 네비게이션으로 보드 사이를 쉽게 이동하고 확인할 수 있도록 하였습니다. 
@@ -183,7 +179,11 @@ https://yourtaskdashboard.netlify.app
 
 ![ezgif com-gif-maker (44)](https://user-images.githubusercontent.com/67466789/206857005-8a08edbb-25d7-4d56-bf95-aac3b42597ad.gif)
 
+</details>
 
 ## 5. 트러블 슈팅
 ### 5.1. input 입력 끊김 현상 해결 :bookmark_tabs:[블로그 글](https://velog.io/@han-byul-yang/world-map-note-%EA%B0%9C%EC%9D%B8-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B81)
- 모바일 환경에서 키워드를 입력할 때, 카드 필터링의 업데이트가 동시에 일어나면서 입력 끊김 UI 현상이 일어났다. 이에 React18의 concurrent 기능을 활용하여 긴급 업데이트(input에 입력)와 전환 업데이트(카드 필터링)를 구분하였다. 이로써 키워드가 부드럽게 입력이 되어 사용성이 높아질 수 있었다.
+ 모바일 환경에서 키워드를 입력할 때, 카드가 필터링 되는 업데이트가 동시에 일어나면서 입력 끊김 UI 현상이 일어났다. 이에 React18의 concurrent 기능을 활용하여 긴급 업데이트(input에 입력)와 전환 업데이트(카드 필터링)를 구분하였다. 이로써 키워드가 부드럽게 입력이 되어 사용성이 높아질 수 있었다.
+
+## 6. 앞으로 구현할 부분
+현재 `프론트엔드 기능만을 구현하여 카드 정보 데이터를 서버에 저장하지 않고` 있는 상황입니다. firebase 등 서버를 이용하여 추후 리팩토링할 예정입니다. 
