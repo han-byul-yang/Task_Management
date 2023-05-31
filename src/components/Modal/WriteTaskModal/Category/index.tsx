@@ -14,22 +14,21 @@ interface ICategoryProps {
 const Category = ({ noCategory }: ICategoryProps) => {
   const [category, setCategory] = useState('')
   const [task, setTask] = useRecoilState(taskAtom)
-  const [categoryShow, setCategoryShow] = useState(false)
 
   const handleCategoryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCategory(e.currentTarget.value)
   }
 
-  const handleCategoryShowClick = () => {
-    setCategoryShow(true)
-  }
-
-  const handleCategorySubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleAddCategory = () => {
     if (!task.categoryList.includes(category)) {
       setTask((prevTask) => ({ ...prevTask, categoryList: [...prevTask.categoryList, category] }))
     }
     setCategory('')
+  }
+
+  const handleCategorySubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    handleAddCategory()
   }
 
   const handleCategoryDeleteClick = (item: string) => {
@@ -48,9 +47,9 @@ const Category = ({ noCategory }: ICategoryProps) => {
         {noCategory && <p className={styles.error}>카테고리를 입력해주세요</p>}
       </div>
       <form className={styles.categoryForm} onSubmit={handleCategorySubmit}>
-        <PlusIcon className={styles.plusIcon} onClick={handleCategoryShowClick} />
+        <PlusIcon className={styles.plusIcon} onClick={handleAddCategory} />
         <input
-          className={cx(styles.categoryInput, { [styles.categoryShow]: categoryShow })}
+          className={styles.categoryInput}
           type='text'
           placeholder='카테고리 입력해주세요'
           value={category}
